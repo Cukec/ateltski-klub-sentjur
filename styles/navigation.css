@@ -1,0 +1,15 @@
+body{
+    margin: 0px;
+    background-color: #FAFAFA;
+}
+
+.navigation {
+    height: 50px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+ul {
+    list-style-type: none;
+    
+}
