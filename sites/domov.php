@@ -60,7 +60,7 @@
             background-color: white;
             min-width: 160px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-
+            
             z-index: 1;
             top: 100%; /* Place dropdown directly below the menu */
             left: 0; /* Align dropdown with the parent item */
