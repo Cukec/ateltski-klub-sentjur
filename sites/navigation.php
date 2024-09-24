@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <style>
         body {
             font-family: "MadeCarving";
@@ -11,7 +10,7 @@
             background-color: #ececec;
         }
 
-        .navigation {
+        nav {
             height: 80px;
             background-color: white;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -23,7 +22,7 @@
             src: url('MADECarvingSoftOutlinePERSONALUSE-Black.otf') format('opentype');
         }
 
-        ul {
+        nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -31,13 +30,13 @@
             padding-left: 100px;
         }
 
-        li {
+        nav ul li {
             float: left;
             margin-top: 7px;
             position: relative; /* Important for dropdown positioning */
         }
 
-        li a {
+        nav ul li a {
             display: block;
             color: #444; /* Ensure text is white and visible */
             text-align: center;
@@ -48,7 +47,7 @@
         }
 
         /* Hover effect for main items */
-        li a:hover {
+        nav ul li a:hover {
             background-color: #ddd;
             color: black;
         }
@@ -88,7 +87,8 @@
 
 </head>
 <body>
-    <ul class="navigation">
+    <nav>
+        <ul>
         <li><a href="#">domov</a></li>
         <li><a href="#">tekmovanja</a></li>
 
@@ -113,16 +113,17 @@
         </li>
 
         <!-- O Klubu with Dropdown -->
-        <li class="dropdown">
-            <a href="#">o klubu</a>
-            <div class="dropdown-content">
-                <a href="#">predstavitev</a>
-                <a href="#">dokumenti</a>
-                <a href="#">finance</a>
-            </div>
-        </li>
+            <li class="dropdown">
+                <a href="#">o klubu</a>
+                <div class="dropdown-content">
+                    <a href="#">predstavitev</a>
+                    <a href="#">dokumenti</a>
+                    <a href="#">finance</a>
+                </div>
+            </li>
 
-        <li><a href="#">galerija</a></li>
-    </ul>
+            <li><a href="#">galerija</a></li>
+        </ul>
+    </nav>
 </body>
 </html>
