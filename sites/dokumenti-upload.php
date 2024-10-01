@@ -1,47 +1,43 @@
 <?php
-// Check if the form was submitted
+// Handle the PDF file upload
 if (isset($_POST["submit"])) {
 
-    // Check if a file was uploaded and has no errors
     if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === UPLOAD_ERR_OK) {
 
-        // Get file information
+        // Get file details
         $fileTmpPath = $_FILES['fileToUpload']['tmp_name'];
         $fileName = $_FILES['fileToUpload']['name'];
-        $fileSize = $_FILES['fileToUpload']['size'];
-        $fileType = $_FILES['fileToUpload']['type'];
-
-        // Check if the uploaded file is a PDF
         $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+        // Only allow PDF uploads
         if ($fileExtension !== 'pdf') {
             echo "Sorry, only PDF files are allowed.";
             exit;
         }
 
-        // Read the content of the uploaded PDF file
-        $fileContent = file_get_contents($fileTmpPath);
+        // Get the selected folder from the form
+        $selectedFolder = isset($_POST['selectedFolder']) ? $_POST['selectedFolder'] : '';
 
-        // Define the path to save the file in the "documents" folder one directory back
-        $outputFilePath = '../documents/' . basename($fileName);
+        // Ensure the folder is valid and exists
+        if (!is_dir($selectedFolder)) {
+            echo "Sorry, the selected folder does not exist.";
+            exit;
+        }
 
-        // Save the file content to the specified file path
-        if (file_put_contents($outputFilePath, $fileContent)) {
-            echo "File content successfully saved to " . $outputFilePath;
+        // Define the path to save the file in the selected folder
+        $outputFilePath = $selectedFolder . '/' . basename($fileName);
+
+        // Save the file content
+        if (move_uploaded_file($fileTmpPath, $outputFilePath)) {
+            echo "File successfully saved to " . $outputFilePath;
         } else {
             echo "Sorry, there was an error saving the file.";
             exit;
         }
 
-        // Redirect back to the previous page
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            header("Location: " . $_SERVER['HTTP_REFERER']);
-            exit;
-        } else {
-            echo "No referring page found.";
-        }
-
-    } else {
-        echo "No file uploaded or there was an error during the upload.";
+        // Redirect back to the main page after upload
+        header("Location: dokumenti.php");
+        exit;
     }
 }
 ?>

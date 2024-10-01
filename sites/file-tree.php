@@ -1,39 +1,24 @@
 <?php
-// Recursive function to get the directory structure as an associative array
-function getFileTree($directory) {
-    $result = [];
-    $files = scandir($directory);
-
+function displayFileTree($dir) {
+    $files = scandir($dir);
+    echo '<ul>';
     foreach ($files as $file) {
-        if ($file != "." && $file != "..") {
-            $filePath = $directory . "/" . $file;
+        if ($file === '.' || $file === '..') continue;
 
-            // If it's a directory, recursively fetch its contents
-            if (is_dir($filePath)) {
-                $result[] = [
-                    'type' => 'directory',
-                    'name' => $file,
-                    'path' => $filePath,
-                    'children' => getFileTree($filePath)
-                ];
-            } else {
-                // If it's a file, add it to the result
-                $result[] = [
-                    'type' => 'file',
-                    'name' => $file,
-                    'path' => $filePath
-                ];
-            }
+        $fullPath = $dir . '/' . $file;
+        if (is_dir($fullPath)) {
+            echo '<li class="directory" data-path="' . $fullPath . '">' . htmlspecialchars($file) . '</li>';
+            displayFileTree($fullPath);
+        } else {
+            // Display files with download and delete icons
+            echo '<li class="file" data-path="' . $fullPath . '">' . htmlspecialchars($file) . 
+                 '<span class="download-icon">⬇️</span>' .
+                 '<span class="delete-icon">🗑️</span>' . 
+                 '</li>';
         }
     }
-    return $result;
+    echo '</ul>';
 }
 
-// Start directory (you can customize this)
-$startDir = "../documents";
-$fileTree = getFileTree($startDir);
-
-// Output the result as JSON
-header('Content-Type: application/json');
-echo json_encode($fileTree);
+displayFileTree('../documents'); // Adjust path as necessary
 ?>

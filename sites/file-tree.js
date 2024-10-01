@@ -9,17 +9,35 @@ function createFileTree(treeData, parentElement) {
             li.textContent = '[Dir] ' + item.name;
             li.classList.add('directory');
 
-            // Recursively create sub-trees
-            const children = createFileTree(item.children, li);
-            li.appendChild(children);
-
-            // Add click event to toggle visibility of subfolders
+            // Add click event to select this folder
             li.addEventListener('click', function(e) {
                 e.stopPropagation(); // Prevent event bubbling
-                children.style.display = children.style.display === 'none' ? 'block' : 'none';
+                
+                // Clear any previous selection
+                const previouslySelected = document.querySelector('.selected');
+                if (previouslySelected) {
+                    previouslySelected.classList.remove('selected');
+                }
+
+                // Highlight the selected folder
+                li.classList.add('selected');
+
+                // Set the selected folder path in the hidden input
+                document.getElementById('selectedFolder').value = item.path;
             });
 
-            children.style.display = 'none';  // Start hidden
+            // Recursively create sub-trees (for child folders if any)
+            if (item.children && item.children.length > 0) {
+                const children = createFileTree(item.children, li);
+                li.appendChild(children);
+                children.style.display = 'none';  // Start hidden
+
+                // Toggle visibility of subfolders
+                li.addEventListener('dblclick', function(e) {
+                    e.stopPropagation();
+                    children.style.display = children.style.display === 'none' ? 'block' : 'none';
+                });
+            }
         } else {
             li.textContent = item.name;
             li.classList.add('file');
@@ -32,7 +50,7 @@ function createFileTree(treeData, parentElement) {
     return ul;
 }
 
-// Fetch the file tree JSON from the server
+// Fetch the file tree JSON from the server (assuming file-tree.php returns this structure)
 fetch('file-tree.php')
     .then(response => response.json())
     .then(data => {
