@@ -89,15 +89,15 @@
 <body>
     <nav>
         <ul>
-        <li><a href="#">domov</a></li>
-        <li><a href="#">tekmovanja</a></li>
+        <li><a href="domov.php">domov</a></li>
+        <li><a href="tekmovanja.php">tekmovanja</a></li>
 
         <!-- Atleti with Dropdown -->
         <li class="dropdown">
             <a href="#">atleti</a>
             <div class="dropdown-content">
-                <a href="#">aktivni</a>
-                <a href="#">nekdanji</a>
+                <a href="atleti-aktivni.php">aktivni</a>
+                <a href="atleti-nekdanji.php">nekdanji</a>
                 <a href="#">dosežki</a>
             </div>
         </li>
@@ -106,9 +106,9 @@
         <li class="dropdown">
             <a href="#">naša ekipa</a>
             <div class="dropdown-content">
-                <a href="#">trenerji</a>
-                <a href="#">vodstvo</a>
-                <a href="#">sodniki</a>
+                <a href="trenerji.php">trenerji</a>
+                <a href="vodstvo.php">vodstvo</a>
+                <a href="sodniki.php">sodniki</a>
             </div>
         </li>
 
@@ -116,13 +116,13 @@
             <li class="dropdown">
                 <a href="#">o klubu</a>
                 <div class="dropdown-content">
-                    <a href="#">predstavitev</a>
-                    <a href="#">dokumenti</a>
-                    <a href="#">finance</a>
+                    <a href="predstavitev.php">predstavitev</a>
+                    <a href="dokumenti.php">dokumenti</a>
+                    <a href="finance.php">finance</a>
                 </div>
             </li>
 
-            <li><a href="#">galerija</a></li>
+            <li><a href="galerija.php">galerija</a></li>
         </ul>
     </nav>
 </body>
