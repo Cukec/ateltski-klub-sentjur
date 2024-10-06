@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/predstavitev.css">
     <title>Predstavitev</title>
 </head>
 <body>
     <main>
         <section>
             <article class="predstavitev">
-            <img src="../assets/atletski-klub-logo.png" alt="Logo">
-            <h2>Predstavitev Atletskega Kluba Šentjur</h2>
+            <h2>Predstavitev</h2>
             <p>Atletski klub Šentjur deluje na področju občine Šentjur in pokriva tudi področje širšega Kozjanskega. 
             V klubu se ukvarjamo s tekmovalno atletiko, šolsko atletiko, spodbujamo pa tudi rekreativno ukvarjanje s tekom. 
             Organiziran imamo svoj sodniški zbor tako, da organiziramo tudi atletska tekmovanja na vseh naštetih področjih. 
@@ -27,6 +27,7 @@
         </section>
         <section>
             <article class="zgodovina">
+                <h2>Zgodovina</h2>
                 <p>
                     Atletski klub Šentjur je bil ustanovljen leta 1994. Ustanovni člani so bili štirje nekdanji atleti celjskega atletskega kluba: Cmok Samo, Kukovič Ivan, Podgoršek Andrej in Artnak Vlado, 
                     ki je do takrat deloval v Celju tudi kot atletski trener. Med podporniki ustanovitve sta bila tudi Gradišnik Marjan, 

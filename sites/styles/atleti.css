@@ -1,0 +1,73 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f5; /* Light background for the page */
+    padding: 20px;
+    margin: 0;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+main h3{
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+/* Table styles */
+table {
+    width: 60%;
+    border-collapse: collapse; /* Remove spaces between table cells */
+    margin: 20px 0;
+    background-color: #fff; /* White background for table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    border-radius: 10px; /* Slightly rounded corners */
+    overflow: hidden; /* Make sure shadow stays within table bounds */
+}
+
+/* Table header styles */
+th {
+    background-color: black; /* Blue background for header */
+    color: #fff; /* White text for header */
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 12px 15px; /* Add padding inside the header */
+    text-transform: uppercase; /* Uppercase for header titles */
+}
+
+/* Table row and cell styles */
+td {
+    padding: 12px 15px; /* Add padding inside cells */
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0; /* Light border between rows */
+    text-align: left; /* Align text to the left */
+}
+
+/* Alternating row colors for better readability */
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray for alternating rows */
+}
+
+/* Hover effect for table rows */
+tr:hover {
+    background-color: #f1f7ff; /* Light blue on hover */
+    transition: background-color 0.3s ease;
+}
+
+/* Last row bottom border removed */
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive table design */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap; /* Force horizontal scrolling */
+    }
+}
