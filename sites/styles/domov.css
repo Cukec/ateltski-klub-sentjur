@@ -97,3 +97,8 @@ body {
     margin: 5px 0 0;
     font-size: 14px;
 }
+
+h1{
+    color: #444;
+    position: sticky;
+}

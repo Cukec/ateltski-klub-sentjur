@@ -16,15 +16,15 @@
 <body>
 
     <?php include "navigation.php"; ?>
-    
+
     <section class="content">
         <!-- Calendar Container -->
         <div id="calendar" style="max-width: 900px; margin: 40px auto;"></div>
 
         <!-- Past Events Section -->
         <div class="past-events">
-            <h2>Past Events</h2>
-            <!-- Novice (News) -->
+            <h2>Pretekle novice</h2>
+            <!-- Novice (News) //spremeni tako da bo class = past-dogodki (ne pozabit CSS) -->
             <div class="novice">
                 <div class="novica">
                     <h2>Novica 1</h2>

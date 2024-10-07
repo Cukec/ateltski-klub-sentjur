@@ -22,6 +22,19 @@
 
             <!-- Dogodki (Events) -->
             <div class="dogodki">
+                <h1>Prihajajoči dogodki:</h1>
+                <div class="dogodek">
+                    <h2>Dogodek 1</h2>
+                    <p>Opis dogodka 1: Tukaj je opis prvega dogodka.</p>
+                </div>
+                <div class="dogodek">
+                    <h2>Dogodek 2</h2>
+                    <p>Opis dogodka 2: Tukaj je opis drugega dogodka.</p>
+                </div>
+                <div class="dogodek">
+                    <h2>Dogodek 3</h2>
+                    <p>Opis dogodka 3: Tukaj je opis tretjega dogodka.</p>
+                </div>
                 <div class="dogodek">
                     <h2>Dogodek 1</h2>
                     <p>Opis dogodka 1: Tukaj je opis prvega dogodka.</p>
@@ -39,6 +52,7 @@
 
         <!-- Novice (News) -->
         <div class="novice">
+            <h1>Novice:</h1>
             <div class="novica">
                 <h2>Novica 1</h2>
                 <p>Opis novice 1: Tukaj je opis prve novice.</p>

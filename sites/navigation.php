@@ -4,84 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
-            font-family: "MadeCarving";
-            margin: 0;
-            background-color: #ececec;
-        }
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-        nav {
-            height: 80px;
-            background-color: white;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            margin-top: 50px;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #ececec;
+}
 
-        @font-face {
-            font-family: "MadeCarving";
-            src: url('MADECarvingSoftOutlinePERSONALUSE-Black.otf') format('opentype');
-        }
 
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            background-color: #333;
-            padding-left: 100px;
-        }
+nav {
+    height: 80px;
+    background-color: #f94449;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 
-        nav ul li {
-            float: left;
-            margin-top: 7px;
-            position: relative; /* Important for dropdown positioning */
-        }
+@font-face {
+    font-family: "MadeCarving";
+    src: url('MADECarvingSoftOutlinePERSONALUSE-Black.otf') format('opentype');
+}
 
-        nav ul li a {
-            display: block;
-            color: #444; /* Ensure text is white and visible */
-            text-align: center;
-            padding: 20px 25px; /* Adjust padding as necessary */
-            text-decoration: none;
-            text-transform: uppercase;
-            box-sizing: border-box; /* Ensure padding is included in width */
-        }
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #f94449;
+    padding-left: 100px;
+    height: 100%; /* Ensure ul fills the nav */
+}
 
-        /* Hover effect for main items */
-        nav ul li a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+nav ul li {
+    float: left;
+    margin-top: 0; /* Remove margin for alignment */
+    position: relative; /* Important for dropdown positioning */
+    height: 100%; /* Ensure li fills the nav */
+}
 
-        /* Dropdown menu */
-        .dropdown-content {
-            display: none; /* Hidden by default */
-            position: absolute;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            
-            z-index: 1;
-            top: 100%; /* Place dropdown directly below the menu */
-            left: 0; /* Align dropdown with the parent item */
-            margin-top: 0; /* Remove margin if necessary */
-        }
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 0 20px 0 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    height: 80px; /* Match the height of the nav */
+    line-height: 80px; /* Center text vertically */
+    margin-bottom: 5px;
+}
 
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
+nav ul li a:hover {
+    border-bottom: 4px solid #ffffff;
+}
 
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
+/* Dropdown menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    margin-top: 0;
+}
 
-        .dropdown:hover .dropdown-content{
-            display: block;
-        }
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+nav ul li img {
+    padding-top: 10%;
+    height: 80%;
+    width: 85%;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.1{
+    margin-left: 5vw;
+}
+
 
     </style>
 
@@ -89,7 +105,14 @@
 <body>
     <nav>
         <ul>
-        <li><a href="domov.php">domov</a></li>
+        <!-- Logo -
+        <li><img src="../assets/aksentjur-logo.png" alt=""></li>
+        -->
+
+        <li><p style="font-weight: bold; color: white; font-size: 2.5vh;">AK ŠENTJUR</p></li>
+        <li style="margin-left: 1%; color: #f5f5f5"><p style="font-size: 2.5vh;">|</p></li>
+
+        <li class="1"><a href="domov.php">domov</a></li>
         <li><a href="tekmovanja.php">tekmovanja</a></li>
 
         <!-- Atleti with Dropdown -->
