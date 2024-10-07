@@ -19,11 +19,6 @@ nav {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-@font-face {
-    font-family: "MadeCarving";
-    src: url('MADECarvingSoftOutlinePERSONALUSE-Black.otf') format('opentype');
-}
-
 nav ul {
     list-style-type: none;
     margin: 0;
@@ -44,47 +39,70 @@ nav ul li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 0 20px 0 20px;
+    padding: 0 20px;
     text-decoration: none;
     text-transform: uppercase;
     box-sizing: border-box;
     height: 80px; /* Match the height of the nav */
     line-height: 80px; /* Center text vertically */
-    margin-bottom: 5px;
+    position: relative; /* Needed for the pseudo-element */
 }
 
-nav ul li a:hover {
-    border-bottom: 4px solid #ffffff;
+nav ul .border a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 4px;
+    background-color: white;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav ul .border:hover a::after {
+    width: 100%; /* Expands to the full width of the dropdown */
+    left: 0;
+}
+
+nav ul li:hover .dropdown-content{
+    display: block;
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Back to its normal position */
+    pointer-events: auto;
 }
 
 /* Dropdown menu */
 .dropdown-content {
-    display: none;
+    display: block;
     position: absolute;
     background-color: white;
-    min-width: 160px;
+    width: auto;
+    min-width: 100%;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1;
     top: 100%;
     left: 0;
     margin-top: 0;
+    
+    opacity: 0; /* Start with invisible */
+    transform: translateY(-20px); /* Start 20px higher */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    pointer-events: none;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
     color: black;
-    padding: 12px 16px;
+    padding: 0px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
+    height: 50px;
+    line-height: 50px;
 }
 
 .dropdown-content a:hover {
     background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }
 
 nav ul li img {
@@ -92,10 +110,6 @@ nav ul li img {
     height: 80%;
     width: 85%;
     filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5));
-}
-
-.1{
-    margin-left: 5vw;
 }
 
 
@@ -112,12 +126,12 @@ nav ul li img {
         <li><p style="font-weight: bold; color: white; font-size: 2.5vh;">AK ŠENTJUR</p></li>
         <li style="margin-left: 1%; color: #f5f5f5"><p style="font-size: 2.5vh;">|</p></li>
 
-        <li class="1"><a href="domov.php">domov</a></li>
-        <li><a href="tekmovanja.php">tekmovanja</a></li>
+        <li class="border"><a href="domov.php">domov</a></li>
+        <li class="border"><a href="tekmovanja.php">tekmovanja</a></li>
 
         <!-- Atleti with Dropdown -->
         <li class="dropdown">
-            <a href="#">atleti</a>
+            <a href="#">&#11167; atleti</a>
             <div class="dropdown-content">
                 <a href="atleti-aktivni.php">aktivni</a>
                 <a href="atleti-nekdanji.php">nekdanji</a>
@@ -127,7 +141,7 @@ nav ul li img {
 
         <!-- Naša Ekipa with Dropdown -->
         <li class="dropdown">
-            <a href="#">naša ekipa</a>
+            <a href="#">&#11167; naša ekipa</a>
             <div class="dropdown-content">
                 <a href="trenerji.php">trenerji</a>
                 <a href="vodstvo.php">vodstvo</a>
@@ -137,7 +151,7 @@ nav ul li img {
 
         <!-- O Klubu with Dropdown -->
             <li class="dropdown">
-                <a href="#">o klubu</a>
+                <a href="#">&#11167; o klubu</a>
                 <div class="dropdown-content">
                     <a href="predstavitev.php">predstavitev</a>
                     <a href="dokumenti.php">dokumenti</a>
@@ -145,7 +159,7 @@ nav ul li img {
                 </div>
             </li>
 
-            <li><a href="galerija.php">galerija</a></li>
+            <li class="border"><a href="galerija.php">galerija</a></li>
         </ul>
     </nav>
 </body>

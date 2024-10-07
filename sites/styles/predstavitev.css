@@ -1,14 +1,8 @@
 /* Global styles */
 body {
-    font-family: "MadeCarving";
     background-color: #f7f7f7; /* Light background for the entire page */
     box-sizing: border-box;
     line-height: 1.6;
-}
-
-@font-face {
-    font-family: "MadeCarving";
-    src: url('MADECarvingSoftOutlinePERSONALUSE-Black.otf') format('opentype');
 }
 
 main {
