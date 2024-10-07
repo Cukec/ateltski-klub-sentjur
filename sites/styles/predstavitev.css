@@ -1,7 +1,5 @@
 /* Global styles */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
     background-color: #f7f7f7; /* Light background for the entire page */
     box-sizing: border-box;
     line-height: 1.6;
@@ -38,11 +36,11 @@ article p {
 }
 
 /* Unordered list styles */
-ul {
+.predstavitev ul {
     padding-left: default;
 }
 
-ul li {
+.predstavitev ul li {
     margin-bottom: 10px;
     font-size: 20px;
 }
