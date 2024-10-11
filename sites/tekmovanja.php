@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <?php include "navigation.php"; ?>
+    <?php include "navigation.php"; include "config.php"; ?>
 
     <section class="content">
         <!-- Calendar Container -->
@@ -23,21 +23,36 @@
 
         <!-- Past Events Section -->
         <div class="past-events">
-            <h2>Pretekle novice</h2>
+            <h2>Pretekle tekmovanja</h2>
             <!-- Novice (News) //spremeni tako da bo class = past-dogodki (ne pozabit CSS) -->
             <div class="novice">
-                <div class="novica">
-                    <h2>Novica 1</h2>
-                    <p>Opis novice 1: Tukaj je opis prve novice.</p>
-                </div>
-                <div class="novica">
-                    <h2>Novica 2</h2>
-                    <p>Opis novice 2: Tukaj je opis druge novice.</p>
-                </div>
-                <div class="novica">
-                    <h2>Novica 3</h2>
-                    <p>Opis novice 3: Tukaj je opis tretje novice.</p>
-                </div>
+                <?php 
+
+                // Define the SQL SELECT query
+                $query = "SELECT title, content, date_start FROM events ORDER BY date_start ASC;";
+
+                // Execute the query
+                $result = $conn->query($query);
+
+                // Check if the query returns any results
+                if ($result->num_rows > 0) {
+                    // Output data for each row
+                    while ($row = $result->fetch_assoc()) {
+                        ?>
+                        <div class="novica">
+                            <h2> <?= $row['title']; ?> </h2>
+                            <p> <?= $row['content']; ?> </p>
+                            <p style ="color: #f3f3f3; float: right;"> <?php $row['date_start'] ?> </p>
+                        </div>
+                        <?php
+                    }
+                } else {
+                    echo "No news available.";
+                }
+
+                // Close the database connection
+                //$conn->close();
+                ?>
             </div>
         </div>
     </section>
@@ -49,39 +64,28 @@
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                editable: true, // Allows users to drag and drop events
-                selectable: true, // Allows users to select date ranges
+                editable: false, // Disable event dragging and resizing
+                selectable: false, // Disable range selection
 
-                // Add a click handler to add events
-                select: function(info) {
-                    var title = prompt('Enter Event Title:');
-                    if (title) {
-                        calendar.addEvent({
-                            title: title,
-                            start: info.startStr,
-                            end: info.endStr,
-                            allDay: info.allDay
-                        });
-                    }
-                    calendar.unselect(); // Clear selection
-                },
+                // Fetch events from the server (adjust the path to your actual PHP file)
+                events: 'fetch-events.php',
 
-                // Sample preloaded events (optional)
-                events: [
-                    {
-                        title: 'Sample Event 1',
-                        start: '2024-10-05'
-                    },
-                    {
-                        title: 'Sample Event 2',
-                        start: '2024-10-12'
-                    }
-                ]
+                // Do not display time with events
+                displayEventTime: false,
+
+                // Optional: Ensure no time is formatted/displayed
+                eventTimeFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                }
             });
 
+            // Render the calendar
             calendar.render();
         });
     </script>
+
 
 </body>
 </html>

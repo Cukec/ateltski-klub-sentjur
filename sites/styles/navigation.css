@@ -1,6 +1,11 @@
+html {
+    background-image: url('../assets/background.svg') no-repeat center center fixed;
+}
+
 body{
     margin: 0px;
-    background-color: #bc5656;
+    background: url('../assets/web-background.svg') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .navigation {

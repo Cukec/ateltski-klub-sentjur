@@ -9,15 +9,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $content = mysqli_real_escape_string($conn, $_POST['content']);
     $type = mysqli_real_escape_string($conn, $_POST['type']);
-    $datetime_start = mysqli_real_escape_string($conn, $_POST['datetime_start']);
-    $datetime_end = mysqli_real_escape_string($conn, isset($_POST['datetime_end']) ? $_POST['datetime_end'] : NULL);  // Allowing null
+    $date_start = mysqli_real_escape_string($conn, $_POST['date_start']);
+    $date_end = mysqli_real_escape_string($conn, isset($_POST['date_end']) ? $_POST['date_end'] : NULL);  // Allowing null
 
     // Get the admin ID (you may need to adjust this if you have a session or a different way of getting the admin ID)
     $id_admin = 1; // This is a placeholder. Replace with the actual ID or session-based logic if necessary.
     
     // Prepare the SQL query to insert the new event into the database
-    $sql = "INSERT INTO events (title, content, type, datetime_start, datetime_end, id_admin) 
-            VALUES ('$title', '$content', '$type', '$datetime_start', " . ($datetime_end ? "'$datetime_end'" : "NULL") . ", '$id_admin')";
+    $sql = "INSERT INTO events (title, content, type, date_start, date_end, id_admin) 
+            VALUES ('$title', '$content', '$type', '$date_start', " . ($date_end ? "'$date_end'" : "NULL") . ", '$id_admin')";
 
     // Execute the query
     if ($conn->query($sql) === TRUE) {

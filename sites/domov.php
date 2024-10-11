@@ -12,29 +12,6 @@
     
     <?php include "navigation.php"; include "config.php"; ?>
 
-    <?php 
-    
-        // Define the SQL SELECT query
-        $sql = "SELECT id, username, mail FROM admin";
-
-        // Execute the query and get the result
-        $result = $conn->query($sql);
-
-        // Check if any rows were returned
-        if ($result->num_rows > 0) {
-            // Output data for each row
-            while($row = $result->fetch_assoc()) {
-                echo "ID: " . $row["id"]. " - Username: " . $row["username"]. " - Email: " . $row["mail"]. "<br>";
-            }
-        } else {
-            echo "0 results";
-        }
-
-        // Close the database connection
-        $conn->close();
-
-    ?>
-
     <!-- Main content container -->
     <div class="main-content">
         <div class="container">
@@ -50,18 +27,33 @@
                 </div>
                 <!-- Dogodki (Events) -->
                 <div class="dogodki">
-                    <div class="dogodek">
-                        <h2>Dogodek 1</h2>
-                        <p>Opis dogodka 1: Tukaj je opis prvega dogodka.</p>
-                    </div>
-                    <div class="dogodek">
-                        <h2>Dogodek 2</h2>
-                        <p>Opis dogodka 2: Tukaj je opis drugega dogodka.</p>
-                    </div>
-                    <div class="dogodek">
-                        <h2>Dogodek 3</h2>
-                        <p>Opis dogodka 3: Tukaj je opis tretjega dogodka.</p>
-                    </div>
+                    <?php 
+
+                    // Define the SQL SELECT query
+                    $query = "SELECT title, content, date_start FROM events ORDER BY date_start ASC;";
+
+                    // Execute the query
+                    $result = $conn->query($query);
+
+                    // Check if the query returns any results
+                    if ($result->num_rows > 0) {
+                        // Output data for each row
+                        while ($row = $result->fetch_assoc()) {
+                            ?>
+                            <div class="novica">
+                                <h2> <?= $row['title']; ?> </h2>
+                                <p> <?= $row['content']; ?> </p>
+                                <p style ="color: #f3f3f3; float: right;"> <?php $row['date_start'] ?> </p>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        echo "No news available.";
+                    }
+
+                    // Close the database connection
+                    //$conn->close();
+                    ?>
                 </div>
             </div>
         </div>
@@ -82,10 +74,10 @@
                     <input type="number" id="type" name="type" min="1" required><br>
 
                     <label for="datetime_start">Začetek dogodka:</label>
-                    <input type="datetime-local" id="datetime_start" name="datetime_start" required><br>
+                    <input type="date" id="datetime_start" name="date_start" required><br>
 
                     <label for="datetime_end">Konec dogodka:</label>
-                    <input type="datetime-local" id="datetime_end" name="datetime_end"><br>
+                    <input type="date" id="datetime_end" name="date_end"><br>
 
                     <button type="submit">Dodaj Dogodek</button>
                 </form>
@@ -102,10 +94,36 @@
 
         <!-- Novice (News) -->
         <div class="novice">
-            <div class="novica">
-                <h2>Novica 1</h2>
-                <p>Opis novice 1: Tukaj je opis prve novice.</p>
-            </div>
+
+        <?php 
+
+            // Define the SQL SELECT query
+            $query = "SELECT title, content FROM news WHERE shown = 1;";
+
+            // Execute the query
+            $result = $conn->query($query);
+
+            // Check if the query returns any results
+            if ($result->num_rows > 0) {
+                // Output data for each row
+                while ($row = $result->fetch_assoc()) {
+                    ?>
+                    <div class="novica">
+                        <h2> <?= $row['title']; ?> </h2>
+                        <p> <?= $row['content']; ?> </p>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "No news available.";
+            }
+
+            // Close the database connection
+            //$conn->close();
+        ?>
+
+
+            
             <!-- More news here -->
         </div>
 
@@ -128,7 +146,7 @@
                     </select><br>
 
                     <label for="post_time">Datum objave:</label>
-                    <input type="datetime-local" id="post_time" name="post_time" required><br>
+                    <input type="date" id="post_time" name="post_time" required><br>
 
                     <button type="submit">Dodaj Novico</button>
                 </form>
