@@ -10,15 +10,18 @@
 </head>
 <body>
     
-    <?php include "navigation.php"; include "config.php"; ?>
+    <?php include "navigation.php"; /* include "config.php"; */ ?>
 
+    <div class="filler-img">
+        <img src="../assets/homepage-background.jpg" alt="Filler Image" class="fullscreen-img">
+    </div>
     <!-- Main content container -->
     <div class="main-content">
         <div class="container">
             <!-- Rotacija slik (Image Rotation) -->
-            <div class="img-rotation">
+            <!-- <div class="img-rotation">
                 <img src="blank.jpg" alt="Blank Image" class="rotation-img">
-            </div>
+            </div> -->
 
             <div class="dogodki-container">
                 <div class="naslov" style="display: flex; flex-direction: horizontal;">

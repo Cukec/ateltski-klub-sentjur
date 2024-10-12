@@ -5,18 +5,25 @@ body {
     background-color: #f7f7f7; /* Light background for the entire page */
     box-sizing: border-box;
 }
-
-
+.filler-img {
+    width: 100vw;
+    height: 100%;
+}
+.fullscreen-img {
+    width: 100vw;
+    height: 50vh;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Adjust values as needed */
+    filter: brightness(80%);
+}
 /* Main content container to avoid conflict with navigation */
 .main-content {
     margin-top: 5vh;
     padding: 20px; /* Add spacing around the content */
 }
-
 /* Container to hold image rotation and events section */
 .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 20px;
 }
 

@@ -102,8 +102,26 @@ nav ul li:hover .dropdown-content{
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: #bcbfbb;
 }
+.dropdown-submenu {
+    display: none; /* Hide submenu by default */
+    position: absolute;
+    left: 100%; /* Position it to the right of the parent dropdown */
+    top: 0;
+    background-color: white;
+    z-index: 1;
+    min-width: 100%; /* Adjust as needed */
+}
+
+.dropdown-content a:hover + .dropdown-submenu {
+    display: block; /* Show submenu on hover */
+}
+
+.dropdown-submenu:hover{
+    display: block; /* Show submenu when hovering over the dropdown */
+}
+
 
 nav ul li img {
     padding-top: 10%;
@@ -143,7 +161,11 @@ nav ul li img {
         <li class="dropdown">
             <a href="#">&#11167; naša ekipa</a>
             <div class="dropdown-content">
-                <a href="trenerji.php">trenerji</a>
+                <a href="trenerji.php">&#11166; trenerji &#11166;</a>
+                <div class="dropdown-submenu">
+                    <a href="#">treningi</a>
+                    <a href="#">kako do nas</a>
+                </div>
                 <a href="vodstvo.php">vodstvo</a>
                 <a href="sodniki.php">sodniki</a>
             </div>
