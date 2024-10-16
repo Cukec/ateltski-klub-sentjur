@@ -9,10 +9,7 @@ main {
     margin: 5vh auto;
     padding: 40px;
     max-width: 1200px; /* Constrain main content to a maximum width */
-    background-color: rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    border-radius: 10px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 section h2 {
@@ -23,9 +20,6 @@ section h2 {
 /* Article styles */
 article {
     background-color: #ffffff; /* White background for the article section */
-    padding: 20px;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Text inside articles */
@@ -33,6 +27,7 @@ article p {
     margin: 10px 0;
     font-size: 20px;
     color:  black;
+    text-align: justify;
 }
 
 /* Unordered list styles */

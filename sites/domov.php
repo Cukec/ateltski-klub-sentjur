@@ -12,9 +12,9 @@
     
     <?php include "navigation.php"; /* include "config.php"; */ ?>
 
-    <div class="filler-img">
+    <!-- <div class="filler-img">
         <img src="../assets/homepage-background.jpg" alt="Filler Image" class="fullscreen-img">
-    </div>
+    </div> -->
     <!-- Main content container -->
     <div class="main-content">
         <div class="container">
@@ -24,6 +24,7 @@
             </div> -->
 
             <div class="dogodki-container">
+                <div class="overlay"></div>
                 <div class="naslov" style="display: flex; flex-direction: horizontal;">
                     <h1>Prihajajoči dogodki:</h1>
                     <button id="openEventModalBtn" class="add-news-btn">Dodaj Dogodek</button>
