@@ -92,8 +92,8 @@
         
 
         <div class="naslov-novice" style="display: flex; flex-direction: horizontal;" >
+            <button id="openModalBtn" class="add-news-btn">Dodaj Novico</button>
             <h1>Novice</h1>
-            <button id="openModalBtn" class="add-news-btn">Dodaj Novico</button> <!-- Add button for adding news -->
         </div>
 
         <!-- Novice (News) -->
