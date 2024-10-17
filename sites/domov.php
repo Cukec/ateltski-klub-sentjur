@@ -10,7 +10,7 @@
 </head>
 <body>
     
-    <?php include "navigation.php";  include "config.php"; ?>
+    <?php include "navigation.php";  /*include "config.php";*/ ?>
 
     <!-- <div class="filler-img">
         <img src="../assets/homepage-background.jpg" alt="Filler Image" class="fullscreen-img">
@@ -160,6 +160,8 @@
         <script src="modal-news.js"></script> <!-- Include the modal JavaScript -->
 
     </div>
-
+    <footer>
+        
+    </footer>
 </body>
 </html>
