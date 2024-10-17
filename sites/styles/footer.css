@@ -1,0 +1,24 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+footer {
+    display: flex;
+    justify-content: center;
+}
+
+.kontakt {
+    text-align: center;
+    width: 40vw;
+}
+
+.sponsor {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+}
+
+.finance {
+    text-align: center;
+    width: 40vw;
+}

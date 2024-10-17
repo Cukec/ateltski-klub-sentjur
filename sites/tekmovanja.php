@@ -23,7 +23,7 @@
 
         <!-- Past Events Section -->
         <div class="past-events">
-            <h2>Pretekle tekmovanja</h2>
+            <h2>Pretekla tekmovanja</h2>
             <!-- Novice (News) //spremeni tako da bo class = past-dogodki (ne pozabit CSS) -->
             <div class="novice">
                 <?php 

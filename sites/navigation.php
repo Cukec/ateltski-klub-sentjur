@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -178,7 +181,6 @@ nav ul li img {
                 <div class="dropdown-content">
                     <a href="predstavitev.php">predstavitev</a>
                     <a href="dokumenti.php">dokumenti</a>
-                    <a href="finance.php">finance</a>
                 </div>
             </li>
 
