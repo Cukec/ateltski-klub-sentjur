@@ -13,18 +13,13 @@
         <div>
             <h2>Lokacije in termini treningov <br> AK Šentjur</h2>
         </div>
-<<<<<<< Updated upstream
         <img src="../assets/deadline.png" alt="">
-=======
-        <img src="../assets/note.png" alt="">
->>>>>>> Stashed changes
     </section>
 
 
     <?php 
     
     $locations = [
-<<<<<<< Updated upstream
         ['town' => 'Šentjur', 'age' => '1., 2. razred', 'location' => 'OŠ Franja Malgaja', 'time' => 'vsak torek 15:00 - 16:00', 'trener' => 'Rok Novak'],
         ['town' => 'Šentjur', 'age' => '3., ..., 5. razred', 'location' => 'OŠ Franja Malgaja', 'time' => 'vsak četrtek 15:00 - 16:00', 'trener' => 'Rok Novak'],
         ['town' => 'Šentjur', 'age' => '6., ..., 9. razred', 'location' => 'OŠ Franja Malgaja', 'time' => 'vsako soboto 15:00 - 16:00 + po dogovoru', 'trener' => 'Vladimir Artnak'],
@@ -34,14 +29,10 @@
         ['town' => 'Lesično', 'age' => '1., ..., 9. razred', 'location' => 'OŠ Lesično', 'time' => 'za info se obrnite na trenerja', 'trener' => 'Ivan Kukovič'],
         ['town' => 'Rogatec', 'age' => 'prešolski otroci do 3. razred', 'location' => 'OŠ Podčetrtek', 'time' => 'vsak torek 14:15 - 15:00', 'trener' => 'Nives Artič'],
         ['town' => 'Rogatec', 'age' => '4., ..., 9.', 'location' => 'OŠ Podčetrtek', 'time' => 'vsak torek 15:00 - 16:00', 'trener' => 'Nives Artič']
-=======
-        ['town' => 'Šentjur', 'age' => '1., 2. razred', 'location' => 'OŠ Franja Malgaja', 'time' => 'vsak torek 15:00 - 16:00', 'trener' => 'Rok Novak']
->>>>>>> Stashed changes
     ]
 
 
     ?>
-<<<<<<< Updated upstream
     <section class="content">
 
         <div class="filter-bar">
@@ -92,44 +83,5 @@
     </section>
     
     
-=======
-
-    <section class="šentjur">
-        <div id="id1">
-            <div class="header">
-                <img src="../assets/location-red.png" alt="">
-                <h2>Šentjur</h2>
-            </div>
-            <hr>
-            <p><b>Starost: <?php echo $locations[1].['age']; ?> </b></p>
-            <p><b>Lokacija:</b></p>
-            <p><b>Čas:</b></p>
-            <p><b>Trener:</b></p>
-        </div>
-        <div id="id2">
-            <div class="header">
-                <img src="../assets/location-purple.png" alt="">
-                <h2>Šentjur</h2>
-            </div>
-            <hr>
-            <p><b>Starost:</b></p>
-            <p><b>Lokacija:</b></p>
-            <p><b>Čas:</b></p>
-            <p><b>Trener:</b></p>
-        </div>
-        <div id="id3">
-            <div class="header">
-                <img src="../assets/location-blue.png" alt="">
-                <h2>Šentjur</h2>
-            </div>
-            <hr>
-            <p><b>Starost:</b></p>
-            <p><b>Lokacija:</b></p>
-            <p><b>Čas:</b></p>
-            <p><b>Trener:</b></p>
-        </div>
-    </section>
-    
->>>>>>> Stashed changes
 </body>
 </html>

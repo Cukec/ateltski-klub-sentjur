@@ -16,7 +16,8 @@ body {
 nav {
     height: 80px;
     background-color: #f94449;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 10px;
+    z-index: 999;
 }
 
 nav ul {
