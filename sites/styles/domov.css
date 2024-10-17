@@ -2,9 +2,39 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7; /* Light background for the entire page */
+    background-color: #ececec;
     box-sizing: border-box;
+    background-image: url('../../assets/domov-filler.jpg');
+    background-size: 100% 85%, 100% 100%;
+    background-position: top center, top center;
+    background-repeat: no-repeat, no-repeat;
+    height: 100vh;
+    position: relative; 
 }
+
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    background: linear-gradient(
+        to bottom, 
+        rgba(0, 0, 0, 0.5) 0%,     /* Dimmed at the top */
+        rgba(0, 0, 0, 0.5) 60%,    /* Slightly more dim towards the middle */
+              /* Solid dark burgundy at the bottom */
+    );
+    z-index: -1; /* Ensure the overlay is behind any content */
+}
+
+
+
+
+
+
+
 /*.filler-img {
     width: 100vw;
     height: 100%;
@@ -18,23 +48,10 @@ body {
 /* Main content container to avoid conflict with navigation */
 .main-content {
     position: relative;
-    padding: 20px; /* Add spacing around the content */
-    background-image: url('../../assets/homepage-background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
+    margin: 5vw; /* Add spacing around the content */
     color: #c3c3c3;
 }
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-}
+
 .add-news-btn {
     background: linear-gradient(135deg, #e07070, #b81212); /* Gradient effect */
     color: white;
@@ -201,6 +218,24 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.naslov-novice {
+    margin-top: 40vh; /* Adjusts the top margin */
+    margin-left: -5vw; /* Slightly shifts the div to the left */
+    width: 25vw; /* 1/4 of the screen width */
+    height: auto;
+    background: linear-gradient(90deg, #f94449 0%, #913333 100%); /* Gradient from red to light gray */
+    border-top-right-radius: 50px; /* Completely round top right edge */
+    border-bottom-right-radius: 50px; /* Completely round bottom right edge */
+    border-top-left-radius: 0; /* Ensure left edge is sharp */
+    border-bottom-left-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    color: white;
 }
 
 /* Button for adding news */

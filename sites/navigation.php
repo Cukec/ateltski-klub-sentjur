@@ -163,7 +163,7 @@ nav ul li img {
             <div class="dropdown-content">
                 <a href="trenerji.php">&#11166; trenerji &#11166;</a>
                 <div class="dropdown-submenu">
-                    <a href="#">treningi</a>
+                    <a href="treningi.php">treningi</a>
                     <a href="#">kako do nas</a>
                 </div>
                 <a href="vodstvo.php">vodstvo</a>

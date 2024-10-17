@@ -3,7 +3,7 @@
 $host = 'localhost';  // Your database server, usually 'localhost'
 $dbname = 'ak-sentjur';  // Replace with your actual database name
 $username = 'root';  // Replace with your actual username
-$password = 'npGLmd8#v*=Ek"76jy>4';  // Replace with your actual password
+$password = '';  // Replace with your actual password
 
 // Create connection
 $conn = new mysqli($host, $username, $password, $dbname);

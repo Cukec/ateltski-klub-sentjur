@@ -10,7 +10,7 @@
 </head>
 <body>
     
-    <?php include "navigation.php"; /* include "config.php"; */ ?>
+    <?php include "navigation.php";  include "config.php"; ?>
 
     <!-- <div class="filler-img">
         <img src="../assets/homepage-background.jpg" alt="Filler Image" class="fullscreen-img">
@@ -24,8 +24,7 @@
             </div> -->
 
             <div class="dogodki-container">
-                <div class="overlay"></div>
-                <div class="naslov" style="display: flex; flex-direction: horizontal;">
+                <div class="naslov-dogodek" style="display: flex; flex-direction: horizontal;">
                     <h1>Prihajajoči dogodki:</h1>
                     <button id="openEventModalBtn" class="add-news-btn">Dodaj Dogodek</button>
                 </div>
@@ -90,9 +89,10 @@
 
         <script src="modal-events.js"></script>
 
+        
 
-        <div class="naslov" style="display: flex; flex-direction: horizontal;" >
-            <h1>Novice:</h1>
+        <div class="naslov-novice" style="display: flex; flex-direction: horizontal;" >
+            <h1>Novice</h1>
             <button id="openModalBtn" class="add-news-btn">Dodaj Novico</button> <!-- Add button for adding news -->
         </div>
 

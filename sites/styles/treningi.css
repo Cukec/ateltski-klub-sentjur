@@ -1,0 +1,179 @@
+.explenation-box {
+    margin-left: 10vw;
+    width: 80vw;
+    height: 50vh;
+    background-color: #ba4347;
+    box-shadow: rgba(0, 0, 0, 0.5) -5px 5px 10px, rgba(0, 0, 0, 0.5) 5px 5px 10px;
+    display: flex;
+    flex-direction: horizontal;
+    border-radius: 0 0 30px 30px;
+    place-items: center;
+    margin-bottom: 10vh;
+}
+
+.explenation-box h2 {
+    float: left;
+    color: #f2f2f2;
+    font-size: 2rem;
+    margin-left: 10vw;
+    margin-right: 15vw;
+}
+
+.explenation-box img{
+    height: 30vh;
+    width: 30vh;
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.5));
+}
+
+.content {
+    margin: 5vw;
+}
+
+.filter-bar {
+    width: 100%;
+    height: 6vh;
+    background-color: #ba4347;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 12px ;
+    display: flex;
+    align-items: center;
+    float: left;
+    margin-bottom: 10vh;
+    z-index: 5;
+}
+
+.filter-bar label {
+    color: white;
+    margin-left: 2vw;
+    font-size: 2rem;
+    vertical-align: middle;
+} 
+
+.filter-bar select {
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    vertical-align: middle;
+}
+
+.šentjur {
+    width: 100%;
+    height: 40vh;
+    color: white;
+    display: flex;
+    gap: 3%;
+    justify-content: space-between; /* Ensure equal spacing between the sections */
+    position: relative;
+}
+
+.šentjur div {
+    width: 30%;
+    padding: 2vw;
+    background-color: rgba(0, 0, 0, 0.2); /* Optional: add a background to the sections for clarity */
+    position: relative;
+}
+
+.šentjur .header {
+    position: absolute;
+    top: -5vh; /* Adjust this value to control how much the header "pokes" above */
+    left: 50%;
+    transform: translateX(-50%); /* Centers the header horizontally */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 70%; /* Adjust width as needed */
+}
+
+.šentjur hr {
+    margin-top: 30px; /* Space after the header */
+    border: none;
+    height: 2px;
+    background-color: white;
+}
+
+.šentjur img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.ostalo{
+    width: 100%;
+    height: 40vh;
+    background-color: rgb(56, 154, 196);
+    color: white;
+    display: flex;
+}
+
+.ostalo div {
+    width: 33.33%;
+    padding: 2vw;
+}
+
+.ostalo br {
+    height: 5px;
+    width: 100%;
+    color: white;
+}
+
+.ostalo-1{
+    width: 100%;
+    height: 40vh;
+    background-color: rgb(56, 154, 196);
+    color: white;
+    display: flex;
+}
+
+.ostalo-1 div {
+    width: 30%;
+    padding: 2vw;
+}
+
+.ostalo-1 br {
+    height: 5px;
+    width: 100%;
+    color: white;
+}
+
+.header {
+    display: flex;
+    flex-direction: horizontal;
+}
+
+.header img { 
+    margin-top: 1vh;
+    height: 5vh;
+    width: 5vh;
+}
+
+#id1 {
+    background-color: rgb(56, 154, 196);
+}
+
+#id1 .header {
+    background-color: rgb(59, 141, 176);
+    box-shadow: 0px 2px 5px #444;
+}
+
+#id2 {
+    background-color: rgb(70, 196, 104);
+}
+
+#id2 .header {
+    background-color: rgb(73, 162, 97);
+    box-shadow: 0px 2px 5px #444;
+}
+
+#id3 {
+    background-color: rgb(240, 177, 90);
+}
+
+#id3 .header {
+    background-color: rgb(201, 141, 58);
+    box-shadow: 0px 2px 5px #444;
+}
+
