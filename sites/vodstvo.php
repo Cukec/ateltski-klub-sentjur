@@ -3,53 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="styles/trenerji-vodstvo.css">
-
     <title>Trenerji</title>
 </head>
 <body>
 
+    <?php include "navigation.php"; ?>
+    
     <?php 
-    
-    include"navigation.php";
-    
     $profiles = [
-        ['name' => 'John Doe', 'roles' => 'Software Developer, Team Lead'],
-        ['name' => 'Jane Smith', 'roles' => 'Product Manager, UX Designer'],
-        ['name' => 'Chris Evans', 'roles' => 'DevOps Engineer, Cloud Architect'],
-        ['name' => 'Emily Johnson', 'roles' => 'Frontend Developer, UI Designer'],
-        ['name' => 'Michael Brown', 'roles' => 'Backend Developer, Database Admin'],
-        ['name' => 'Sarah Davis', 'roles' => 'QA Engineer, Automation Specialist'],
-        ['name' => 'James Wilson', 'roles' => 'Full Stack Developer, CTO'],
-        ['name' => 'Emma Martinez', 'roles' => 'Marketing Manager, Content Strategist'],
-        ['name' => 'David Lee', 'roles' => 'Cybersecurity Expert, System Administrator'],
-        ['name' => 'Olivia White', 'roles' => 'Project Manager, Scrum Master']
+        ['name' => 'Vladimir', 'surname' => 'Artnak', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Cmok', 'surname' => 'Luka', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Katja', 'surname' => 'Jevšnik', 'email' => '', 'roles' => 'trenerka'],
+        ['name' => 'Ivan', 'surname' => 'Kukovič', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Rok', 'surname' => 'Novak', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Bojan', 'surname' => 'Očko', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Borut', 'surname' => 'Pihlar', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Andrej', 'surname' => 'Podgoršek', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Robert', 'surname' => 'Švegler', 'email' => '', 'roles' => 'trener'],
     ];
-    
     ?>
-    <div class="content">
-        <article>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto praesentium sapiente fugiat consectetur non earum cum reprehenderit magnam nulla error, maiores porro blanditiis accusamus quam, recusandae id repellat velit laborum!</p>
-        </article>
+
+    <div class="custom-shape">
+        <div class="left-text">
+            <h2>vodenje</h2>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="right-text">
+            <p>
+
+            Atletski klub je zavezan spodbujanju športnega duha, timskega dela in osebne rasti vseh svojih članov. Vodstvo kluba sestavljajo trenerji in strokovnjaki navdušeni nad atletiko.
+
+            </p>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const shape = document.querySelector('.custom-shape');
+            shape.classList.add('slide-in');
+        });
+    </script>
+
     <div class="content">
-    <section>
+    <section class="profile-container">
 
         <?php
-
         foreach ($profiles as $profile) {
-        echo '
-        <div class="profile-card">
-            <div class="empty-pfp">?</div>
-            <h2>' . $profile['name'] . '</h2>
-            <p class="roles">' . $profile['roles'] . '</p>
-        </div>';
+            echo '
+            <div class="profile-card">
+                <div class="empty-pfp">?</div>
+                <div class="profile-info">
+                    <h2>' . $profile['name'] . '</h2>
+                    <h3>' . $profile['surname'] . '</h3>
+                    <p class="email">' . $profile['email'] . '</p>
+                    <p class="roles">' . $profile['roles'] . '</p>
+                </div>
+            </div>';
         }
-
         ?>
-        
+
     </section>
     </div>
+
 </body>
 </html>

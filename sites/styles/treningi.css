@@ -25,6 +25,7 @@
     filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.5));
 }
 
+<<<<<<< Updated upstream
 .content {
     margin: 5vw;
 }
@@ -103,17 +104,26 @@
 
 .ostalo{
     width: 100%;
+=======
+.šentjur {
+    width: 100vw;
+>>>>>>> Stashed changes
     height: 40vh;
     background-color: rgb(56, 154, 196);
     color: white;
     display: flex;
 }
 
+<<<<<<< Updated upstream
 .ostalo div {
+=======
+.šentjur div {
+>>>>>>> Stashed changes
     width: 33.33%;
     padding: 2vw;
 }
 
+<<<<<<< Updated upstream
 .ostalo br {
     height: 5px;
     width: 100%;
@@ -134,6 +144,9 @@
 }
 
 .ostalo-1 br {
+=======
+.šentjur br {
+>>>>>>> Stashed changes
     height: 5px;
     width: 100%;
     color: white;
@@ -154,15 +167,19 @@
     background-color: rgb(56, 154, 196);
 }
 
+<<<<<<< Updated upstream
 #id1 .header {
     background-color: rgb(59, 141, 176);
     box-shadow: 0px 2px 5px #444;
 }
 
+=======
+>>>>>>> Stashed changes
 #id2 {
     background-color: rgb(70, 196, 104);
 }
 
+<<<<<<< Updated upstream
 #id2 .header {
     background-color: rgb(73, 162, 97);
     box-shadow: 0px 2px 5px #444;
@@ -177,3 +194,8 @@
     box-shadow: 0px 2px 5px #444;
 }
 
+=======
+#id3 {
+    background-color: rgb(240, 205, 90);
+}
+>>>>>>> Stashed changes
