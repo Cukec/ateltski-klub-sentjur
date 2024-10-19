@@ -1,7 +1,7 @@
 <?php
 // Database configuration
 $host = 'localhost';  // Your database server, usually 'localhost'
-$dbname = 'ak-sentjur';  // Replace with your actual database name
+$dbname = 'ak-sentjur-test';  // Replace with your actual database name
 $username = 'root';  // Replace with your actual username
 $password = '';  // Replace with your actual password
 

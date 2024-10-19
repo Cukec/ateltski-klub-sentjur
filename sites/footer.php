@@ -61,7 +61,7 @@
             <p>3230 Šentjur</p>
             <h3>Kontakti</h3>
             <p>Vladimir Artnak</p>
-            <p>&#128222; +386 (0)31 826 969</p>
+            <p>&#9742; +386 (0)31 826 969</p>
             <p>info@aksentjur.si</p>
         </div>
         <div class="sponsor">

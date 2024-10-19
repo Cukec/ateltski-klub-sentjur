@@ -1,54 +1,33 @@
 /* Global styles */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
     background-color: #ececec;
-    box-sizing: border-box;
-    background-image: url('../../assets/domov-filler.jpg');
-    background-size: 100% 85%, 100% 100%;
-    background-position: top center, top center;
-    background-repeat: no-repeat, no-repeat;
-    height: 100vh;
-    position: relative; 
 }
 
 /* Main content container to avoid conflict with navigation */
 .main-content {
-    position: relative;
-    margin: 5vw; /* Add spacing around the content */
-    color: #c3c3c3;
+    display: flex;
+    margin: 5%; /* Add spacing around the content */
+    color: black;
 }
-
-.add-news-btn {
-    height: auto;
-    width: auto;
-    background: linear-gradient(135deg, #e07070, #b81212); /* Gradient effect */
+.naslov-strani {
+    display: flex;
+    height: 25vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url('../../assets/domov-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+}
+.naslov-strani h1 {
     color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 30px; /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
-    cursor: pointer;
-    transition: all 0.3s ease; /* Smooth transitions */
-    margin: 2%;
-}
-
-.add-news-btn:hover {
-    background: linear-gradient(135deg, #e08686, #d43b3b); /* Hover effect with gradient */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
-    transform: translateY(-3px); /* Slight lift effect */
-}
-
-.add-news-btn:active {
-    transform: translateY(0); /* Remove lift on click */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+    font-size: 100px;
 }
 /* Container to hold image rotation and events section */
 .container {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -64,7 +43,7 @@ body {
 }
 
 .img-rotation img {
-    width: 100%;
+    width: 30%;
     min-height: 100%;
     object-fit: cover;
 }
@@ -114,18 +93,27 @@ body {
 
 /* Novice (News) - takes full width */
 .novice {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
     width: 100%;
     height: 60vh;
-    background-color: rgba(0, 0, 0, 0.05); /* Same background color as Dogodki */
     padding: 20px;
     margin-top: 10vh;
     box-sizing: border-box;
     border-radius: 10px; /* Rounded corners */
-    max-height: 50vh; /* Set maximum height to limit overflow */
-    overflow-y: auto; /* Enable scrolling if content overflows */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Inset shadow for indentation effect */
 }
 
+.novica:nth-child(1) {
+    grid-column: span 2;
+}
+
+.novice-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-right: 5%;
+}
 /* Individual Novica (News) background */
 .novica {
     background-color: #ffffff; /* White background for individual news */
@@ -206,7 +194,6 @@ body {
 }
 
 .naslov-novice {
-    margin-top: 40vh; /* Adjusts the top margin */
     margin-left: -5vw; /* Slightly shifts the div to the left */
     width: 35vw; /* 1/4 of the screen width */
     height: 10vh;
@@ -217,7 +204,7 @@ body {
     border-bottom-left-radius: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
     padding: 10px 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
     color: white;
@@ -235,7 +222,32 @@ body {
 .naslov-dogodek {
     justify-content: center;
 }
+.add-news-btn {
+    height: auto;
+    width: auto;
+    background: linear-gradient(135deg, #e07070, #b81212); /* Gradient effect */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transitions */
+    margin: 2%;
+}
 
+.add-news-btn:hover {
+    background: linear-gradient(135deg, #e08686, #d43b3b); /* Hover effect with gradient */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+.add-news-btn:active {
+    transform: translateY(0); /* Remove lift on click */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
 /* Button for adding news */
 /*.add-news-btn {
     background-color: #4CAF50;

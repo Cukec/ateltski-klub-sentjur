@@ -11,53 +11,112 @@
 <body>
     
     <?php include "navigation.php";  include "config.php"; ?>
-
-    <!-- <div class="filler-img">
-        <img src="../assets/homepage-background.jpg" alt="Filler Image" class="fullscreen-img">
-    </div> -->
-    <!-- Main content container -->
+    <div class="naslov-strani">
+        <h1>AK ŠENTJUR</h1>
+    </div>
     <div class="main-content">
-        <div class="container">
-            <!-- Rotacija slik (Image Rotation) -->
-            <!-- <div class="img-rotation">
-                <img src="blank.jpg" alt="Blank Image" class="rotation-img">
-            </div> -->
+        <div class="novice-container">
+            <div class="naslov-novice" style="display: flex; flex-direction: horizontal;" >
+                <!-- <button id="openModalBtn" class="add-news-btn">Dodaj Novico</button> -->
+                <h1>Novice</h1>
+            </div>
+                <!-- Novice (News) -->
+            <div class="novice">
+                
+                <?php 
+                // Define the SQL SELECT query
+                $query = "SELECT title, content FROM news WHERE shown = 1;";
 
-            <div class="dogodki-container">
-                <div class="naslov-dogodek" style="display: flex; flex-direction: horizontal;">
-                    <h1>Prihajajoči dogodki:</h1>
-                    <button id="openEventModalBtn" class="add-news-btn">Dodaj Dogodek</button>
-                </div>
-                <!-- Dogodki (Events) -->
-                <div class="dogodki">
-                    <?php 
+                // Execute the query
+                $result = $conn->query($query);
 
-                    // Define the SQL SELECT query
-                    $query = "SELECT title, content, date_start FROM events ORDER BY date_start ASC;";
-
-                    // Execute the query
-                    $result = $conn->query($query);
-
-                    // Check if the query returns any results
-                    if ($result->num_rows > 0) {
-                        // Output data for each row
-                        while ($row = $result->fetch_assoc()) {
-                            ?>
-                            <div class="novica">
-                                <h2> <?= $row['title']; ?> </h2>
-                                <p> <?= $row['content']; ?> </p>
-                                <p style ="color: #f3f3f3; float: right;"> <?php $row['date_start'] ?> </p>
-                            </div>
-                            <?php
-                        }
-                    } else {
-                        echo "No news available.";
+                // Check if the query returns any results
+                if ($result->num_rows > 0) {
+                    // Output data for each row
+                    while ($row = $result->fetch_assoc()) {
+                        ?>
+                        <div class="novica">
+                            <img src="../assets/no-image-placeholder.jpg" alt="placeholder-image">
+                            <h2> <?= $row['title']; ?> </h2>
+                            <p> <?= $row['content']; ?> </p>
+                        </div>
+                        <?php
                     }
+                } else {
+                    echo "No news available.";
+                }
 
-                    // Close the database connection
-                    //$conn->close();
-                    ?>
+                // Close the database connection
+                //$conn->close();
+                ?>
+
+
+                    
+                <!-- More news here -->
+            </div>
+
+                <!-- Modal for Adding News -->
+                <div id="addNewsModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Dodaj Novico</h2>
+                        <form id="newsForm" action="submit-news.php" method="POST">
+                            <label for="title">Naslov:</label>
+                            <input type="text" id="title" name="title" required><br>
+
+                            <label for="content">Vsebina:</label>
+                            <textarea id="content" name="content" rows="4" required></textarea><br>
+
+                            <label for="shown">Prikaži novico:</label>
+                            <select id="shown" name="shown">
+                                <option value="1">Da</option>
+                                <option value="0">Ne</option>
+                            </select><br>
+
+                            <label for="post_time">Datum objave:</label>
+                            <input type="date" id="post_time" name="post_time" required><br>
+
+                            <button type="submit">Dodaj Novico</button>
+                        </form>
+                    </div>
                 </div>
+        </div>
+
+        <script src="modal-news.js"></script> <!-- Include the modal JavaScript -->
+        <div class="dogodki-container">
+            <div class="naslov-dogodek" style="display: flex; flex-direction: horizontal;">
+                <h1>Prihajajoči dogodki</h1>
+                    <!-- <button id="openEventModalBtn" class="add-news-btn">Dodaj Dogodek</button> -->
+            </div>
+                <!-- Dogodki (Events) -->
+            <div class="dogodki">
+                <?php 
+
+                // Define the SQL SELECT query
+                $query = "SELECT title, content, date_start FROM events ORDER BY date_start ASC;";
+
+                // Execute the query
+                $result = $conn->query($query);
+
+                // Check if the query returns any results
+                if ($result->num_rows > 0) {
+                    // Output data for each row
+                    while ($row = $result->fetch_assoc()) {
+                        ?>
+                        <div class="novica">
+                            <h2> <?= $row['title']; ?> </h2>
+                            <p> <?= $row['content']; ?> </p>
+                            <p style ="color: #f3f3f3; float: right;"> <?php $row['date_start'] ?> </p>
+                        </div>
+                        <?php
+                    }
+                } else {
+                    echo "No news available.";
+                }
+
+                // Close the database connection
+                //$conn->close();
+                ?>
             </div>
         </div>
 
@@ -86,80 +145,9 @@
                 </form>
             </div>
         </div>
+    </div>
 
         <script src="modal-events.js"></script>
-
-        
-
-        <div class="naslov-novice" style="display: flex; flex-direction: horizontal;" >
-            <button id="openModalBtn" class="add-news-btn">Dodaj Novico</button>
-            <h1>Novice</h1>
-        </div>
-
-        <!-- Novice (News) -->
-        <div class="novice">
-
-        <?php 
-
-            // Define the SQL SELECT query
-            $query = "SELECT title, content FROM news WHERE shown = 1;";
-
-            // Execute the query
-            $result = $conn->query($query);
-
-            // Check if the query returns any results
-            if ($result->num_rows > 0) {
-                // Output data for each row
-                while ($row = $result->fetch_assoc()) {
-                    ?>
-                    <div class="novica">
-                        <h2> <?= $row['title']; ?> </h2>
-                        <p> <?= $row['content']; ?> </p>
-                    </div>
-                    <?php
-                }
-            } else {
-                echo "No news available.";
-            }
-
-            // Close the database connection
-            //$conn->close();
-        ?>
-
-
-            
-            <!-- More news here -->
-        </div>
-
-        <!-- Modal for Adding News -->
-        <div id="addNewsModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Dodaj Novico</h2>
-                <form id="newsForm" action="submit-news.php" method="POST">
-                    <label for="title">Naslov:</label>
-                    <input type="text" id="title" name="title" required><br>
-
-                    <label for="content">Vsebina:</label>
-                    <textarea id="content" name="content" rows="4" required></textarea><br>
-
-                    <label for="shown">Prikaži novico:</label>
-                    <select id="shown" name="shown">
-                        <option value="1">Da</option>
-                        <option value="0">Ne</option>
-                    </select><br>
-
-                    <label for="post_time">Datum objave:</label>
-                    <input type="date" id="post_time" name="post_time" required><br>
-
-                    <button type="submit">Dodaj Novico</button>
-                </form>
-            </div>
-        </div>
-
-        <script src="modal-news.js"></script> <!-- Include the modal JavaScript -->
-
-    </div>
     <?php include ('footer.php') ?>
 </body>
 </html>
