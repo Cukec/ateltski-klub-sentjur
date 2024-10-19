@@ -3,7 +3,7 @@
 $host = 'localhost';
 $dbname = 'ak-sentjur';
 $user = 'root';
-$pass = 'npGLmd8#v*=Ek"76jy>4';
+$pass = '';
 
 try {
     // Establish a connection to the database
@@ -14,11 +14,16 @@ try {
     header('Content-Type: application/json');
 
     // Query to fetch events from the database and alias date_start as start
-    $stmt = $pdo->query("SELECT title, date_start AS start FROM events");
+    $stmt = $pdo->query("SELECT date_start FROM events");
     $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Output the events as JSON
-    echo json_encode($events);
+    // Prepare an array of event dates
+    $eventDates = array_map(function($event) {
+        return date('Y-m-d', strtotime($event['date_start']));
+    }, $events);
+
+    // Output the event dates as JSON
+    echo json_encode($eventDates);
 
 } catch (PDOException $e) {
     // Return error message in case of an exception

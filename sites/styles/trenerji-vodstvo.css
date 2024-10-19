@@ -16,7 +16,7 @@
     display: flex;
     justify-content: flex-start; 
     align-items: center;
-    background-color: #f2f2f2;
+    background: linear-gradient(135deg, #e07070, #b81212);
     border-radius: 0 50px 50px 0;
     height: 200px;
     width: 60%;
@@ -25,6 +25,7 @@
     margin-top: 13vh;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     z-index: 0;
+    color: white;
 }
 
 /* Left text: delo z atleti */
@@ -39,7 +40,8 @@
 .left-text h2 {
     font-size: 2.5rem; /* Bigger text */
     font-weight: bold;
-    color: #333;
+    color: rgb(113, 34, 34);
+    text-shadow: #511717;
     margin: 0;
 }
 
@@ -47,7 +49,7 @@
 .vertical-line {
     width: 2px;
     height: 60%;
-    background-color: #555; /* Line color */
+    background-color: #692020; /* Line color */
     margin: 0 2vw; /* Using viewport width for responsive margin */
 }
 
@@ -59,7 +61,7 @@
 
 .right-text p {
     font-size: 0.9rem;
-    color: #555;
+    color: #e8e8e8;
     margin: 0;
 }
 
@@ -71,7 +73,8 @@
 
 /* Ensure paragraph is under navigation bar */
 .content {
-    margin: 0;
+    margin-right: 5vw;
+    margin-left: 5vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,12 +102,12 @@ article {
 /* Adjust margin for the profile section */
 .profile-container {
     padding-top: 25vh;
-    margin: 5vh auto; /* Center the profile container and add vertical spacing */
+    /*margin: 5vh auto;  Center the profile container and add vertical spacing */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; /* Distribute the profile cards evenly */
     gap: 20px; /* Space between cards */
-    max-width: 1200px; /* Optional: limit the width of the profile section */
+    width: 90vw; /* Optional: limit the width of the profile section */
 }
 
 /* Profile card styling */
