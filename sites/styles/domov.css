@@ -1,13 +1,10 @@
 /* Global styles */
-body {
-    margin: 0;
-    background-color: #ececec;
-}
+
 
 /* Main content container to avoid conflict with navigation */
 .main-content {
     display: flex;
-    margin: 5%; /* Add spacing around the content */
+    margin: 5vw; /* Add spacing around the content */
     color: black;
 }
 .naslov-strani {
@@ -50,26 +47,23 @@ body {
 
 .dogodki-container {
     width: 40%;
-    color: black;
-    display: flex; /* Make this a flex container */
-    flex-direction: column; /* Stack children vertically */
-    justify-content: space-between; /* Distribute space between children */
-    height: calc(50vw * (9 / 16)); /* Match the height of the image rotation */
-    background: #fff;
-    border-radius: 20px;
-    padding: 20px;
 }
 
 /* Dogodki (Events) - 1/3 of the width */
 .dogodki {
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.05); /* Same background color as Novice */
-    padding: 20px;
-    box-sizing: border-box;
-    flex-grow: 1; /* Allow this to take remaining space */
-    overflow-y: auto; /* Enable scrolling if content overflows */
     border-radius: 10px; /* Rounded corners */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Inset shadow for indentation effect */
+    margin-top: 10vh;
+}
+
+.dogodek a, .novica a {
+    text-decoration: none;
+    color: inherit;
+
+}
+
+.dogodek a:hover, .novica a:hover {
+    color: #e07070;
 }
 
 /* Individual Dogodek (Event) background */
@@ -93,34 +87,42 @@ body {
 
 /* Novice (News) - takes full width */
 .novice {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-content: flex-start;
     width: 100%;
     height: 60vh;
-    padding: 20px;
     margin-top: 10vh;
-    box-sizing: border-box;
     border-radius: 10px; /* Rounded corners */
-}
-
-.novica:nth-child(1) {
-    grid-column: span 2;
+    overflow-y: auto;
 }
 
 .novice-container {
-    display: flex;
-    flex-direction: column;
     width: 60%;
-    margin-right: 5%;
+    margin-right: 5vw;
 }
 /* Individual Novica (News) background */
-.novica {
+.novica{
     background-color: #ffffff; /* White background for individual news */
     padding: 15px;
     border-radius: 8px; /* Rounded corners for individual news */
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: calc(50% - 20px);
+    box-sizing: border-box;
+    max-height: 50vh;
+}
+
+.novica:first-child {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .novica {
+        width: 100%; /* On smaller screens, each news item takes full width */
+    }
 }
 
 .novica h2 {
@@ -182,14 +184,21 @@ body {
     cursor: pointer;
 }
 
-@keyframes slideIn {
+@keyframes slideInNovica {
     0% {
         transform: translateX(-100%); /* Start off-screen to the left */
-        opacity: 0; /* Make it invisible */
     }
     100% {
         transform: translateX(0); /* End in its final position */
-        opacity: 1; /* Fully visible */
+    }
+}
+
+@keyframes slideInDogodek {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
     }
 }
 
@@ -205,11 +214,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: end;
-    padding: 10px 20px;
+    padding: 1vh 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
     color: white;
-    opacity: 0; /* Start invisible */
-    animation: slideIn 1s ease-out forwards; /* Apply animation */
+    animation: slideInNovica 2.2s ease-out forwards; /* Apply animation */
 }
 
 .naslov-novice h1 {
@@ -220,7 +228,21 @@ body {
     margin: 0;
 }
 .naslov-dogodek {
-    justify-content: center;
+    width: calc(100% - 2.15vw);
+    margin-left: 5vw;
+    height: 10vh;
+    background: linear-gradient(90deg, #913333 0%, #f94449 100%); /* Gradient from red to dark red */
+    border-top-left-radius: 50px; /* Completely round top right edge */
+    border-bottom-left-radius: 50px; /* Completely round bottom right edge */
+    border-top-right-radius: 0; /* Ensure left edge is sharp */
+    border-bottom-right-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 1vh 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    color: white;
+    animation: slideInDogodek 2.2s ease-out forwards; /* Apply animation */
 }
 .add-news-btn {
     height: auto;

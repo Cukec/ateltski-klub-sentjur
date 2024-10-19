@@ -1,0 +1,33 @@
+main {
+    margin: 5%;
+}
+
+.naslov-strani {
+    display: flex;
+    height: 25vh;
+    background: linear-gradient(90deg, #f94449 0%, #913333 100%);
+}
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%); /* Start off-screen to the left */
+    }
+    100% {
+        transform: translateX(0); /* End in its final position */
+    }
+}
+
+.naslov-novice {
+    display: inline-block;
+    width: auto;
+    margin-left: -5vw; /* Slightly shifts the div to the left */
+    height: 10vh;
+    background: linear-gradient(90deg, #f94449 0%, #913333 100%); /* Gradient from red to dark red */
+    border-top-right-radius: 50px; /* Completely round top right edge */
+    border-bottom-right-radius: 50px; /* Completely round bottom right edge */
+    border-top-left-radius: 0; /* Ensure left edge is sharp */
+    border-bottom-left-radius: 0;
+    padding: 1vh 5vw;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    color: white;
+    animation: slideIn 2.2s ease-out forwards; /* Apply animation */
+}

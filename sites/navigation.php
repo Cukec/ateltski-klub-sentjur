@@ -19,7 +19,7 @@ body {
 nav {
     display: flex;
     height: 80px;
-    background-color: #f94449;
+    background: linear-gradient(0deg, #ba1010 0%, #e95e5e 100%);
     box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 15px;
     z-index: 999;
 }

@@ -1,26 +1,43 @@
 /* Global styles */
 body {
-    background-color: #f7f7f7; /* Light background for the entire page */
-    box-sizing: border-box;
     line-height: 1.6;
 }
 
 main {
-    margin: 5vh auto;
-    padding: 40px;
-    max-width: 1200px; /* Constrain main content to a maximum width */
-    box-sizing: border-box;
+    margin: 5vh 5vw;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%); /* Start off-screen to the left */
+    }
+    100% {
+        transform: translateX(0); /* End in its final position */
+    }
 }
 
 section h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    width: auto;
+    font-size: 2.0rem;
+    margin-left: -5vw; /* Slightly shifts the div to the left */
+    height: 10vh;
+    background: linear-gradient(90deg, #f94449 0%, #913333 100%); /* Gradient from red to dark red */
+    border-top-right-radius: 50px; /* Completely round top right edge */
+    border-bottom-right-radius: 50px; /* Completely round bottom right edge */
+    border-top-left-radius: 0; /* Ensure left edge is sharp */
+    border-bottom-left-radius: 0;
+    padding: 1vh 5vw;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    color: white;
+    animation: slideIn 2.2s ease-out forwards; /* Apply animation */
 }
 
 /* Article styles */
-article {
-    background-color: #ffffff; /* White background for the article section */
-}
+
 
 /* Text inside articles */
 article p {
@@ -46,7 +63,7 @@ article p {
 }
 
 .predstavitev h2 {
-    color: Black; /* Slight blue for title */
+    color: white; /* Slight blue for title */
 }
 
 /* Section: Zgodovina */
@@ -57,7 +74,7 @@ article p {
 }
 
 .zgodovina h2 {
-    color: black; /* Green color for Zgodovina section */
+    color: white; /* Green color for Zgodovina section */
 }
 
 /* Responsive Design */

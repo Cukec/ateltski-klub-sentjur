@@ -11,19 +11,19 @@
     <main>
         <section>
             <article class="predstavitev">
-            <h2>Predstavitev</h2>
-            <p>Atletski klub Šentjur deluje na področju občine Šentjur in pokriva tudi področje širšega Kozjanskega. 
-            V klubu se ukvarjamo s tekmovalno atletiko, šolsko atletiko, spodbujamo pa tudi rekreativno ukvarjanje s tekom. 
-            Organiziran imamo svoj sodniški zbor tako, da organiziramo tudi atletska tekmovanja na vseh naštetih področjih. 
-            Vse, ki vas zanima aktivno sodelovanje ali delo v klubu nas preko naših kontaktnih naslovov obvestite in radi vas bomo sprejeli medse. 
-            AK Šentjur ima tudi status nevladne organizacije v javnem interesu na področju športa, ki mu lahko po veljavni zakonodaji namenite del dohodnine. 
-            Smo člani naslednjih sorodnih zvez in organizacij:</p>
-            <ul>
-                <li>Atletske zveze Slovenije</li>
-                <li>Športne unije Slovenije</li>
-                <li>Športne zveze Šentjur</li>
-            </ul>
-        </article>
+                <h2>Predstavitev</h2>
+                <p>Atletski klub Šentjur deluje na področju občine Šentjur in pokriva tudi področje širšega Kozjanskega. 
+                V klubu se ukvarjamo s tekmovalno atletiko, šolsko atletiko, spodbujamo pa tudi rekreativno ukvarjanje s tekom. 
+                Organiziran imamo svoj sodniški zbor tako, da organiziramo tudi atletska tekmovanja na vseh naštetih področjih. 
+                Vse, ki vas zanima aktivno sodelovanje ali delo v klubu nas preko naših kontaktnih naslovov obvestite in radi vas bomo sprejeli medse. 
+                AK Šentjur ima tudi status nevladne organizacije v javnem interesu na področju športa, ki mu lahko po veljavni zakonodaji namenite del dohodnine. 
+                Smo člani naslednjih sorodnih zvez in organizacij:</p>
+                <ul>
+                    <li>Atletske zveze Slovenije</li>
+                    <li>Športne unije Slovenije</li>
+                    <li>Športne zveze Šentjur</li>
+                </ul>
+            </article>
         </section>
         <section>
             <article class="zgodovina">

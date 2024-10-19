@@ -16,7 +16,7 @@
     </div>
     <div class="main-content">
         <div class="novice-container">
-            <div class="naslov-novice" style="display: flex; flex-direction: horizontal;" >
+            <div class="naslov-novice">
                 <!-- <button id="openModalBtn" class="add-news-btn">Dodaj Novico</button> -->
                 <h1>Novice</h1>
             </div>
@@ -36,8 +36,8 @@
                     while ($row = $result->fetch_assoc()) {
                         ?>
                         <div class="novica">
-                            <img src="../assets/no-image-placeholder.jpg" alt="placeholder-image">
-                            <h2> <?= $row['title']; ?> </h2>
+                            <img src="../assets/no-image-placeholder" alt="placeholder-image">
+                            <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
                             <p> <?= $row['content']; ?> </p>
                         </div>
                         <?php
@@ -84,7 +84,7 @@
 
         <script src="modal-news.js"></script> <!-- Include the modal JavaScript -->
         <div class="dogodki-container">
-            <div class="naslov-dogodek" style="display: flex; flex-direction: horizontal;">
+            <div class="naslov-dogodek">
                 <h1>Prihajajoči dogodki</h1>
                     <!-- <button id="openEventModalBtn" class="add-news-btn">Dodaj Dogodek</button> -->
             </div>
@@ -103,8 +103,8 @@
                     // Output data for each row
                     while ($row = $result->fetch_assoc()) {
                         ?>
-                        <div class="novica">
-                            <h2> <?= $row['title']; ?> </h2>
+                        <div class="dogodek">
+                            <a href="info-dogodek.php"><h2> <?= $row['title']; ?> </h2></a>
                             <p> <?= $row['content']; ?> </p>
                             <p style ="color: #f3f3f3; float: right;"> <?php $row['date_start'] ?> </p>
                         </div>
