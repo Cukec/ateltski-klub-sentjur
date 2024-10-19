@@ -17,9 +17,10 @@ body {
 
 
 nav {
+    display: flex;
     height: 80px;
     background-color: #f94449;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 10px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 15px;
     z-index: 999;
 }
 
@@ -27,7 +28,6 @@ nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #f94449;
     padding-left: 100px;
     height: 100%; /* Ensure ul fills the nav */
 }
@@ -140,14 +140,14 @@ nav ul li img {
 </head>
 <body>
     <nav>
+        <img src="../assets/aksentjur-logo.png" alt="logo">
         <ul>
         <!-- Logo -
         <li><img src="../assets/aksentjur-logo.png" alt=""></li>
         -->
 
-        <li><p style="font-weight: bold; color: white; font-size: 2.5vh;">AK ŠENTJUR</p></li>
-        <li style="margin-left: 1%; color: #f5f5f5"><p style="font-size: 2.5vh;">|</p></li>
-
+        <!-- <li><p style="font-weight: bold; color: white; font-size: 2.5vh;">AK ŠENTJUR</p></li>
+        <li style="margin-left: 1%; color: #f5f5f5"><p style="font-size: 2.5vh;">|</p></li> -->
         <li class="border"><a href="domov.php">domov</a></li>
         <li class="border"><a href="tekmovanja.php">tekmovanja</a></li>
 
