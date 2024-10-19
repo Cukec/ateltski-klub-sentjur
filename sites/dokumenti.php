@@ -3,159 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dokumenti</title>
-
-    <style>
-        ul {
-            list-style-type: none;
-            padding-left: 1em; /* Indentation for nested lists */
-        }
-
-        li {
-            cursor: pointer;
-            padding-left: 1em; /* Indentation for arrow and icon */
-            position: relative; /* To position the delete icon */
-        }
-
-        .directory::before {
-            content: '▶'; /* Default closed folder icon (right arrow) */
-            display: inline-block;
-            margin-right: 0.5em;
-        }
-
-        .directory.open::before {
-            content: '▼'; /* Open folder icon (down arrow) */
-        }
-
-        .directory .folder-icon::before {
-            content: '📁'; /* Folder icon */
-            margin-right: 0.5em;
-        }
-
-        .file::before {
-            content: '📄'; /* File icon */
-            margin-right: 0.5em;
-        }
-
-        .selected {
-            background-color: #f0f0f0; /* Highlight selected folder */
-        }
-
-        /* Darker background for selected files */
-        .file.selected {
-            background-color: #d0d0d0; /* Darker highlight for selected files */
-        }
-
-        /* Hide subfolder contents by default */
-        ul ul {
-            display: none; /* Hide nested lists */
-        }
-
-        /* When a directory is open, its contents are shown */
-        .directory.open + ul {
-            display: block; /* Show contents of open directory */
-        }
-    </style>
-
+    <title>File Tree Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles/dokumenti.css">
 </head>
 <body>
-    <div class="document-img">
-        <img src="../assets/documents.png" height="256" width="256">
-    </div>
-    <article>
-        <p>Skozi leta smo shranjevali rezultate, razpise in rekorde. Vse to in uradne dokumente ter razne ostale dokumente.</p>
-        <p>Najdete jih spodaj.</p>
-    </article>
 
-    <div>
-        <h1>Upload PDF and View File Tree</h1>
+<?php include"navigation.php"; include"config.php" ?>
 
-        <!-- Form for uploading PDF -->
-        <form action="dokumenti-upload.php" method="POST" enctype="multipart/form-data">
-            <!-- Hidden input to store the selected folder -->
-            <input type="hidden" id="selectedFolder" name="selectedFolder">
-            
-            <!-- File input for selecting the PDF -->
-            <input type="file" name="fileToUpload" accept=".pdf" required>
-            <input type="submit" value="Upload PDF" name="submit">
-        </form>
 
-        <!-- File Tree Section -->
-        <h2>Select Folder to Save File</h2>
-        <div id="fileTree">
-            <!-- File tree generated from PHP -->
-            <?php include 'file-tree.php'; ?>
+    <div class="custom-shape">
+        <div class="left-text">
+            <h2>uporabni dokumenti</h2>
         </div>
+        <div class="vertical-line"></div>
+        <div class="right-text">
+            <p>
+                Skozi leta delovanja AK Šentjur se je nabralo nekaj uporabnih dokumentov. Najdete in jih lahko spodaj, s klikom na datoteko pa jo prenesete.
+            </p>
+        </div>
+    </div>
 
-        <!-- JavaScript for File Tree Interaction -->
-        <script>
-        // Select all directory items and files
-        const directories = document.querySelectorAll('.directory');
-        const files = document.querySelectorAll('.file');
 
-        directories.forEach(function(directory) {
-            directory.addEventListener('click', function() {
-                // Toggle selection for the current directory
-                const wasSelected = directory.classList.toggle('selected');
-
-                // Update the hidden input with the selected folder path
-                const folderPath = directory.getAttribute('data-path');
-                document.getElementById('selectedFolder').value = wasSelected ? folderPath : '';
-
-                // Handle visibility of subfolders/files
-                const subList = directory.nextElementSibling;
-                if (subList) {
-                    subList.style.display = wasSelected ? 'block' : 'none';
-                }
-            });
-
-            // Toggle visibility of subfolders/files on double-click
-            directory.addEventListener('dblclick', function() {
-                directory.classList.toggle('open');
-                const subList = directory.nextElementSibling;
-                if (subList) {
-                    subList.style.display = directory.classList.contains('open') ? 'block' : 'none';
-                }
-            });
-        });
-
-        files.forEach(function(file) {
-            file.addEventListener('click', function(event) {
-                // Deselect other files and highlight the clicked one
-                files.forEach(f => f.classList.remove('selected'));
-                file.classList.add('selected');
-            });
-
-            // Download functionality
-            const downloadIcon = file.querySelector('.download-icon');
-            downloadIcon.addEventListener('click', function(event) {
-                event.stopPropagation(); // Prevent triggering file selection
-                const filePath = file.getAttribute('data-path');
-                window.location.href = 'dokumenti-download.php?file=' + encodeURIComponent(filePath);
-            });
-
-            // Add event listener for delete action
-            const deleteIcon = file.querySelector('.delete-icon');
-            deleteIcon.addEventListener('click', function(event) {
-                event.stopPropagation(); // Prevent triggering file selection
-                const confirmed = confirm('Are you sure you want to delete this file?');
-                if (confirmed) {
-                    const filePath = file.getAttribute('data-path');
-                    window.location.href = 'dokumenti-delete.php?file=' + encodeURIComponent(filePath);
-                }
-            });
-        });
-
-        // Prevent form submission if no folder is selected
-        document.querySelector('form').addEventListener('submit', function(event) {
-            const selectedFolder = document.getElementById('selectedFolder').value;
-            if (!selectedFolder) {
-                alert('Please select a folder to upload the file.');
-                event.preventDefault();
+<div class="file-tree-container">
+    <div class="title"><h2>Dokumenti</h2></div>
+    <ul class="file-tree" id="fileTree"></ul>
+</div>
+<script>
+$(document).ready(function() {
+    // Function to load file tree
+    function loadFileTree(path, $parent) {
+        $.ajax({
+            url: 'fetch-file-tree.php', // PHP script to fetch the file tree
+            type: 'GET',
+            data: { folder: path },
+            dataType: 'json',
+            success: function(data) {
+                buildFileTree(data, $parent);
+            },
+            error: function() {
+                alert('Error loading file tree');
             }
         });
-        </script>
+    }
 
-    </div>
+    // Function to build the file tree from JSON data
+    function buildFileTree(data, $parent) {
+        data.forEach(function(item) {
+            let $li = $('<li></li>').addClass(item.type);
+            $li.text(item.name);
+
+            if (item.type === 'folder') {
+                $li.addClass('folder');
+                let $subTree = $('<ul class="hidden"></ul>');
+                $li.append($subTree);
+
+                // Click event to toggle folder open/close
+                $li.on('click', function(e) {
+                    e.stopPropagation(); // Prevent event bubbling
+
+                    // Check if folder is already open
+                    if ($li.hasClass('open')) {
+                        $subTree.addClass('hidden'); // Hide subfolder contents
+                        $li.removeClass('open'); // Toggle folder to closed state
+                    } else {
+                        // If the folder is closed, load its contents (if not already loaded)
+                        if ($subTree.children().length === 0) {
+                            loadFileTree(item.path, $subTree); // Load subfolder contents only if not already loaded
+                        }
+                        $subTree.removeClass('hidden'); // Show subfolder contents
+                        $li.addClass('open'); // Toggle folder to open state
+                    }
+                });
+            } else {
+                $li.addClass('file');
+
+                // Attach click event to trigger file download
+                $li.on('click', function(e) {
+                    e.stopPropagation(); // Prevent event bubbling
+
+                    // Create a hidden download link and trigger download
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = item.path; // File path
+                    downloadLink.download = item.name; // File name
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                });
+            }
+
+            $parent.append($li);
+        });
+    }
+
+    // Initialize file tree with the desired folder path
+    loadFileTree('../documents', $('#fileTree')); // Change this to your target folder path
+});
+</script>
+
+<?php include"footer.php"; ?>
+
 </body>
 </html>
