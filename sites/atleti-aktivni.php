@@ -1,420 +1,66 @@
-<?php include ('navigation.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="styles/atleti.css">
-<title>Tabela aktivnih atletov</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/trenerji-vodstvo.css">
+    <title>Aktivni atleti</title>
 </head>
-
 <body>
-    <main>
-        <h3>Tabela aktivnih atletov</h3>
-        <table border="1">
-    <tr>
-        <th>Ime</th>
-        <th>Priimek</th>
-        <th>Datum Rojstva</th>
-        <th>Disciplina</th>
-        <th>Dosežki</th>
-        <th>Osebni rekordi</th>
-    </tr>
-    <tr>
-        <td>Teja</td>
-        <td>Amon</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Lara</td>
-        <td>Antolič</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Martin</td>
-        <td>Artnak</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Neža</td>
-        <td>Artnak</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Ota</td>
-        <td>Boršič</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Blaž</td>
-        <td>Brečko</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Filip</td>
-        <td>Cmok</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Jakob</td>
-        <td>Cmok</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Lejla</td>
-        <td>Čakš</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Liam</td>
-        <td>Čakš</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Severin</td>
-        <td>Čakš</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Jana</td>
-        <td>Čoklc</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Lili</td>
-        <td>Čoklc</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Gloria</td>
-        <td>Čušin</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Andrej</td>
-        <td>Debelak</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Val</td>
-        <td>Filej</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Tia</td>
-        <td>Fingušt</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Sofija</td>
-        <td>Gajšek</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Julija</td>
-        <td>Gobec</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Nace</td>
-        <td>Gorjanc</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Patricija</td>
-        <td>Gorjanc</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Staš</td>
-        <td>Gračnar</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Manca</td>
-        <td>Jazbec</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Edi</td>
-        <td>Kolar</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Zarja</td>
-        <td>Koželj</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Brajen</td>
-        <td>Krajnc</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Filip</td>
-        <td>Lakner</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Ana</td>
-        <td>Majcen</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Jon</td>
-        <td>Marentič Šegel</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Urban</td>
-        <td>Mezgec</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Rebeka</td>
-        <td>Mlinarič</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Bojan</td>
-        <td>Očko</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Nika</td>
-        <td>Ogradi</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Urška</td>
-        <td>Ogrizek</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Tilen</td>
-        <td>Pajk</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Žana</td>
-        <td>Pajk</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Matija</td>
-        <td>Perčič</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Ema</td>
-        <td>Petrovič</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Heno</td>
-        <td>Plank</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>David</td>
-        <td>Plevnik</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Tjaša</td>
-        <td>Potočnik</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Doroteja</td>
-        <td>Rajh</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Lara</td>
-        <td>Šturbej</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Anže</td>
-        <td>Tanšek</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Teja</td>
-        <td>Verdinek</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Tjaša</td>
-        <td>Vrtačič</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Taja</td>
-        <td>Zabukošek</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Ema</td>
-        <td>Zabukovšek</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Katarina</td>
-        <td>Zidar</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-</table>
 
-    </main>
+    <?php include "navigation.php"; ?>
+    
+    <?php 
+    $profiles = [
+        ['name' => 'Vladimir', 'surname' => 'Artnak', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Cmok', 'surname' => 'Luka', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Katja', 'surname' => 'Jevšnik', 'email' => '', 'roles' => 'trenerka'],
+        ['name' => 'Ivan', 'surname' => 'Kukovič', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Rok', 'surname' => 'Novak', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Bojan', 'surname' => 'Očko', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Borut', 'surname' => 'Pihlar', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Andrej', 'surname' => 'Podgoršek', 'email' => '', 'roles' => 'trener'],
+        ['name' => 'Robert', 'surname' => 'Švegler', 'email' => '', 'roles' => 'trener'],
+    ];
+    ?>
+
+    <div class="custom-shape">
+        <div class="left-text">
+            <h2>aktivni atleti</h2>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="right-text">
+            <p>Spodaj so navedeni aktivni atleti AK Šentjur</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const shape = document.querySelector('.custom-shape');
+            shape.classList.add('slide-in');
+        });
+    </script>
+
+    <div class="content">
+    <section class="profile-container">
+
+        <?php
+        foreach ($profiles as $profile) {
+            echo '
+            <div class="profile-card">
+                <div class="empty-pfp">?</div>
+                <div class="profile-info">
+                    <h2>' . $profile['name'] . '</h2>
+                    <h3>' . $profile['surname'] . '</h3>
+                    <p class="email">' . $profile['email'] . '</p>
+                    <p class="roles">' . $profile['roles'] . '</p>
+                </div>
+            </div>';
+        }
+        ?>
+
+    </section>
+    </div>
+    <?php include"footer.php"; ?>
 </body>
-
 </html>

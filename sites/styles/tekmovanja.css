@@ -6,86 +6,42 @@ body {
     box-sizing: border-box;
 }
 
-.content{
-    margin: 10vh 5vh 10vh 5vh;
-}
-
-/* Main content container to avoid conflict with navigation */
-.main-content {
-    margin-top: 5vh;
-    padding: 20px;
+.content {
+    margin: 5vw;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Calendar Section */
-.dogodki {
-    width: 33.33%;
-    padding: 20px;
-    box-sizing: border-box;
-    height: 400px;
+.dogodki-info {
+    margin-left: 10vw;
+    width: 80vw;
+    height: 50vh;
+    background: linear-gradient(#ba1f24, #96151a);
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 10px;
+    display: flex;
+    flex-direction: row; /* Change to column */
+    gap: 10vw;
+    align-items: center; /* Center items horizontally */
+    border-radius: 0 0 30px 30px;
+    margin-bottom: 10vh;
 }
 
-/* Calendar container */
-#calendar {
-    background-color: #ffffff; /* White background for the whole calendar */
-    border-radius: 12px; /* Rounded corners for the entire calendar container */
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for the calendar container */
-}
-
-/* FullCalendar header styling (includes month name and navigation buttons) */
-.fc-header-toolbar {
-    background-color: #ffffff;
-    border-radius: 12px 12px 0 0; /* Rounded top corners */
-    padding: 10px;
-    /* Removed box shadow from the month name container */
-}
-
-/* FullCalendar table (dates area) */
-.fc-daygrid-body {
-    border-radius: 12px; /* Rounded bottom corners of the calendar grid */
-    overflow: hidden; /* Ensures that overflow does not break rounded edges */
-}
-
-/* Round the edges of individual day cells */
-.fc-daygrid-day-frame {
-    border-radius: 6px; /* Rounded edges for each day cell */
-    overflow: hidden; /* Prevent content from overflowing rounded corners */
-    border: 1px solid transparent; /* Optional, to avoid visible grid lines */
-}
-
-/* Ensure the first and last rows in the grid are rounded at the bottom */
-.fc-daygrid-row:last-child .fc-daygrid-day {
-    border-radius: 0 0 12px 12px; /* Rounded bottom corners for the last row */
-}
-
-/* Calendar day cell hover */
-.fc-daygrid-day {
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.fc-daygrid-day:hover {
-    background-color: #f5f5f5; /* Light hover effect */
-}
-
-/* Events styling */
-.fc-event {
-    background-color: #28a745;
-    border-color: #28a745;
+.dogodki-info h1 {
     color: white;
+    margin-left: 10vw;
 }
+
 
 /* Novice (News) - takes full width */
 .novice {
     width: 100%;
-    height: 60vh;
     background-color: rgba(0, 0, 0, 0.05); /* Same background color as Dogodki */
     padding: 20px;
     box-sizing: border-box;
     border-radius: 10px; /* Rounded corners */
     max-height: 400px; /* Set maximum height to limit overflow */
     overflow-y: auto; /* Enable scrolling if content overflows */
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Inset shadow for indentation effect */
 }
 
 /* Individual Novica (News) background */
@@ -106,5 +62,3 @@ body {
     margin: 5px 0 0;
     font-size: 14px;
 }
-
-

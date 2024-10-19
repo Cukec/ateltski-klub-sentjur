@@ -1,0 +1,140 @@
+/* Adjust margin and center the file tree container */
+.content {
+    padding-top: 25vh;
+    display: flex;
+    justify-content: center; /* Center the file tree container */
+}
+
+.custom-shape {
+    animation: slideIn 2.2s ease-out forwards;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: linear-gradient(135deg, #e07070, #b81212);
+    border-radius: 0 50px 50px 0;
+    height: 200px;
+    width: 60%;
+    position: relative;
+    left: 0;
+    margin-top: 13vh;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    z-index: 0; /* Keep this higher */
+    color: white;
+}
+
+/* Left text in the custom shape */
+.left-text {
+    padding-left: 3vw;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-text h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 10px #792222;
+    margin: 0;
+}
+
+/* Adjust margin for the profile section */
+
+
+/* Vertical line separator */
+.vertical-line {
+    width: 2px;
+    height: 60%;
+    background-color: #692020; /* Line color */
+    margin: 0 2vw; /* Using viewport width for responsive margin */
+}
+
+/* Right text */
+.right-text {
+    flex: 2;
+    padding-right: 3vw; /* Using viewport width for responsive padding */
+}
+
+.right-text p {
+    font-size: 0.9rem;
+    color: #e8e8e8;
+    margin: 0;
+}
+
+.file-tree-container {
+    width: 50vw;
+    max-width: 1200px; /* Limit the max width */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Card-like shadow */
+    background-color: #f9f9f9; /* Optional: Background color for the container */
+    box-sizing: border-box;
+    margin: 5vw 25vw 5vw 25vw;
+}
+
+/* File tree styling inside the card */
+.file-tree {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-tree li {
+    margin: 5px 0;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.2rem; /* Adjust text size */
+    color: #333; /* Text color remains */
+}
+
+/* Folder and file icons styling (colors remain the same) */
+.file-tree .folder::before, .file-tree .file::before {
+    font-size: 1.2rem; /* Adjust icon size */
+    margin-right: 10px; /* Space between icon and name */
+}
+
+.file-tree .folder::before {
+    content: '\f07b'; /* Font Awesome folder icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.file-tree .folder.open::before {
+    content: '\f07c'; /* Font Awesome open folder icon */
+}
+
+.file-tree .file::before {
+    content: '\f15b'; /* Font Awesome file icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px; /* Space between icon and name */
+    font-size: 1.2rem; /* Adjust size if needed */
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    margin-top: 0vh;
+    border-radius: 10px 10px 0 0;
+    background-color: #ebebeb;
+}
+
+.file-tree-container h2 {
+    color: #444;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+    .file-tree-container {
+        width: 95vw; /* Adjust container width for smaller screens */
+        padding: 15px;
+    }
+}

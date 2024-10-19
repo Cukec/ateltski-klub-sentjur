@@ -1,9 +1,8 @@
 <?php
-// Database configuration
-$host = 'localhost';  // Your database server, usually 'localhost'
-$dbname = 'ak-sentjur-test';  // Replace with your actual database name
-$username = 'root';  // Replace with your actual username
-$password = '';  // Replace with your actual password
+$host = 'localhost';  
+$dbname = 'ak-sentjur-test';  
+$username = 'root';  
+$password = '';  
 
 // Create connection
 $conn = new mysqli($host, $username, $password, $dbname);

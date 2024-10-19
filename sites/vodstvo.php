@@ -7,7 +7,7 @@
     <title>Trenerji</title>
 </head>
 <body>
-
+    <main>
     <?php include "navigation.php"; ?>
     
     <?php 
@@ -65,6 +65,7 @@
 
     </section>
     </div>
-
+    </main>
+    <?php include"footer.php";?>
 </body>
 </html>
