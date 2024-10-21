@@ -149,7 +149,7 @@ nav ul li img {
         <!-- <li><p style="font-weight: bold; color: white; font-size: 2.5vh;">AK ŠENTJUR</p></li>
         <li style="margin-left: 1%; color: #f5f5f5"><p style="font-size: 2.5vh;">|</p></li> -->
         <li class="border"><a href="domov.php">domov</a></li>
-        <li class="border"><a href="tekmovanja.php">tekmovanja</a></li>
+        <li class="border"><a href="tekmovanja.php">dogodki</a></li>
 
         <!-- Atleti with Dropdown -->
         <li class="dropdown">
