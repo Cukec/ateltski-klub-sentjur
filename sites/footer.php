@@ -9,7 +9,6 @@
             background-color: #f1f1f1; /* Light gray background for contrast */
             display: flex;
             padding: 2vh;
-            margin-top: 30vh;
             justify-content: space-between;
             flex-wrap: wrap;
             border-top: 2px solid gray;

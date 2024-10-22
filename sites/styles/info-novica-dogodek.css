@@ -31,3 +31,62 @@ main {
     color: white;
     animation: slideIn 2.2s ease-out forwards; /* Apply animation */
 }
+
+main{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.event-details {
+    width: 45vw;
+    background: white;
+    border-radius: 5px;
+    padding: 5%;
+    height: max-content;
+    margin-bottom: 2vh;
+}
+
+.go-back a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: #000; /* Adjust the text color as needed */
+    padding: 10px 20px;
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+}
+
+.go-back a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FF9914;
+    z-index: -1;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.45, 0, 0.55, 1); /* Smooth animation */
+}
+
+.go-back a:hover {
+    color: #fff; /* Text color change on hover */
+}
+
+.go-back a:hover::before {
+    transform: translateX(0);
+    animation: bounce 0.5s ease-out;
+}
+
+@keyframes bounce {
+    0% {
+        transform: scaleX(1);
+    }
+    50% {
+        transform: scaleX(1.05); /* Slight overshoot for bounce effect */
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}

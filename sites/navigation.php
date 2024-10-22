@@ -12,12 +12,14 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    background-color: #ececec;
+    padding: 0;
+    background-color: #fff;
 }
 
 
 nav {
     display: flex;
+    justify-content: center;
     height: 80px;
     background: linear-gradient(0deg, #ba1010 0%, #e95e5e 100%);
     box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 15px;
@@ -28,7 +30,6 @@ nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    padding-left: 100px;
     height: 100%; /* Ensure ul fills the nav */
 }
 
@@ -140,7 +141,6 @@ nav ul li img {
 </head>
 <body>
     <nav>
-        <img src="../assets/aksentjur-logo.png" alt="logo">
         <ul>
         <!-- Logo -
         <li><img src="../assets/aksentjur-logo.png" alt=""></li>
@@ -149,7 +149,7 @@ nav ul li img {
         <!-- <li><p style="font-weight: bold; color: white; font-size: 2.5vh;">AK ŠENTJUR</p></li>
         <li style="margin-left: 1%; color: #f5f5f5"><p style="font-size: 2.5vh;">|</p></li> -->
         <li class="border"><a href="domov.php">domov</a></li>
-        <li class="border"><a href="tekmovanja.php">tekmovanja</a></li>
+        <li class="border"><a href="tekmovanja.php">dogodki</a></li>
 
         <!-- Atleti with Dropdown -->
         <li class="dropdown">

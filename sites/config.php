@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';  
-$dbname = 'ak-sentjur-test';  
+$dbname = 'ak-sentjur';  
 $username = 'root';  
 $password = '';  
 
@@ -14,5 +14,4 @@ if ($conn->connect_error) {
 
 // Set the charset to utf8mb4 for proper encoding
 $conn->set_charset("utf8mb4");
-
 ?>
