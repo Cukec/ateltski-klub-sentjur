@@ -15,7 +15,7 @@
         <div class="novice-container">
             <div class="naslov-novice">
                 <!-- <button id="openModalBtn" class="add-news-btn">Dodaj Novico</button> -->
-                <h1>Novice</h1>
+                <h1>AKTULANO</h1>
             </div>
                 <!-- Novice (News) -->
             <div class="novice">
