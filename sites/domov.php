@@ -13,7 +13,7 @@
 </head>
 <body>
     
-    <?php include "navigation-test.php";  include "config.php"; ?>
+    <?php include "navigation.php";  include "config.php"; ?>
     <div class="main-content">
         <div class="novice-container">
             <!--<div class="naslov-novice">
@@ -49,11 +49,12 @@
                         }
                         else {
                             ?>
-                                <div class="novica-img-null">
-                                    <div class="novica-title">
-                                        <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
+                                <div class="novica-img">
+                                    <div class="novica-left">
+                                        <img src="../assets/16-9-aspect-ratio-test.jpg" alt="placeholder-image">
                                     </div>
-                                    <div class="novica-text">
+                                    <div class="novica-right">
+                                        <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
                                         <p> <?= $row['content']; ?> </p>
                                     </div>
                                 </div>

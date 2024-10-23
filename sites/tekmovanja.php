@@ -16,7 +16,7 @@
     
     <section class="dogodki-info">
         <div class="description-main">
-            <h1>Dogodki in tekmovanja <br> AK Šentjur</h1>
+            <h1>Dogodki in tekmovanja</h1>
             <hr>
             <p>Prihajajoči dogodki in tekmovanja so barvno označeni na koledarju. S klikom na želeni datum se vam bo prikazal urnik tistega dne.</p>
         </div>
