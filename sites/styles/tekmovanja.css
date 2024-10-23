@@ -33,7 +33,7 @@ body {
 .subtitle {
     padding: 5vw;
     display: flex;
-    flex-direction: row; /* Corrected */
+    flex-direction: row;
     background-image: url(../../assets/top-gradient-green-orange-left.svg);
     background-size: cover; /* Adjust as necessary */
     background-repeat: no-repeat; /* Prevents repeating */
@@ -42,8 +42,22 @@ body {
     align-items: center;
 }
 
+.subtitle div hr{
+    width: 70%;
+    float: left;
+}
+
+.subtitle-middle {
+    margin: 10vh;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
 .description {
-    margin: -5vh 10vw 0 0;
+    width: 40vw;
 }
 
 .description h1{
@@ -56,9 +70,13 @@ body {
 }
 
 .content {
-    margin: 5vw;
+    padding: 5vw;
     display: flex;
     flex-direction: column;
+    background-image: url(../../assets/red-orange-gradient-full.svg);
+    background-size: cover; /* Adjust as necessary */
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
 }
 
 /* Calendar Section */
@@ -80,15 +98,11 @@ body {
 }
 
 
-/* Novice (News) - takes full width */
 .novice {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    border-radius: 10px; /* Rounded corners */
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Allow items to wrap */
 }
 
-/* Individual Novica (News) background */
 .novica {
     background-color: #ffffff; /* White background for individual news */
     padding: 15px;
@@ -97,12 +111,39 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+.novice-past {
+    display: flex; /* Use Flexbox */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: space-between; /* Space between items */
+}
+
+.novica-past {
+    background-color: #ffffff; /* White background for individual news */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners for individual news */
+    margin-bottom: 20px; /* Space below each item */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    flex: 0 1 calc(33.33% - 20px); /* Set to one-third width minus gap */
+    box-sizing: border-box; /* Include padding and borders in width calculation */
+}
+
+
 .novica h2 {
     margin: 0;
     font-size: 18px;
 }
 
 .novica p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.novica-past h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.novica-past p {
     margin: 5px 0 0;
     font-size: 14px;
 }
