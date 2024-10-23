@@ -11,9 +11,6 @@
 <body>
     
     <?php include "navigation.php";  include "config.php"; ?>
-    <div class="naslov-strani">
-        <img src="../assets/aks-30-let-glava.jpg" alt="glava-strani">
-    </div>
     <div class="main-content">
         <div class="novice-container">
             <div class="naslov-novice">
@@ -34,7 +31,6 @@
                 if ($result->num_rows > 0) {
                     // Output data for each row
                     while ($row = $result->fetch_assoc()) {
-<<<<<<< HEAD
                         if (isset($row['id_image']) && $row['id_image'] != NULL) {
                             ?>
                                 <div class="novica-img">
@@ -60,19 +56,6 @@
                                 </div>
                             <?php
                         }
-=======
-                        ?>
-                        <div class="novica">
-                            <div class="left">
-                                <img src="../assets/no-image-placeholder.jpg" alt="placeholder-image">
-                            </div>
-                            <div class="right">
-                            <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
-                            <!--<p> <?= $row['content']; ?> </p>-->
-                            </div>
-                        </div>
-                        <?php
->>>>>>> 6d93ba97bde458e04ccfe3b5867a84f74a5c2e73
                     }
                 } else {
                     echo "No news available.";
