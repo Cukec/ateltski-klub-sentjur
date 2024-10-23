@@ -10,6 +10,7 @@
     padding: 0 5vw 5vw 5vw; /* Add spacing around the content */
     color: black;
     width: 100%;
+    border-top: 1px solid lightgray;
 }
 
 .naslov-novice h1 {
@@ -24,11 +25,13 @@
     width: 60%;
 }
 
-.atletska-sola {
-    width: 40%;
+.desni-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 5vw;
+    width: 40%;
 }
 
 .atletska-sola img {
@@ -44,11 +47,14 @@
 
 /* Novice (News) - takes full width */
 .novice {
+    background-image: url(../../assets/red-orange-gradient-middle-left.svg);
+    background-repeat: no-repeat;
+    margin-left: -5vw;
+    padding: 5vw;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 25vh 25vh 25vh;
     gap: 20px;
-    margin-top: 5vh;
 }
 
 /* Individual Novica (News) background */
@@ -71,6 +77,12 @@
     flex-direction: column;
     height: 100%;
     justify-content: center;
+}
+
+.novica-title {
+    display: flex;
+    height: 100%;
+    width: 100%;
 }
 
 .novica-img a, .novica-img-null a {
