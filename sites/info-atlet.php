@@ -109,6 +109,8 @@ if ($athleteId > 0) {
         <div class="image-container">
             <img src="https://eu.ui-avatars.com/api/?name=John+Doe&size=250" alt="Athlete Image" class="polaroid-image">
         </div>
+        <div id="green"></div>
+        <div id="red"></div>
     </div>
     <div class="go-back">
         <a href="tekmovanja.php">nazaj ↶</a>

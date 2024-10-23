@@ -34,10 +34,37 @@
                 if ($result->num_rows > 0) {
                     // Output data for each row
                     while ($row = $result->fetch_assoc()) {
+<<<<<<< HEAD
+                        if (isset($row['id_image']) && $row['id_image'] != NULL) {
+                            ?>
+                                <div class="novica-img">
+                                    <div class="novica-left">
+                                        <img src="../assets/16-9-aspect-ratio-test.jpg" alt="placeholder-image">
+                                    </div>
+                                    <div class="novica-right">
+                                        <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
+                                        <p> <?= $row['content']; ?> </p>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                        else {
+                            ?>
+                                <div class="novica-img-null">
+                                    <div class="novica-title">
+                                        <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
+                                    </div>
+                                    <div class="novica-text">
+                                        <p> <?= $row['content']; ?> </p>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+=======
                         ?>
                         <div class="novica">
                             <div class="left">
-                                <img src="../assets/16-9-aspect-ratio-test.jpg" alt="placeholder-image">
+                                <img src="../assets/no-image-placeholder.jpg" alt="placeholder-image">
                             </div>
                             <div class="right">
                             <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
@@ -45,6 +72,7 @@
                             </div>
                         </div>
                         <?php
+>>>>>>> 6d93ba97bde458e04ccfe3b5867a84f74a5c2e73
                     }
                 } else {
                     echo "No news available.";
@@ -84,6 +112,9 @@
                         </form>
                     </div>
                 </div>
+        </div>
+        <div class="atletska-sola">
+            <a href="treningi.php"><img src="../assets/logo-atletska-sola.png" alt="logo-atletska-sola"></a>
         </div>
     </div>
     <?php include ('footer.php') ?>

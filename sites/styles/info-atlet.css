@@ -8,8 +8,10 @@ main {
 
 .athlete-wrapper {
     display: flex; /* Flexbox for side-by-side layout */
-    align-items: flex-start; /* Align items to the top */
+    align-items: center; /* Align items to the top */
+    justify-content: center;
     width: 100%; /* Ensure it takes the full width */
+    margin-bottom: 20vh;
 }
 
 .athlete-info {
@@ -18,6 +20,7 @@ main {
     border-radius: 5px;
     padding: 5%;
     height: max-content; /* Adjusts based on content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
 
 .image-container {
@@ -37,7 +40,33 @@ main {
     z-index: 1; /* Ensure it appears in front */
 }
 
+#green {
+    display: block;
+    position: absolute;
+    width: 30vh;
+    height: 30vw;
+    margin: 0; /* Set margin to zero initially */
+    top: 30vh; /* Adjust positioning to make sure it's visible */
+    left: 46vw;
+    background-color: #A1CF6B; /* Optional: Add a background color to make it visible */
+    z-index: -1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    border-radius: 5px;
+}
 
+#red {
+    display: block;
+    position: absolute;
+    width: 30vh;
+    height: 20vh;
+    margin: 0; /* Set margin to zero initially */
+    top: 55vh; /* Adjust positioning to make sure it's visible */
+    left: 30vw;
+    background-color: #840C0C; /* Optional: Add a background color to make it visible */
+    z-index: -1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    border-radius: 5px;
+}
 
 .go-back a {
     position: relative;
