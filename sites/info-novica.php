@@ -19,5 +19,6 @@
             <img src="../assets/no-image-placeholder.jpg" alt="placeholder-image">
         </div>
     </main>
+    <?php include "footer.php"; ?>
 </body>
 </html>

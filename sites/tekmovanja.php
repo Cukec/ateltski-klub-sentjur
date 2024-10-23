@@ -214,6 +214,6 @@
             });
         });
     </script>
-    <?= include"footer.php"; ?>
+    <?php include "footer.php"; ?>
 </body>
 </html>
