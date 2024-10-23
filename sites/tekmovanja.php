@@ -33,7 +33,7 @@
     <section class="subtitle">
         <div class="description">
             <h1>Prihajajoči dogodki</h1>
-            <hr>
+            <hr><br>
             <p>Prikazani dogodki se bodo odvijali v bližnji prihodnosti.</p>
         </div>
         <div>
@@ -113,13 +113,22 @@
             </div>
         </div>
     </section>
+    
+
+    <section class="subtitle-middle">
+        <div class="description">
+            <h1>Pretekli dogodki</h1>
+            <hr>
+            <p>Skozi leta smo v AK Šentjur priredili in se udeležili mnogo tekmovanj in dogodkov. Spodaj lahko prebrskate po spominih in dosežkih iz njih.</p>
+        </div>
+    </section>
 
     <section class="content">
         <div class="past-events" id="events-container">
-            <div class="novice">
+            <div class="novice-past">
                 <?php 
                 // Define how many results per page
-                $resultsPerPage = 10;
+                $resultsPerPage = 21;
 
                 // Find out the current page number
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -153,7 +162,7 @@
                         // Assume you have an 'id' field in your 'events' table to uniquely identify each event
                         $eventId = $row['id'];
                         ?>
-                        <div class="novica">
+                        <div class="novica-past">
                             <!-- Display title and date next to each other -->
                             <div style="display: flex; flex-direction: horizontal;">
                                 <!-- Make title clickable and redirect to info-dogodek.php with event id as a query parameter -->
@@ -161,8 +170,8 @@
                                     <a href="info-dogodek.php?id=<?= $eventId; ?>" style="text-decoration: none; color: inherit;">
                                         <?= $title; ?>
                                     </a>
+                                    <p style="color: #dedede; margin-left: 1vw;"> <?= htmlspecialchars($row['date_start']); ?></p>
                                 </h2>
-                                <h2 style="color: #dedede; margin-left: 1vw;"> <?= htmlspecialchars($row['date_start']); ?> </h2>
                             </div>
                             <p> <?= htmlspecialchars($contentPreview); ?> </p>
                         </div>
