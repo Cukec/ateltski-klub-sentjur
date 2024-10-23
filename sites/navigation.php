@@ -50,23 +50,12 @@ nav ul li a {
     box-sizing: border-box;
     height: 80px; /* Match the height of the nav */
     line-height: 80px; /* Center text vertically */
-    position: relative; /* Needed for the pseudo-element */
 }
 
-nav ul .border a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 4px;
-    background-color: white;
-    transition: width 0.3s ease, left 0.3s ease;
-}
-
-nav ul .border:hover a::after {
-    width: 100%; /* Expands to the full width of the dropdown */
-    left: 0;
+nav ul li a:hover, .dropdown-content a:hover{
+    background-color: #cc7a0b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color 1s ease, box-shadow 1s ease;
 }
 
 nav ul li:hover .dropdown-content{
@@ -80,24 +69,25 @@ nav ul li:hover .dropdown-content{
 .dropdown-content {
     display: block;
     position: absolute;
-    background-color: white;
+    background-color: #FF9914;
     width: auto;
     min-width: 100%;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1;
     top: 100%;
     left: 0;
     margin-top: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
     
     opacity: 0; /* Start with invisible */
-    transform: translateY(-20px); /* Start 20px higher */
+    transform: translateY(-40px); /* Start 20px higher */
     transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
     pointer-events: none;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
+    color: white;
     padding: 0px 16px;
     text-decoration: none;
     display: block;
@@ -106,27 +96,10 @@ nav ul li:hover .dropdown-content{
     line-height: 50px;
 }
 
-.dropdown-content a:hover {
-    background-color: #bcbfbb;
+.dropdown-content a.zadnji {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
-.dropdown-submenu {
-    display: none; /* Hide submenu by default */
-    position: absolute;
-    left: 100%; /* Position it to the right of the parent dropdown */
-    top: 0;
-    background-color: white;
-    z-index: 1;
-    min-width: 100%; /* Adjust as needed */
-}
-
-.dropdown-content a:hover + .dropdown-submenu {
-    display: block; /* Show submenu on hover */
-}
-
-.dropdown-submenu:hover{
-    display: block; /* Show submenu when hovering over the dropdown */
-}
-
 
 nav ul li img {
     padding-top: 10%;
@@ -148,8 +121,9 @@ nav ul li img {
 
         <!-- <li><p style="font-weight: bold; color: white; font-size: 2.5vh;">AK ŠENTJUR</p></li>
         <li style="margin-left: 1%; color: #f5f5f5"><p style="font-size: 2.5vh;">|</p></li> -->
-        <li class="border"><a href="domov.php">domov</a></li>
-        <li class="border"><a href="tekmovanja.php">dogodki</a></li>
+        <li><a href="domov.php">domov</a></li>
+        <li><a href="treningi.php">treningi</a></li>
+        <li><a href="tekmovanja.php">tekmovanja</a></li>
 
         <!-- Atleti with Dropdown -->
         <li class="dropdown">
@@ -157,7 +131,7 @@ nav ul li img {
             <div class="dropdown-content">
                 <a href="atleti-aktivni.php">aktivni</a>
                 <a href="atleti-nekdanji.php">nekdanji</a>
-                <a href="#">dosežki</a>
+                <a class="zadnji" href="#">dosežki</a>
             </div>
         </li>
 
@@ -165,13 +139,9 @@ nav ul li img {
         <li class="dropdown">
             <a href="#">&#11167; naša ekipa</a>
             <div class="dropdown-content">
-                <a href="trenerji.php">&#11166; trenerji &#11166;</a>
-                <div class="dropdown-submenu">
-                    <a href="treningi.php">treningi</a>
-                    <a href="#">kako do nas</a>
-                </div>
+                <a href="trenerji.php">trenerji</a>
                 <a href="vodstvo.php">vodstvo</a>
-                <a href="sodniki.php">sodniki</a>
+                <a class="zadnji" href="sodniki.php">sodniki</a>
             </div>
         </li>
 
@@ -181,10 +151,11 @@ nav ul li img {
                 <div class="dropdown-content">
                     <a href="predstavitev.php">predstavitev</a>
                     <a href="dokumenti.php">dokumenti</a>
+                    <a class="zadnji" href="#">kako do nas</a>
                 </div>
             </li>
 
-            <li class="border"><a href="galerija.php">galerija</a></li>
+            <li><a href="#">galerija</a></li>
         </ul>
     </nav>
     <img src="../assets/aks-glava-2.svg" alt="" width="100%">
