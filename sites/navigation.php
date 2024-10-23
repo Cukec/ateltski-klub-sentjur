@@ -69,7 +69,7 @@ nav ul li:hover .dropdown-content{
 .dropdown-content {
     display: block;
     position: absolute;
-    background-color: #FF9914;
+    background: linear-gradient(to bottom, #FF9914, #f0a13b);
     width: auto;
     min-width: 100%;
     z-index: 1;
@@ -127,7 +127,7 @@ nav ul li img {
 
         <!-- Atleti with Dropdown -->
         <li class="dropdown">
-            <a href="#">&#11167; atleti</a>
+            <a href="atleti.php">&#11167; atleti</a>
             <div class="dropdown-content">
                 <a href="atleti-aktivni.php">aktivni</a>
                 <a href="atleti-nekdanji.php">nekdanji</a>
@@ -137,7 +137,7 @@ nav ul li img {
 
         <!-- Naša Ekipa with Dropdown -->
         <li class="dropdown">
-            <a href="#">&#11167; naša ekipa</a>
+            <a href="nasa-ekipa.php">&#11167; naša ekipa</a>
             <div class="dropdown-content">
                 <a href="trenerji.php">trenerji</a>
                 <a href="vodstvo.php">vodstvo</a>
@@ -147,7 +147,7 @@ nav ul li img {
 
         <!-- O Klubu with Dropdown -->
             <li class="dropdown">
-                <a href="#">&#11167; o klubu</a>
+                <a href="o-klubu.php">&#11167; o klubu</a>
                 <div class="dropdown-content">
                     <a href="predstavitev.php">predstavitev</a>
                     <a href="dokumenti.php">dokumenti</a>
