@@ -23,28 +23,37 @@ main h3{
     text-transform: uppercase;
     margin-bottom: 10px;
 }
-/* Table styles */
+.display-table {
+    display: flex;
+    background-image: url(../../assets/green-blue-gradient-top.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center contents of .display-table */
+    width: 100%; /* Ensure it takes full width */
+    margin-bottom: 20vh;
+    padding-bottom: 5vh;
+    border-bottom: 1px solid #cecece;
+}
+
 table {
     width: 60vw;
-    border-collapse: collapse; 
-    margin: 10vh 0 2vh 0;
+    border-collapse: collapse; /* Ensures no space between borders */
+    margin: 10vh auto 2vh auto; /* Center the table using auto margins */
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-    opacity: 0;
+    border-radius: 5px !important;
+    opacity: 1;
     transition: opacity 1s ease-in-out;
+    border: none !important; /* Remove table borders */
 }
 
-
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+th, td {
+    border: none !important;/* Remove cell borders */
 }
 
-/* Table header styles */
+/* Other existing styles remain unchanged */
 th {
     background-color: #FF9914; /* Blue background for header */
     color: #fff; /* White text for header */
@@ -55,12 +64,10 @@ th {
     text-transform: uppercase; /* Uppercase for header titles */
 }
 
-/* Table row and cell styles */
 td {
     padding: 12px 15px; /* Add padding inside cells */
     font-size: 14px;
     color: #333;
-    border-bottom: 1px solid #e0e0e0; /* Light border between rows */
     text-align: left; /* Align text to the left */
 }
 
@@ -77,7 +84,7 @@ tr:hover {
 
 /* Last row bottom border removed */
 tr:last-child td {
-    border-bottom: none;
+    border-bottom: none; /* Optional if you want to keep it clean */
 }
 
 /* Responsive table design */
@@ -87,4 +94,132 @@ tr:last-child td {
         overflow-x: auto;
         white-space: nowrap; /* Force horizontal scrolling */
     }
+}
+
+.pagination {
+    display: flex;
+    flex-direction: horizontal;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pagination button styles */
+.pagination button {
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+    border-radius: 50%;
+    color: black;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.pagination button:hover {
+    animation: moveButton 0.45s ease forwards;
+}
+
+@keyframes moveButton {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(var(--shift));
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+#prev-page:hover {
+    --shift: -10px;
+}
+
+#next-page:hover {
+    --shift: 10px;
+}
+
+
+.subtitle {
+    padding: 5vw;
+    display: flex;
+    flex-direction: row;
+    background-image: url(../../assets/top-gradient-green-orange-left.svg);
+    background-size: cover; /* Adjust as necessary */
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
+    justify-content: center;
+    align-items: center;
+}
+
+.subtitle div hr{
+    width: 70%;
+    float: left;
+}
+
+.subtitle-middle {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10vh;
+}
+
+.description {
+    width: 40vw;
+}
+
+.description h1{
+    font-size: 2rem;
+}
+
+.nav-atleti {
+    display: flex;
+    flex-direction: row; /* Use 'row' instead of 'horizontal' */
+    color: Black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    height: 8vh;
+    align-items: center;
+    position: sticky;
+    top: 0; /* Make the element stick to the top */
+    z-index: 1000; /* Ensure it appears above other content */
+    background-color: #fff;
+}
+
+.nav-atleti ul {
+    list-style: none;
+}
+
+.nav-atleti li{
+    float: left;
+    margin: 0 2vw 0 5vw;
+}
+
+.nav-atleti button {
+    border: none;
+    color: #507626;
+    font-weight: bold;
+    background: linear-gradient(135deg, rgb(161, 207, 107, 86%), hsl(208, 100%, 86%));
+    padding: 1vh 2vw;
+    border-radius: 7px;
+    transition: transform 0.3s ease; /* Add transition for scaling */
+    transform: scale(1); /* Set the initial scale */
+}
+
+.nav-atleti button:hover {
+    transform: scale(1.1); /* Scale up to 1.1 on hover */
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
