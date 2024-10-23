@@ -37,7 +37,7 @@
                         ?>
                         <div class="novica">
                             <div class="left">
-                                <img src="../assets/16-9-aspect-ratio-test.jpg" alt="placeholder-image">
+                                <img src="../assets/no-image-placeholder.jpg" alt="placeholder-image">
                             </div>
                             <div class="right">
                             <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>

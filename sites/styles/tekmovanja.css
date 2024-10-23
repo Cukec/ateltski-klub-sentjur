@@ -47,7 +47,6 @@ body {
     margin-left: 10vw;
     width: 80vw;
     height: 50vh;
-    background: linear-gradient(#ba1f24, #96151a);
     box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 10px;
     display: flex;
     flex-direction: row; /* Change to column */

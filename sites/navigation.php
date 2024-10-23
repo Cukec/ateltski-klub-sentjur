@@ -21,7 +21,7 @@ nav {
     display: flex;
     justify-content: center;
     height: 80px;
-    background: linear-gradient(0deg, #ba1010 0%, #e95e5e 100%);
+    background-color: #FF9914;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 15px;
     z-index: 999;
 }
@@ -187,5 +187,6 @@ nav ul li img {
             <li class="border"><a href="galerija.php">galerija</a></li>
         </ul>
     </nav>
+    <img src="../assets/aks-glava-2.svg" alt="" width="100%">
 </body>
 </html>
