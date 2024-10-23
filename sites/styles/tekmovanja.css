@@ -14,23 +14,43 @@ body {
     }
 }
 
-.naslov-dogodki {
-    margin-left: -5vw; /* Slightly shifts the div to the left */
-    width: 35vw; /* 1/4 of the screen width */
-    height: 10vh;
-    background: linear-gradient(135deg, #840c0c, #b81212);
-    border-top-right-radius: 50px; /* Completely round top right edge */
-    border-bottom-right-radius: 50px; /* Completely round bottom right edge */
-    border-top-left-radius: 0; /* Ensure left edge is sharp */
-    border-bottom-left-radius: 0;
+.nav-dogodki {
     display: flex;
-    align-items: center;
-    justify-content: end;
-    padding: 1vh 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-    color: white;
-    animation: slideInDogodki 2.2s ease-out forwards; /* Apply animation */
+    flex-direction: horizontal;
+    color: Black;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    /*animation: slideInDogodki 2.2s ease-out forwards; /* Apply animation */
 }
+
+.nav-dogodki ul {
+    list-style: none;
+}
+
+.nav-dogodki li{
+    float: left;
+    margin: 0 5vw 0 5vw;
+}
+
+.subtitle {
+    padding: 5vw;
+    display: flex;
+    flex-direction: row; /* Corrected */
+    background-image: url(../../assets/top-gradient-green-orange-left.svg);
+    background-size: cover; /* Adjust as necessary */
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
+    justify-content: center;
+    align-items: center;
+}
+
+.description {
+    margin: -5vh 10vw 0 0;
+}
+
+.description h1{
+    font-size: 2rem;
+}
+
 
 .naslov-dogodki h1 {
     margin-right: 2vw;
@@ -47,18 +67,17 @@ body {
     margin-left: 10vw;
     width: 80vw;
     height: 50vh;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 10px;
     display: flex;
-    flex-direction: row; /* Change to column */
+    flex-direction: row; 
     gap: 10vw;
-    align-items: center; /* Center items horizontally */
-    border-radius: 0 0 30px 30px;
+    align-items: center; 
     margin-bottom: 10vh;
+    margin-top: -10vh;
 }
 
 .dogodki-info h1 {
-    color: white;
-    margin-left: 10vw;
+    color: black;
+    font-size: 3rem;
 }
 
 
