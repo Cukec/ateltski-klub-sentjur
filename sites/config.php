@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';  
-$dbname = 'ak-sentjur';  
+$dbname = 'ak-sentjur-test';  
 $username = 'root';  
 $password = '';  
 
