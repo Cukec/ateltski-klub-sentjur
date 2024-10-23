@@ -1,10 +1,6 @@
-/* Global styles */
-body {
-    line-height: 1.6;
-}
 
 main {
-    margin: 5vh 5vw;
+    margin: 0 5vw 5vw 5vw;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -24,6 +20,7 @@ section h2 {
     align-items: center;
     width: auto;
     font-size: 2.0rem;
+    margin-top: 0;
     margin-left: -5vw; /* Slightly shifts the div to the left */
     height: 10vh;
     background: linear-gradient(90deg, #f94449 0%, #913333 100%); /* Gradient from red to dark red */
@@ -66,12 +63,11 @@ article p {
 }
 
 .predstavitev h2 {
-    align-self: flex-start;
     width: calc(100% - 5vw);
     color: white; /* Slight blue for title */
 }
 
-.predstavitev p {
+.predstavitev p, .zgodovina p {
     width: 75vw;
     font-size: 20px;
     line-height: 1.8; /* Slightly increased line height for readability */
@@ -82,13 +78,6 @@ article p {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-/* Section: Zgodovina */
-.zgodovina p {
-    width: 75vw;
-    font-size: 20px;
-    line-height: 1.8; /* Slightly increased line height for readability */
-    color: #333;
 }
 
 .zgodovina h2 {
