@@ -6,171 +6,50 @@
     <style>
        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #fff;
     overflow-x: hidden;
 }
 
 /* Main nav styling */
 nav {
+    position: relative;
     display: flex;
     justify-content: center;
     height: 80px;
     background-color: #FF9914;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 15px;
-    z-index: 999;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    height: 100%;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-nav ul li {
-    position: relative;
-    white-space: nowrap;
-}
-
-nav ul li a {
-    display: block;
+nav a {
     color: white;
-    text-align: center;
     padding: 0 20px;
     text-decoration: none;
     text-transform: uppercase;
     height: 80px;
     line-height: 80px;
     white-space: nowrap;
+    position: relative;
 }
 
-nav ul li a:hover, .dropdown-content a:hover {
-    background-color: #cc7a0b;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: background-color 1s ease, box-shadow 1s ease;
-}
-
-/* Dropdown menu */
-.dropdown-content {
-    display: none;
+nav #marker {
     position: absolute;
-    background: linear-gradient(to bottom, #FF9914, #f0a13b);
-    width: auto;
-    min-width: 100%;
-    top: 100%;
-    left: 0;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-.dropdown-content a {
-    color: white;
-    padding: 0px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    height: 50px;
-    line-height: 50px;
-}
-
-.dropdown-content a.zadnji {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-nav ul li:hover .dropdown-content {
-    display: block;
-}
-
-/* Hamburger menu icon */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-}
-
-.hamburger div {
-    width: 30px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
-    transition: 0.4s;
-}
-
-/* Toggle class for the menu */
-nav ul.active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    background-color: #FF9914;
-}
-
-nav ul li {
-    width: 100%;
-    text-align: center;
-}
-
-/* Responsive for iPads and phones */
-@media (max-width: 768px) {
-    nav ul {
-        display: none; /* Hide nav links by default */
-        flex-direction: column;
-    }
-
-    nav {
-        justify-content: space-between;
-        padding: 0 20px;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    nav ul li {
-        width: 100%;
-        text-align: center;
-    }
-
-    .dropdown-content {
-        position: static; /* Make dropdowns part of the flow */
-        width: 100%;
-        border-radius: 0;
-    }
-
-    nav ul.active {
-        display: flex; /* Show nav links when active */
-    }
-}
-
-/* Animation for hamburger icon when clicked (cross effect) */
-.change .bar1 {
-    transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.change .bar2 {
-    opacity: 0;
-}
-
-.change .bar3 {
-    transform: rotate(45deg) translate(-6px, -6px);
+    height: 4px;
+    width: 0;
+    background: white;
+    bottom: 0;
+    transition: 0.5s;
+    border-radius: 4px;
 }
 
     </style>
@@ -178,92 +57,62 @@ nav ul li {
 <body>
 
     <nav>
-        <!-- Hamburger menu icon -->
-        <div class="hamburger" onclick="toggleMenu()">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
-
-        <ul>
-            <li><a href="domov.php">domov</a></li>
-            <li><a href="treningi.php">treningi</a></li>
-            <li><a href="tekmovanja.php">tekmovanja</a></li>
-            <li> <!-- class dropdown -->
-                <a href="atleti.php">atleti</a>
-                <!--
-                <div class="dropdown-content">
-                    <a href="atleti-aktivni.php">aktivni</a>
-                    <a href="atleti-nekdanji.php">nekdanji</a>
-                    <a class="zadnji" href="#">dosežki</a>
-                </div>
-                -->
-            </li>
-            <li> <!-- class dropdown -->
-                <a href="nasa-ekipa.php">naša ekipa</a>
-                <!--
-                <div class="dropdown-content">
-                    <a href="trenerji.php">trenerji</a>
-                    <a href="vodstvo.php">vodstvo</a>
-                    <a class="zadnji" href="sodniki.php">sodniki</a>
-                </div>
-                -->
-            </li>
-            <li> <!-- class dropdown -->
-                <a href="o-klubu.php">kako do nas</a>
-                <!--
-                <div class="dropdown-content">
-                    <a href="predstavitev.php">predstavitev</a>
-                    <a href="dokumenti.php">dokumenti</a>
-                    <a class="zadnji" href="#">kako do nas</a>
-                </div>
-                -->
-            </li>
-            <li><a href="#">galerija</a></li>
-        </ul>
+        <div id="marker"></div>
+        <a href="domov.php">domov</a>
+        <a href="treningi.php">treningi</a>
+        <a href="tekmovanja.php">tekmovanja</a>
+        <a href="atleti.php">atleti</a>
+        <a href="nasa-ekipa.php">naša ekipa</a>
+        <a href="o-klubu.php">o klubu</a>
+        <a href="galerija.php">galerija</a>
     </nav>
 
     <img src="../assets/aks-glava-2.svg" alt="" width="100%">
 
     <script>
-        // Toggle the main menu (hamburger)
-        function toggleMenu() {
-            var nav = document.querySelector("nav ul");
-            var hamburger = document.querySelector(".hamburger");
-            var body = document.querySelector("body");
+        var marker = document.querySelector('#marker');
+        var items = document.querySelectorAll('nav a');
+        var activeIndex = 0;
 
-            nav.classList.toggle("active");
-            hamburger.classList.toggle("change");
-
-            // Disable scrolling when menu is active
-            if (nav.classList.contains("active")) {
-                body.style.overflow = "hidden";
-            } else {
-                body.style.overflow = "auto";
-            }
+        function indicator(e) {
+            marker.style.left = e.offsetLeft+"px";
+            marker.style.width = e.offsetWidth+"px";
         }
 
-        // Toggle dropdown on click for mobile devices
-        function toggleDropdown(event) {
-            event.preventDefault();
-            var dropdown = event.target.nextElementSibling;
-            dropdown.classList.toggle("active");
+        function setMarkerToActive() {
+            var activeLink = items[activeIndex];
+            indicator(activeLink);
         }
 
-        // Close menu on window resize if menu is open and screen is enlarged
-        window.addEventListener('resize', function () {
-            var nav = document.querySelector("nav ul");
-            var hamburger = document.querySelector(".hamburger");
-            var body = document.querySelector("body");
+        function setActiveLink() {
+            const currentPath = window.location.pathname.split('/').pop();
+            items.forEach((link, index) => {
+                if (link.getAttribute('href') === currentPath) {
+                    activeIndex = index;
+                }
+            })
+            setMarkerToActive();
+        }
 
-            // Close the menu if the window width is greater than 768px and the menu is open
-            if (window.innerWidth > 768 && nav.classList.contains("active")) {
-                nav.classList.remove("active");
-                hamburger.classList.remove("change");
-                body.style.overflow = "auto"; // Re-enable scrolling
-            }
-        });
+        items.forEach((link, index) => {
+            link.addEventListener('mouseenter', (e)=>{
+                indicator(e.target);
+            })
+
+            link.addEventListener('click', (e) => {
+                activeIndex = index;
+                setMarkerToActive();
+            })
+        })
+
+        document.querySelector('nav').addEventListener('mouseleave', setMarkerToActive);
+        window.onload = () => {
+            marker.style.transition = "none";
+            setTimeout(() => {
+                marker.style.transition = "0.5s";
+            }, 10)
+            setActiveLink();
+        };
     </script>
-
 </body>
 </html>
