@@ -13,7 +13,7 @@
 </head>
 <body>
     
-    <?php include "navigation-test.php";  include "config.php"; ?>
+    <?php include "navigation.php";  include "config.php"; ?>
     <div class="main-content">
         <div class="novice-container">
             <!--<div class="naslov-novice">
