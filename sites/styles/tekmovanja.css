@@ -15,11 +15,17 @@ body {
 
 .nav-dogodki {
     display: flex;
-    flex-direction: horizontal;
+    flex-direction: row; /* Use 'row' instead of 'horizontal' */
     color: Black;
-    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.6); /* Subtle shadow for depth */
-    /*animation: slideInDogodki 2.2s ease-out forwards; /* Apply animation */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    height: 8vh;
+    align-items: center;
+    position: sticky;
+    top: 0; /* Make the element stick to the top */
+    z-index: 1000; /* Ensure it appears above other content */
+    background-color: #fff; /* Optional: set a background color to avoid transparency issues */
 }
+
 
 .nav-dogodki ul {
     list-style: none;
