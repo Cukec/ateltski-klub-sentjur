@@ -49,13 +49,13 @@
     $result = $conn->query($query);
     ?>
 
-    <section class="subtitle-middle">
-        <div class="description">
+    <section class="atleti-info">
+        <div class="description-main">
             <h1>Delo z atleti</h1>
             <hr>
-            <p>
-            V AK Šentjur stavimo veliko na delo z mladimi, zato so v večini naši atleti in atletinje člani mlajših selekcij. Naš osnovni in vedno prisoten cilj je s trdim delom ter skrbno načrtovanimi treningi vzgajati tekmovalce od mladih nog, da bodo nekoč morda nekateri med njimi sposobni v slovenskem prostoru in širše posegati po najvišjih mestih.</p>
+            <p>Prihajajoči dogodki in tekmovanja so barvno označeni na koledarju. S klikom na želeni datum se vam bo prikazal urnik tistega dne.</p>
         </div>
+        <div id="image"><img src="../assets/running.svg" alt=""></div>
     </section>
 
     <div class="nav-atleti" id="past-events-section">
@@ -87,6 +87,10 @@
         </div>
     </div>
     
+
+    <div class="display-">
+
+    </div>
 
 </div>
 

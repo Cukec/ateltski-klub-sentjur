@@ -147,6 +147,17 @@ body {
 .novica-past h2 {
     margin: 0;
     font-size: 18px;
+    display: flex;
+    flex-direction: horizontal;
+    align-items: center;
+}
+
+.novica-past a{
+    margin-right: 1vw;
+}
+
+.novica-past h2 p{
+    font-size: 18px;
 }
 
 .novica-past p {
@@ -179,6 +190,98 @@ body {
     padding: 0 10px; /* Space around the page number */
 }
 
+/* Pagination button styles */
+.pagination button {
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+    border-radius: 50%;
+    color: black;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
 
+.pagination button:hover {
+    animation: moveButton 0.45s ease forwards;
+}
 
+@keyframes moveButton {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(var(--shift));
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
 
+.past-events .events-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Space between the items */
+}
+.past-events{
+    width: 100%;
+}
+.past-events .dogodek-past {
+    flex: 0 1 calc(50% - 10px); /* Each item takes up half of the container minus some space */
+    margin-bottom: 20px; /* Space between rows */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for a card effect */
+    padding: 15px; /* Padding for better appearance */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* Background color */
+}
+
+.past-events .dogodek-past h2 {
+    margin: 0; /* Remove margin for headings */
+    font-size: 1.2em; /* Adjust font size as needed */
+}
+
+.past-events .dogodek-past p {
+    margin: 5px 0 0; /* Space out paragraphs */
+    color: #333; /* Text color */
+}
+
+.past-events-content {
+    display: flex;
+    flex-direction: horizontal;
+    justify-content: center;
+    align-items: center;
+}
+
+.past-events {
+    display: flex; /* Use Flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between; /* Space between the items */
+    margin-top: 20px; /* Space above past events */
+}
+
+.dogodek-past {
+    flex: 0 1 calc(50% - 10px); /* Each item takes up half of the container minus some space */
+    background-color: #ffffff; /* White background for individual events */
+    padding: 15px; /* Inner padding for content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 20px; /* Space below each item */
+}
+
+/* If you want to ensure exactly 5 items per column */
+.past-events {
+    flex-direction: horizontal; /* Stack the columns vertically */
+}
+
+.dogodek-past:nth-child(odd) {
+    flex: 0 1 50%; /* First column */
+}
+
+.dogodek-past:nth-child(even) {
+    flex: 0 1 50%; /* Second column */
+}

@@ -23,6 +23,34 @@ main h3{
     text-transform: uppercase;
     margin-bottom: 10px;
 }
+
+.atleti-info {
+    margin-left: 10vw;
+    width: 80vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: horizontal; 
+    gap: 10vw;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10vh;
+    margin-top: -10vh;
+}
+
+.atleti-info h1 {
+    color: black;
+    font-size: 3rem;
+}
+
+.atleti-info img {
+    height: 30vh;
+    width: 30vh;
+}
+
+.description-main {
+    width: 40vw;
+}
+
 .display-table {
     display: flex;
     background-image: url(../../assets/green-blue-gradient-top.svg);
