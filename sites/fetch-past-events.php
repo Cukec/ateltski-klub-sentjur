@@ -5,7 +5,7 @@ include "config.php";
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 
-$resultsPerPage = 10;
+$resultsPerPage = 5;
 $offset = ($page - 1) * $resultsPerPage;
 
 // Get selected year and month from the request

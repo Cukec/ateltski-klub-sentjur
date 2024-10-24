@@ -104,32 +104,35 @@
     
     <section class="past-events-content">
         <div class="subtitle-section">
-            <div class="description">
+            <div class="past-description">
                 <h1>Pretekli dogodki</h1>
-                <hr>
+                <hr><br>
                 <p>Skozi leta smo v AK Šentjur priredili in se udeležili mnogo tekmovanj in dogodkov. Spodaj lahko prebrskate po spominih in dosežkih iz njih.</p>
                 <div class="filter-section">
-                    <label for="year-select">Year:</label>
-                    <select id="year-select" onchange="filterEvents()">
-                        <!-- Year options will be dynamically populated -->
-                    </select>
-
-                    <label for="month-select">Month:</label>
-                    <select id="month-select" onchange="filterEvents()">
-                        <option value="all">All</option>
-                        <option value="01">January</option>
-                        <option value="02">February</option>
-                        <option value="03">March</option>
-                        <option value="04">April</option>
-                        <option value="05">May</option>
-                        <option value="06">June</option>
-                        <option value="07">July</option>
-                        <option value="08">August</option>
-                        <option value="09">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
-                    </select>
+                    <div>
+                        <label for="year-select">Leto:</label>
+                        <select id="year-select" onchange="filterEvents()">
+                            <!-- Year options will be dynamically populated -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="month-select">Mesec:</label>
+                        <select id="month-select" onchange="filterEvents()">
+                            <option value="all">All</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,14 +149,6 @@
         </div>
     </section>
 
-    
-
-    
-
-    
-
-    
-    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             flatpickr("#calendar", {
