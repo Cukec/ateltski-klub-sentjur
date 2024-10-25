@@ -49,12 +49,11 @@
                         }
                         else {
                             ?>
-                                <div class="novica-img">
-                                    <div class="novica-left">
-                                        <img src="../assets/16-9-aspect-ratio-test.jpg" alt="placeholder-image">
-                                    </div>
-                                    <div class="novica-right">
+                                <div class="novica-img-null">
+                                    <div class="novica-title">
                                         <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
+                                    </div>
+                                    <div class="novica-text">
                                         <p> <?= $row['content']; ?> </p>
                                     </div>
                                 </div>

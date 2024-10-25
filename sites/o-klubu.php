@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <?php include "navigation.php";  include "config.php"; ?>
     
 </body>
 </html>
