@@ -60,12 +60,26 @@
             </div>
         </section>
 
+        <?php 
+        
+        $vse_discipline_query = "SELECT * FROM discipline";
+        $vse_discipline_result = $conn->query($vse_discipline_query);
+
+        $vse_selekcije_query = "SELECT * FROM selection";
+        $vse_selekcije_result = $conn->query($vse_selekcije_query);
+
+        ?>
+
         <div class="nav-atleti" id="past-events-section">
             <ul>
                 <li><button id="active-athletes" class="athlete-toggle" data-type="active">Aktivni</button></li>
                 <li><button id="ex-athletes" class="athlete-toggle" data-type="ex-athlete">Nekdanji</button></li>
+                <li><button id="club-acc" class="acc-toggle" data-type="club-acc">Dosežki</button></li>
+                <li><button id="tables" class="acc-toggle" data-type="table">Tablice</button></li>
             </ul>
         </div>
+
+        <!-- Tabela atletov -->
 
         <div class="display-table">
             <table>
@@ -88,11 +102,65 @@
                 <button id="next-page">></button>
             </div>
         </div>
-        
 
-        <div class="display-">
 
+        <!-- Sql querry-ji za dosežke in tablice -->
+
+        <div class="acc-filters">
+            <ul>
+                <!-- Discipline Filter -->
+                <li>
+                    <label for="discipline-filter">Disciplina:</label>
+                    <select id="discipline-filter" name="discipline">
+                        <option value="">Izberite disciplino</option>
+                        <?php 
+                        if ($vse_discipline_result && $vse_discipline_result->num_rows > 0) {
+                            while ($discipline = $vse_discipline_result->fetch_assoc()) {
+                                echo "<option value='{$discipline['id']}'>{$discipline['title']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>No disciplines found</option>";
+                        }
+                        ?>
+                    </select>
+                </li>
+
+                <!-- Selection Filter -->
+                <li>
+                    <label for="selection-filter">Selekcija:</label>
+                    <select id="selection-filter" name="selection">
+                        <option value="">Izberite selekcijo</option>
+                        <?php 
+                        if ($vse_selekcije_result && $vse_selekcije_result->num_rows > 0) {
+                            while ($selection = $vse_selekcije_result->fetch_assoc()) {
+                                echo "<option value='{$selection['id']}'>{$selection['title']}</option>";
+                            }
+                        } else {
+                            echo "<option value=''>No selections found</option>";
+                        }
+                        ?>
+                    </select>
+                </li>
+            </ul>
         </div>
+
+        <div class="display-accomplishments">
+            <h2>Disciplina</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rezultat</th>
+                        <th>Atlet</th>
+                        <th>Leto</th>
+                        <th>Kraj</th>
+                    </tr>
+                </thead>
+                <tbody id="tables-body">
+                    <!-- Data from fetch-accomplishments.php will populate here -->
+                </tbody>
+            </table>
+        </div>
+
 
     </div>
 
@@ -193,6 +261,63 @@
                 loadAthletes(1);
             });
         </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to fetch and display accomplishments based on selected filters
+    function loadAccomplishments() {
+        const disciplineId = document.getElementById('discipline-filter').value;
+        const selectionId = document.getElementById('selection-filter').value;
+        console.log(`Fetching accomplishments for discipline ${disciplineId} and selection ${selectionId}`);
+
+        // Construct the URL with query parameters for the selected filters
+        const url = `fetch-accomplishments.php?discipline=${disciplineId}&selection=${selectionId}`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Accomplishments data:", data);
+
+                const tableBody = document.getElementById('tables-body');
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                if (data.accomplishments.length > 0) {
+                    data.accomplishments.forEach(item => {
+                        const row = `
+                            <tr>
+                                <td>${item.result}</td>
+                                <td>${item.name} ${item.surname}</td>
+                                <td>${item.date}</td>
+                                <td>${item.location}</td>
+                            </tr>
+                        `;
+                        tableBody.insertAdjacentHTML('beforeend', row);
+                    });
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No accomplishments found</td></tr>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading accomplishments:', error);
+            });
+    }
+
+    // Add event listeners for filter changes to update the table dynamically
+    document.getElementById('discipline-filter').addEventListener('change', loadAccomplishments);
+    document.getElementById('selection-filter').addEventListener('change', loadAccomplishments);
+
+    // Initial load of accomplishments when page is first loaded
+    loadAccomplishments();
+});
+
+
+</script>
+
     </main>
 
     <?php include "footer.php"; ?>
