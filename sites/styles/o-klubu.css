@@ -1,0 +1,204 @@
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -20vh;
+}
+
+.content {
+    padding-top: 25vh;
+    display: flex;
+    justify-content: center; /* Center the file tree container */
+}
+
+.atleti-info {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: horizontal;
+}
+
+.atleti-info h1 {
+    color: black;
+    font-size: 3rem;
+}
+
+.atleti-info hr {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.atletska-sola img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 50%;
+}
+
+.atletska-sola img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    opacity: 0.9;
+}
+
+.description-main, .atletska-sola{
+    display: flex;
+    justify-content: center;
+}
+
+.description-main {
+    width: 50%;
+    flex-direction: column;
+    padding-left: 10vw;
+}
+
+.atletska-sola {
+    align-items: center;
+    width: 50%;
+}
+
+.nav-dogodki {
+    display: flex;
+    flex-direction: row; /* Use 'row' instead of 'horizontal' */
+    color: Black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    height: 8vh;
+    width: 100%;
+    align-items: center;
+    position: sticky;
+    top: 0; /* Make the element stick to the top */
+    z-index: 1000; /* Ensure it appears above other content */
+    background-color: #fff; /* Optional: set a background color to avoid transparency issues */
+}
+
+
+.nav-dogodki ul {
+    list-style: none;
+}
+
+.nav-dogodki li{
+    float: left;
+    margin: 0 5vw 0 5vw;
+}
+
+section h2 {
+    margin: 2vh 2vw;
+    font-size: 2rem;
+}
+
+.predstavitev-zgodovina {
+    padding: 0 5vw 5vh 5vw;
+    background-image: url(../../assets/green-blue-gradient-top.svg);
+    background-size: cover; /* Adjust as necessary */
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
+}
+
+.predstavitev, .zgodovina, .dokumenti{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dokumenti {
+    background-image: url(../../assets/top-gradient-green-orange-left.svg);
+    background-size: cover; /* Adjust as necessary */
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
+}
+
+.custom-shape {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-tree-container {
+    width: 50vw;
+    max-width: 1200px; /* Limit the max width */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Card-like shadow */
+    background-color: #f9f9f9; /* Optional: Background color for the container */
+    box-sizing: border-box;
+    margin: 5vw 25vw 5vw 25vw;
+}
+
+/* File tree styling inside the card */
+.file-tree {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-tree li {
+    margin: 5px 0;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.2rem; /* Adjust text size */
+    color: #333; /* Text color remains */
+}
+
+/* Folder and file icons styling (colors remain the same) */
+.file-tree .folder::before, .file-tree .file::before {
+    font-size: 1.2rem; /* Adjust icon size */
+    margin-right: 10px; /* Space between icon and name */
+}
+
+.file-tree .folder::before {
+    content: '\f07b'; /* Font Awesome folder icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.file-tree .folder.open::before {
+    content: '\f07c'; /* Font Awesome open folder icon */
+}
+
+.file-tree .file::before {
+    content: '\f15b'; /* Font Awesome file icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px; /* Space between icon and name */
+    font-size: 1.2rem; /* Adjust size if needed */
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    margin-top: 0vh;
+    border-radius: 10px 10px 0 0;
+    background-color: #ebebeb;
+}
+
+.file-tree-container h2 {
+    color: #444;
+}
+
+.hidden {
+    display: none;
+}
+
+.kako-do-nas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-image: url(../../assets/green-blue-gradient-top.svg);
+    background-size: cover; /* Adjust as necessary */
+    background-repeat: no-repeat; /* Prevents repeating */
+    background-position: center; /* Centers the image */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+    .file-tree-container {
+        width: 95vw; /* Adjust container width for smaller screens */
+        padding: 15px;
+    }
+}

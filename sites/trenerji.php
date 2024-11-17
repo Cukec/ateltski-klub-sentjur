@@ -46,24 +46,24 @@
     </script>
 
     <div class="content">
-    <section class="profile-container">
+        <section class="profile-container">
 
-        <?php
-        foreach ($profiles as $profile) {
-            echo '
-            <div class="profile-card">
-                <div class="empty-pfp">?</div>
-                <div class="profile-info">
-                    <h2>' . $profile['name'] . '</h2>
-                    <h3>' . $profile['surname'] . '</h3>
-                    <p class="email">' . $profile['email'] . '</p>
-                    <p class="roles">' . $profile['roles'] . '</p>
-                </div>
-            </div>';
-        }
-        ?>
+            <?php
+            foreach ($profiles as $profile) {
+                echo '
+                <div class="profile-card">
+                    <div class="empty-pfp">?</div>
+                    <div class="profile-info">
+                        <h2>' . $profile['name'] . '</h2>
+                        <h3>' . $profile['surname'] . '</h3>
+                        <p class="email">' . $profile['email'] . '</p>
+                        <p class="roles">' . $profile['roles'] . '</p>
+                    </div>
+                </div>';
+            }
+            ?>
 
-    </section>
+        </section>
     </div>
     <?php include "footer.php"; ?>
 </body>

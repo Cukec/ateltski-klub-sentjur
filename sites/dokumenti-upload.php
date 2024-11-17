@@ -36,7 +36,7 @@ if (isset($_POST["submit"])) {
         }
 
         // Redirect back to the main page after upload
-        header("Location: dokumenti.php");
+        header("Location: o-klubu.php");
         exit;
     }
 }

@@ -6,7 +6,7 @@ if (isset($_GET['file'])) {
     // Check if the file exists and delete it
     if (file_exists($file)) {
         unlink($file); // Delete the file
-        header('Location: dokumenti.php'); // Redirect back to the documents page
+        header('Location: o-klubu.php'); // Redirect back to the documents page
         exit;
     } else {
         echo "File does not exist.";

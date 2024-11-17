@@ -7,10 +7,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles/dokumenti.css">
+    
 </head>
 <body>
 
-<?php include"navigation.php"; include"config.php" ?>
+<?php include "navigation.php"; include "config.php" ?>
 
 
     <div class="custom-shape">
@@ -26,27 +27,27 @@
     </div>
 
 
-<div class="file-tree-container">
-    <div class="title"><h2>Dokumenti</h2></div>
-    <ul class="file-tree" id="fileTree"></ul>
-</div>
-<script>
-$(document).ready(function() {
-    // Function to load file tree
-    function loadFileTree(path, $parent) {
-        $.ajax({
-            url: 'fetch-file-tree.php', // PHP script to fetch the file tree
-            type: 'GET',
-            data: { folder: path },
-            dataType: 'json',
-            success: function(data) {
-                buildFileTree(data, $parent);
-            },
-            error: function() {
-                alert('Error loading file tree');
-            }
-        });
-    }
+    <div class="file-tree-container">
+        <div class="title"><h2>Dokumenti</h2></div>
+        <ul class="file-tree" id="fileTree"></ul>
+    </div>
+    <script>
+    $(document).ready(function() {
+        // Function to load file tree
+        function loadFileTree(path, $parent) {
+            $.ajax({
+                url: 'fetch-file-tree.php', // PHP script to fetch the file tree
+                type: 'GET',
+                data: { folder: path },
+                dataType: 'json',
+                success: function(data) {
+                    buildFileTree(data, $parent);
+                },
+                error: function() {
+                    alert('Error loading file tree');
+                }
+            });
+        }
 
     // Function to build the file tree from JSON data
     function buildFileTree(data, $parent) {
