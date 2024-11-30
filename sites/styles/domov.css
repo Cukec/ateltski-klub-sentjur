@@ -18,7 +18,35 @@
 .novice-container {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 75%;
+}
+
+.novica-placeholder {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 2%;
+}
+
+.novica-image {
+    height: 70%;
+    width: 100%;
+}
+
+.novica-image img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.novica-title {
+    overflow: hidden;
+    text-overflow: none;
+    white-space: wrap; /* Keeps text on one line and truncates with ellipsis if too long */
+}
+
+.novica-title a {
+    font-size: 0.8rem; /* Initial font size */
 }
 
 .desni-container {
@@ -43,7 +71,7 @@
 
 /* Novice (News) - takes full width */
 .novice {
-    background-image: url(../../assets/red-orange-gradient-middle-left.svg);
+    background-image: url(../../assets/red-blurry-center.svg);
     background-repeat: no-repeat;
     padding: 5vw;
     display: grid;

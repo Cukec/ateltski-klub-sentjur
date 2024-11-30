@@ -21,57 +21,31 @@
                 <h1>AKTULANO</h1>
             </div> -->
                 <!-- Novice (News) -->
-            <div class="novice">
-                
-                <?php 
-                // Define the SQL SELECT query
-                $query = "SELECT title, content FROM news WHERE shown = 1 ORDER BY post_time DESC LIMIT 6;";
+                <div class="novice">
+                    <?php 
+                    // Define the SQL SELECT query
+                    $query = "SELECT title, content FROM news WHERE shown = 1 ORDER BY post_time DESC LIMIT 6;";
+                    $result = $conn->query($query);
 
-                // Execute the query
-                $result = $conn->query($query);
-
-                // Check if the query returns any results
-                if ($result->num_rows > 0) {
-                    // Output data for each row
-                    while ($row = $result->fetch_assoc()) {
-                        if (isset($row['id_image']) && $row['id_image'] != NULL) {
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
                             ?>
-                                <div class="novica-img">
-                                    <div class="novica-left">
-                                        <img src="../assets/16-9-aspect-ratio-test.jpg" alt="placeholder-image">
-                                    </div>
-                                    <div class="novica-right">
-                                        <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
-                                        <p> <?= $row['content']; ?> </p>
-                                    </div>
+                            <div class="novica-placeholder">
+                                <div class="novica-image">
+                                    <img src="../assets/news_placeholder.jpg" alt="Placeholder Image">
                                 </div>
+                                <div class="novica-title">
+                                    <a href="info-novica.php"><h2><?= $row['title']; ?></h2></a>
+                                </div>
+                            </div>
                             <?php
                         }
-                        else {
-                            ?>
-                                <div class="novica-img-null">
-                                    <div class="novica-title">
-                                        <a href="info-novica.php"><h2> <?= $row['title']; ?> </h2></a>
-                                    </div>
-                                    <div class="novica-text">
-                                        <p> <?= $row['content']; ?> </p>
-                                    </div>
-                                </div>
-                            <?php
-                        }
+                    } else {
+                        echo "No news available.";
                     }
-                } else {
-                    echo "No news available.";
-                }
+                    ?>
+                </div>
 
-                // Close the database connection
-                //$conn->close();
-                ?>
-
-
-                    
-                <!-- More news here -->
-            </div>
 
                 <!-- Modal for Adding News -->
                 <div id="addNewsModal" class="modal">
@@ -119,6 +93,18 @@
                 }
             });
         });
+
+        function resizeTextToFit(element) {
+            let fontSize = parseInt(window.getComputedStyle(element).fontSize);
+            while (element.scrollWidth > element.clientWidth && fontSize > 10) { // Stops at a minimum font size of 10px
+                fontSize--;
+                element.style.fontSize = `${fontSize}px`;
+            }
+        }
+
+        const titleElement = document.querySelector(".novica-title a");
+        resizeTextToFit(titleElement);
+
     </script>
     <?php include ('footer.php') ?>
         <script src="modal-news.js"></script> <!-- Include the modal JavaScript -->        
