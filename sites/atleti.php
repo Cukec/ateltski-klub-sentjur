@@ -74,8 +74,8 @@
             <ul>
                 <li><button id="active-athletes" class="athlete-toggle" data-type="active">Aktivni</button></li>
                 <li><button id="ex-athletes" class="athlete-toggle" data-type="ex-athlete">Nekdanji</button></li>
-                <li><button id="club-acc" class="acc-toggle" data-type="club-acc">Dosežki</button></li>
-                <li><button id="tables" class="acc-toggle" data-type="table">Tablice</button></li>
+                <li><a href="dosezki-atleti.php"><button id="club-acc" class="acc-toggle" data-type="club-acc">Dosežki</button></a></li>
+                <li><a href="tablice-atleti.php"><button id="tables" class="acc-toggle" data-type="table">Tablice</button></a></li>
             </ul>
         </div>
 
@@ -107,8 +107,8 @@
         <!-- Sql querry-ji za dosežke in tablice -->
 
         <div class="acc-filters" style="display: none">
+        <!-- <div class="acc-filters">
             <ul>
-                <!-- Discipline Filter -->
                 <li>
                     <label for="discipline-filter">Disciplina:</label>
                     <select id="discipline-filter" name="discipline">
@@ -125,7 +125,6 @@
                     </select>
                 </li>
 
-                <!-- Selection Filter -->
                 <li>
                     <label for="selection-filter">Selekcija:</label>
                     <select id="selection-filter" name="selection">
@@ -142,10 +141,12 @@
                     </select>
                 </li>
             </ul>
-        </div>
+        </div> -->
 
         <div class="display-accomplishments" id="accom">
             <table>
+        <!--<div class="display-accomplishments">
+            <table id="tablice">
                 <thead>
                     <tr>
                         <th>Rezultat</th>
@@ -155,7 +156,7 @@
                     </tr>
                 </thead>
                 <tbody id="tables-body">
-                    <!-- Data from fetch-accomplishments.php will populate here -->
+                    --comment Data from fetch-accomplishments.php will populate here comment--
                 </tbody>
             </table>
         </div>
@@ -165,6 +166,8 @@
         
 
     
+        </div> -->
+        
         <script>
           document.querySelectorAll(".acc-toggle").forEach(button => {
     button.addEventListener("click", function () {
@@ -280,61 +283,61 @@
             });
         </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to fetch and display accomplishments based on selected filters
-    function loadAccomplishments() {
-        const disciplineId = document.getElementById('discipline-filter').value;
-        const selectionId = document.getElementById('selection-filter').value;
-        console.log(`Fetching accomplishments for discipline ${disciplineId} and selection ${selectionId}`);
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to fetch and display accomplishments based on selected filters
+            function loadAccomplishments() {
+                const disciplineId = document.getElementById('discipline-filter').value;
+                const selectionId = document.getElementById('selection-filter').value;
+                console.log(`Fetching accomplishments for discipline ${disciplineId} and selection ${selectionId}`);
 
-        // Construct the URL with query parameters for the selected filters
-        const url = `fetch-accomplishments.php?discipline=${disciplineId}&selection=${selectionId}`;
+                // Construct the URL with query parameters for the selected filters
+                const url = `fetch-accomplishments.php?discipline=${disciplineId}&selection=${selectionId}`;
 
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Accomplishments data:", data);
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Accomplishments data:", data);
 
-                const tableBody = document.getElementById('tables-body');
-                tableBody.innerHTML = ''; // Clear existing rows
+                        const tableBody = document.getElementById('tables-body');
+                        tableBody.innerHTML = ''; // Clear existing rows
 
-                if (data.accomplishments.length > 0) {
-                    data.accomplishments.forEach(item => {
-                        const row = `
-                            <tr>
-                                <td>${item.result}</td>
-                                <td>${item.name} ${item.surname}</td>
-                                <td>${item.date}</td>
-                                <td>${item.location}</td>
-                            </tr>
-                        `;
-                        tableBody.insertAdjacentHTML('beforeend', row);
+                        if (data.accomplishments.length > 0) {
+                            data.accomplishments.forEach(item => {
+                                const row = `
+                                    <tr>
+                                        <td>${item.result}</td>
+                                        <td>${item.name} ${item.surname}</td>
+                                        <td>${item.date}</td>
+                                        <td>${item.location}</td>
+                                    </tr>
+                                `;
+                                tableBody.insertAdjacentHTML('beforeend', row);
+                            });
+                        } else {
+                            tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No accomplishments found</td></tr>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading accomplishments:', error);
                     });
-                } else {
-                    tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No accomplishments found</td></tr>`;
-                }
-            })
-            .catch(error => {
-                console.error('Error loading accomplishments:', error);
-            });
-    }
+            }
 
-    // Add event listeners for filter changes to update the table dynamically
-    document.getElementById('discipline-filter').addEventListener('change', loadAccomplishments);
-    document.getElementById('selection-filter').addEventListener('change', loadAccomplishments);
+            // Add event listeners for filter changes to update the table dynamically
+            document.getElementById('discipline-filter').addEventListener('change', loadAccomplishments);
+            document.getElementById('selection-filter').addEventListener('change', loadAccomplishments);
 
-    // Initial load of accomplishments when page is first loaded
-    loadAccomplishments();
-});
+            // Initial load of accomplishments when page is first loaded
+            loadAccomplishments();
+        });
 
 
-</script>
+        </script>
 
     </main>
 

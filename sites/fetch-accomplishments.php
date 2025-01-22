@@ -47,8 +47,9 @@ if ($result->num_rows > 0) {
             'gender' => htmlspecialchars($row['gender']),
             'accomplishment_id' => $row['id'],  // Assuming 'id' is the unique identifier for accomplishments
             'result' => htmlspecialchars($row['result']),
-            'date' => (new DateTime($row['date']))->format('d-m-Y'),
+            'date' => $row['date'] ? (new DateTime($row['date']))->format('d-m-Y') : null,
             'location' => htmlspecialchars($row['location']),
+            'description' => htmlspecialchars($row['description']),  // Added description here
             'discipline' => htmlspecialchars($row['di_title']),
             'selection' => htmlspecialchars($row['se_title']),
             'discipline_id' => $row['d_id'],

@@ -141,6 +141,13 @@ main {
     box-sizing: border-box; /* Include padding and borders in width calculation */
 }
 
+.novica a {
+    color: black;
+}
+
+.novica a:hover {
+    color: blue;
+}
 
 .novica h2 {
     margin: 0;

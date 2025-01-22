@@ -113,7 +113,7 @@ if ($athleteId > 0) {
         <div id="red"></div>
     </div>
     <div class="go-back">
-        <a href="tekmovanja.php">nazaj ↶</a>
+        <a href="atleti.php">nazaj ↶</a>
     </div>
 </main>
 

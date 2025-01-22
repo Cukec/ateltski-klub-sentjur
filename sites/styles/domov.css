@@ -50,6 +50,10 @@
     font-size: 0.8rem; /* Initial font size */
 }
 
+.novica-title a:hover h2 {
+    color: blue;
+}
+
 .desni-container {
     display: flex;
     flex-direction: column;
