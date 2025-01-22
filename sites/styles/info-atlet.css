@@ -3,7 +3,7 @@ main {
     flex-direction: column; /* Keep the column layout for the main content */
     align-items: flex-start; /* Align items to the top */
     height: auto; /* Allow height to adjust based on content */
-    margin: 5%;
+    margin: -20vh 5vw 5vh 5vw;
 }
 
 .athlete-wrapper {

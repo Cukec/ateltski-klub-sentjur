@@ -86,8 +86,12 @@ nav #marker {
 
         function setActiveLink() {
             const currentPath = window.location.pathname.split('/').pop();
+            const altPath = window.location.pathname.split('-').pop();
             items.forEach((link, index) => {
                 if (link.getAttribute('href') === currentPath) {
+                    activeIndex = index;
+                }
+                else if (link.getAttribute('href') === altPath) {
                     activeIndex = index;
                 }
             })

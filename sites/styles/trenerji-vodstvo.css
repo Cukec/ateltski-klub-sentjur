@@ -95,6 +95,15 @@ main{
 .naslov-vodstvo, .naslov-trenerji, .naslov-sodniki {
     margin: 2vh 2vw;
     font-size: 2rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.naslov-vodstvo p, .naslov-trenerji p, .naslov-sodniki p{
+    font-size: 1.2rem;
 }
 
 .content {

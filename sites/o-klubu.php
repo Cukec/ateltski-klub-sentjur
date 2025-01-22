@@ -15,9 +15,11 @@
 
         <section class="atleti-info">
             <div class="description-main">
-                <h1>Vodstvo, trenerji in sodniki</h1>
+                <h1>Predstavitev AK Šentjur</h1>
                 <hr>
-                <p>Atletski klub je zavezan spodbujanju športnega duha, timskega dela in osebne rasti vseh svojih članov. Vodstvo kluba sestavljajo trenerji in strokovnjaki navdušeni nad atletiko.</p>
+                <p>
+                    Atletski klub Šentjur deluje na področju občine Šentjur in pokriva tudi področje širšega Kozjanskega
+                </p>
             </div>
             <div class="atletska-sola">
                 <a href="treningi.php"><img src="../assets/logo-atletska-sola.png" alt="logo-atletska-sola"></a>
@@ -40,12 +42,7 @@
                 Organiziran imamo svoj sodniški zbor tako, da organiziramo tudi atletska tekmovanja na vseh naštetih področjih. 
                 Vse, ki vas zanima aktivno sodelovanje ali delo v klubu nas preko naših kontaktnih naslovov obvestite in radi vas bomo sprejeli medse. 
                 AK Šentjur ima tudi status nevladne organizacije v javnem interesu na področju športa, ki mu lahko po veljavni zakonodaji namenite del dohodnine. 
-                Smo člani naslednjih sorodnih zvez in organizacij:</p>
-                <ul>
-                    <li>Atletske zveze Slovenije</li>
-                    <li>Športne unije Slovenije</li>
-                    <li>Športne zveze Šentjur</li>
-                </ul>
+                Smo člani naslednjih sorodnih zvez in organizacij, to so Atletske zveze Slovenije, Športne unije Slovenije in Športne zveze Šentjur</p>
             </article>
             <article class="zgodovina">
                 <h2>Zgodovina</h2>
@@ -53,19 +50,16 @@
                     Atletski klub Šentjur je bil ustanovljen leta 1994. Ustanovni člani so bili štirje nekdanji atleti celjskega atletskega kluba: Cmok Samo, Kukovič Ivan, Podgoršek Andrej in Artnak Vlado, 
                     ki je do takrat deloval v Celju tudi kot atletski trener. Med podporniki ustanovitve sta bila tudi Gradišnik Marjan, 
                     takratni ravnatelj OŠ Franja Malgaja Šentjur in Jože Artnak, takrat aktiven v lokalni skupnosti.
-                </p>
-                <p>
+
                     Atletski klub Šentjur je bil ustanovljen s ciljem, nuditi možnost talentiranim otrokom in mladini iz občine Šentjur in širšega Kozjanskega vadbo in treninge atletike bližje kraju bivanja. 
                     Motiv za ustanovitev pa je bil predvsem v dejstvu, da so številni uspešni atleti iz tega okolja svoje rezultate dosegali za klub in kraj drugje.
-                </p>
-                <p>
+
                     Prvi predsednik Atletskega kluba Šentjur je postal Marjan Gradišnik, ki je bil to vse do leta 2011. Leta 2010 prejme tudi posebno priznanje župana Občine Šentjur za vodenje našega AK.  
                     Na rednem volilnem občnem zboru leta 2011 ga nasledi za 4 leta Vladimir Artnak, ki je eden izmed ustanoviteljev in trenerjev v klubu. 
                     V letu 2014 smo s svečano kulturno prireditvijo obeležili 20. obletnico delovanja kluba in izdali ZBORNIK Šentjurske atletike 1994 - 2014. 
                     Konec leta 2014 postane na rednem volilnem občnem zboru predsednik Jože Artnak,  dolgoletni atletski delavec, atletski sodnik in že član IO ter rekreativni tekač. 
                     Ponovno je za predsednika izvoljen leta 2018 ter 2023. V letu 2024 obeležujemo 30. obletnico našega društva.
-                </p>
-                <p>
+
                     Klub v vseh letih goji pozitivni odnos do športa in kraja ter vzgaja mlade predvsem v duhu pripadnosti idejam športa in predvsem atletike. 
                     Vsako leto uspemo vpisati v šolo atletike od 60 do 120 otrok, v mladinski in članski kategoriji pa je aktivnih od 6 do 16 atletov. 
                     Ob tem se lahko pohvalimo tudi s številnimi rezultati, uspehi in dosežki, ki so ponesli ime našega kraja po Sloveniji in navzven. To so:
@@ -74,21 +68,40 @@
         </section>
 
         <section class="dokumenti">
-            <div class="custom-shape">
-                <h2>Uporabni Dokumenti</h2>
-                <p>
-                    Skozi leta delovanja AK Šentjur se je nabralo nekaj uporabnih dokumentov. Najdete in jih lahko spodaj, s klikom na datoteko pa jo prenesete.
-                </p>
-            </div>
+            <article class="dokumenti-article">
+                <div class="custom-shape">
+                    <h2>Uporabni Dokumenti</h2>
+                    <p>
+                        Skozi leta delovanja AK Šentjur se je nabralo nekaj uporabnih dokumentov. Najdete in jih lahko spodaj, s klikom na datoteko pa jo prenesete.
+                    </p>
+                </div>
 
 
-            <div class="file-tree-container">
-                <div class="title"><h2>Dokumenti</h2></div>
-                <ul class="file-tree" id="fileTree"></ul>
-            </div>
+                <div class="file-tree-container">
+                    <div class="title"><h2>Dokumenti</h2></div>
+                    <ul class="file-tree" id="fileTree"></ul>
+                </div>
+            </article>
+
+            <article class="kako-do-nas-article">
+                <div class="naslov-kako-do-nas">
+                    <h2>Kako do Nas</h2>
+                </div>
+                <div class="google-maps">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1951.9571870400787!2d15.392774675641492!3d46.2207124080434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476577c4e12dcb29%3A0xcf26706d232b88ea!2sAtletski%20klub%20%C5%A0entjur!5e0!3m2!1sen!2ssi!4v1731767342342!5m2!1sen!2ssi" 
+                        width="600" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </article>
         </section>
 
-        <section class="kako-do-nas">
+        <!-- <section class="kako-do-nas">
             <div class="naslov-kako-do-nas">
                 <h2>Kako do Nas</h2>
             </div>
@@ -103,7 +116,7 @@
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
-        </section>
+        </section> -->
 
         <script>
             $(document).ready(function() {

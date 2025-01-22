@@ -44,7 +44,10 @@
 
         <div class="vodstvo">
             <div class="naslov-vodstvo">
-                <h2>VODENJE</h2>
+                <h2>VODSTVO</h2>
+                <p>
+                    Vodstvo atletskega kluba Šentjur, ki ga sestavljajo trenerji in strokovnjaki navdušeni nad atletiko
+                </p>
             </div>
 
             <script>
@@ -93,6 +96,9 @@
         <div class="trenerji">
             <div class="naslov-trenerji">
                 <h2>TRENERJI</h2>
+                <p>
+                Pri delu stavimo na usposobljen doma vzgojen trenerski kader z ustrezno izobrazbo ali usposobljenostjo in trenersko licenco. Trenutno aktivni trenerji so
+                </p>
             </div>
 
             <script>
@@ -141,6 +147,10 @@
         <div class="sodniki">
             <div class="naslov-sodniki">
                 <h2>SODNIKI</h2>
+                <p>
+                    Društvo atletskih sodnikov AK Šentjur, je bilo ustanovljeno 7.10.2005. Člani društva so predvsem nekdanji atleti in ljubitelji atletike. 
+                    Od leta 2003 je določeno število atletov v AK Šentjur, zaključilo s tekmovalno aktivnostjo, bodi si zaradi študijskih obveznosti, ali družinskih obveznosti
+                </p>
             </div>
 
             <script>

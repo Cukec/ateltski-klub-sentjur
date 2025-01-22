@@ -24,8 +24,10 @@
                 <div class="novice">
                     <?php 
                     // Define the SQL SELECT query
-                    $query = "SELECT title, content FROM news WHERE shown = 1 ORDER BY post_time DESC LIMIT 6;";
-                    $result = $conn->query($query);
+                    $query = "SELECT id, title, content, id_image FROM news WHERE shown = 1 ORDER BY post_time DESC LIMIT 6;";
+                    $stmt = $conn->prepare($query);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -35,7 +37,9 @@
                                     <img src="../assets/news_placeholder.jpg" alt="Placeholder Image">
                                 </div>
                                 <div class="novica-title">
-                                    <a href="info-novica.php"><h2><?= $row['title']; ?></h2></a>
+                                    <a href="info-novica.php?id=<?= $row['id']; ?>"style="text-decoration: none; color: inherit;">
+                                        <h2><?= htmlspecialchars($row['title']); ?></h2>
+                                    </a>
                                 </div>
                             </div>
                             <?php

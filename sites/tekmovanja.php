@@ -80,7 +80,7 @@
                                     <div style="display: flex; flex-direction: horizontal;">
                                         <!-- Make title clickable and redirect to info-dogodek.php with event id as a query parameter -->
                                         <h2>
-                                            <a href="info-dogodek.php?id=<?= $eventId; ?>" style="text-decoration: none; color: inherit;">
+                                            <a href="info-dogodek.php?id=<?= $eventId; ?>" style="text-decoration: none;">
                                                 <?= $title; ?>
                                             </a>
                                         </h2>
