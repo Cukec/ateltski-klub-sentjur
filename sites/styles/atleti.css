@@ -81,6 +81,13 @@ main h3{
     border-bottom: 1px solid #cecece;
 }
 
+.display-accomplishments table {
+    height: 50vh; /* Set the height to 10% of the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: block; /* Ensure the table is treated as a block element for scrolling */
+    width: 100%;
+}
+
 table {
     width: 60vw;
     border-collapse: collapse; /* Ensures no space between borders */

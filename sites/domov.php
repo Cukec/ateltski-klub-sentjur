@@ -32,10 +32,10 @@
                             ?>
                             <div class="novica-placeholder">
                                 <div class="novica-image">
-                                    <img src="../assets/news_placeholder.jpg" alt="Placeholder Image">
+                                    <img src="../assets/news-placeholder.jpg" alt="Placeholder Image">
                                 </div>
                                 <div class="novica-title">
-                                    <a href="info-novica.php"><h2><?= $row['title']; ?></h2></a>
+                                    <a href="#"><h2><?= $row['title']; ?></h2></a>
                                 </div>
                             </div>
                             <?php

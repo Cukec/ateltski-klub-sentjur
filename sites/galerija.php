@@ -5,121 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Gallery Upload</title>
     <link rel="stylesheet" href="styles/galerija.css">
-    <!-- Cropper.js CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css">
-
-    <style>
-        .wrking{
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10vh;
-            margin-top: -15vh;
-        }
-    </style>
 </head>
 <body>
-    <?php include "navigation.php"; ?>
+<?php include "navigation.php"; include "config.php"; ?>
 
-    <div class="wrking">
-        <img src="../assets/working-on-it.png" height="35%" width="35%" alt="">
-        <h1 style="color: gray">Delamo na tem!</h1>
+<section class="galerija-info">
+    <div class="description-main">
+        <h1>Galerija</h1>
+        <hr>
+        <p>Skozi leta smo doživeli veliko lepih trenutkov. Skrbno smo jih poskušali čim več ujeti. Spodaj lahko pobrskate po preteklih trenutkih.</p>
     </div>
-    
-
-    <!--
-    <section class="galerija-info">
-        <div class="description-main">
-            <h1>Delo z atleti</h1>
-            <hr>
-            <p>V AK Šentjur stavimo veliko na delo z mladimi...</p>
-        </div>
-        <div class="img-galerija">
-            <img src="../assets/camera.png" alt="" id="uploaded-image">
-        </div>
-        
-        <button id="open-modal">Open Image Cropper</button>
-    </section>
-
-    
-    <div id="cropper-modal">
-        <div class="modal-content">
-            
-            <button id="close-modal">X</button>
-            
-            
-            <div class="aspect-ratio-options">
-                <label><input type="radio" name="aspect-ratio" value="4/3" checked> 4:3</label>
-                <label><input type="radio" name="aspect-ratio" value="3/4"> 3:4</label>
-                <label><input type="radio" name="aspect-ratio" value="1/1"> 1:1</label>
-            </div>
-            
-            
-            <img id="image-to-crop" src="../assets/camera.png" alt="Image to crop">
-            
-           
-            <button id="download-cropped">Download Cropped Image</button>
-        </div>
+    <div class="atletska-sola">
+        <img src="../assets/camera.png">
     </div>
+</section>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
-    <script>
-        let cropper;
+<main>
+    <div class="gallery-container">
+        <?php
+        $queryImg = "SELECT * 
+        FROM test_image 
+        WHERE url LIKE 'galerija/%' AND url NOT LIKE '%male/%'
+        ORDER BY 
+            CAST(SUBSTRING(url, REGEXP_INSTR(url, '[0-9]{4}'), 4) AS UNSIGNED) DESC
+        ";
+        $resultImg = $conn->query($queryImg);
 
-        // Function to initialize the cropper with a specific aspect ratio
-        function initializeCropper(aspectRatio) {
-            const image = document.getElementById('image-to-crop');
-            if (cropper) {
-                cropper.destroy(); // Destroy previous cropper instance if exists
+        if ($resultImg->num_rows > 0) {
+            $imagesByFolder = [];
+            while ($row = $resultImg->fetch_assoc()) {
+                $trimmedUrl = str_replace("galerija/", "", $row['url']);
+                $parts = explode("/", $trimmedUrl);
+                $folder = $parts[0]; // The first folder name
+                $imagesByFolder[$folder][] = $trimmedUrl;
             }
-            cropper = new Cropper(image, {
-                aspectRatio: aspectRatio,
-                viewMode: 1,
-                autoCropArea: 0.65,
-                responsive: true,
-                minContainerHeight: 300,
-                minContainerWidth: 400,
+
+            $folderCount = 0; // Counter for folders
+            foreach ($imagesByFolder as $folder => $images) {
+                $style = $folderCount < 5 ? "" : "style='display: none;'"; // Display first 5 folders
+                echo "<div class='gallery-folder' $style data-folder-index='$folderCount'>";
+                echo "<div class='folder-title' data-gallery-id='$folder'>$folder</div>";
+                echo "<div class='folder-description no-description'>S klikom prikažete slike</div>";
+                echo "<div class='gallery-images' data-gallery-id='$folder' style='display: none;'>";
+                foreach ($images as $image) {
+                    echo "<div class='polaroid'>";
+                    echo "<img src='../filegator/repository/galerija/$image' alt='$image'>";
+                    echo "<div class='caption'>$image</div>";
+                    echo "</div>";
+                }
+                echo "</div>"; // Close gallery-images
+                echo "</div>"; // Close gallery-folder
+                $folderCount++;
+            }
+
+            // Add "Display More Archives" button if more than 5 folders
+            if ($folderCount > 5) {
+                echo "<button id='display-more-archives' class='centered-button'>Prikaži več</button>";
+            }
+        } else {
+            echo "<p>No images found.</p>";
+        }
+        ?>
+    </div>
+</main>
+
+<!-- Modal Section -->
+<div id="image-modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-image" src="" alt="">
+    <div class="modal-caption"></div>
+    <button class="prev">&lt;</button>
+    <button class="next">&gt;</button>
+</div>
+
+<?php include("footer.php"); ?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const folderTitles = document.querySelectorAll(".folder-title");
+        const displayMoreButton = document.getElementById("display-more-archives");
+        let currentFolderCount = 5;
+
+        // Toggle folder visibility
+        folderTitles.forEach(title => {
+            title.addEventListener("click", () => {
+                const galleryId = title.getAttribute("data-gallery-id");
+                const galleryImages = document.querySelector(`.gallery-images[data-gallery-id='${galleryId}']`);
+
+                if (galleryImages.style.display === "none" || galleryImages.style.display === "") {
+                    galleryImages.style.display = "grid";
+                    galleryImages.classList.add("visible");
+                } else {
+                    galleryImages.style.display = "none";
+                    galleryImages.classList.remove("visible");
+                }
+            });
+        });
+
+        // Display more archives
+        if (displayMoreButton) {
+            displayMoreButton.addEventListener("click", () => {
+                const hiddenFolders = document.querySelectorAll(`.gallery-folder[data-folder-index]`);
+                let shownCount = 0;
+
+                hiddenFolders.forEach(folder => {
+                    if (folder.style.display === "none" && shownCount < 5) {
+                        folder.style.display = "block";
+                        shownCount++;
+                    }
+                });
+
+                // Hide the button if all folders are shown
+                const allFoldersShown = Array.from(hiddenFolders).every(folder => folder.style.display === "block");
+                if (allFoldersShown) {
+                    displayMoreButton.style.display = "none";
+                }
             });
         }
-
-        // Initialize the cropper with default aspect ratio 4:3
-        initializeCropper(4 / 3);
-
-        // Change aspect ratio based on user selection
-        document.querySelectorAll('input[name="aspect-ratio"]').forEach(function (radio) {
-            radio.addEventListener('change', function () {
-                const aspectRatio = this.value.split('/').map(Number);
-                initializeCropper(aspectRatio[0] / aspectRatio[1]);
-            });
-        });
-
-        // Open modal
-        document.getElementById('open-modal').addEventListener('click', function() {
-            document.getElementById('cropper-modal').style.display = 'flex';
-        });
-
-        // Close the modal
-        document.getElementById('close-modal').addEventListener('click', function() {
-            document.getElementById('cropper-modal').style.display = 'none';
-        });
-
-        // Download the cropped image
-        document.getElementById('download-cropped').addEventListener('click', function() {
-            const canvas = cropper.getCroppedCanvas();
-            const dataUrl = canvas.toDataURL('image/png');
-
-            // Create a download link and trigger it
-            const link = document.createElement('a');
-            link.href = dataUrl;
-            link.download = 'cropped-image.png';
-            link.click();
-        });
-    </script>
--->
-    <?php include("footer.php") ?>
+    });
+</script>
+<script src="gallery.js"></script>
+<script src="gallery-modal.js"></script>
 </body>
 </html>

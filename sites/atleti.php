@@ -106,7 +106,7 @@
 
         <!-- Sql querry-ji za dosežke in tablice -->
 
-        <div class="acc-filters">
+        <div class="acc-filters" style="display: none">
             <ul>
                 <!-- Discipline Filter -->
                 <li>
@@ -144,8 +144,7 @@
             </ul>
         </div>
 
-        <div class="display-accomplishments">
-            <h2>Disciplina</h2>
+        <div class="display-accomplishments" id="accom">
             <table>
                 <thead>
                     <tr>
@@ -163,8 +162,27 @@
 
 
     </div>
+        
 
+    
         <script>
+          document.querySelectorAll(".acc-toggle").forEach(button => {
+    button.addEventListener("click", function () {
+        // Determine the target id based on the button's data-type attribute
+        const targetId = button.dataset.type === "club-acc" ? "accom" :
+                         button.dataset.type === "table" ? "accom" : null;
+
+        if (targetId) {
+            // Find the target element
+            const targetElement = document.getElementById(targetId);
+
+            // Scroll to the element smoothly
+            targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    });
+});
+
+
             document.addEventListener('DOMContentLoaded', function() {
                 let currentPage = 1;
                 const resultsPerPage = 10;
