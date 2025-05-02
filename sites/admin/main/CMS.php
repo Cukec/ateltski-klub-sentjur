@@ -1,6 +1,7 @@
 <?php
+
 $host = 'localhost';  
-$dbname = 'ak-sentjur-test';  
+$dbname = 'ak-sentjur';  
 $username = 'root';  
 $password = '';  
 
@@ -31,4 +32,22 @@ if ($is_admin_page && $_SESSION['admin_logged'] === false) {
 } else {
     $hide_body = false;
 }
+
+
+abstract class CMS{    
+
+    abstract public function add(array $data);
+    abstract public function change(int $id, array $data);
+    abstract public function delete(int $id);
+
+    protected function sanitizeInput($input) {
+        return trim($input);
+    }
+
+    protected function validateSQL($input) {
+        return preg_match('/(union|select|insert|delete|update|drop|--)/i', $input) ? false : true;
+    }
+
+}
+
 ?>

@@ -49,7 +49,7 @@
                 echo "<div class='gallery-images' data-gallery-id='$folder' style='display: none;'>";
                 foreach ($images as $image) {
                     echo "<div class='polaroid'>";
-                    echo "<img src='../filegator/repository/galerija/$image' alt='$image'>";
+                    echo "<img src='../gallery/galerija/$image' alt='$image'>";
                     echo "<div class='caption'>$image</div>";
                     echo "</div>";
                 }
@@ -58,7 +58,6 @@
                 $folderCount++;
             }
 
-            // Add "Display More Archives" button if more than 5 folders
             if ($folderCount > 5) {
                 echo "<button id='display-more-archives' class='centered-button'>Prikaži več</button>";
             }

@@ -1,0 +1,40 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.drop-zone {
+    border: 2px dashed #4CAF50;
+    padding: 30px;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.drop-zone p {
+    font-size: 18px;
+    color: #666;
+}
+
+.drop-zone.drag-over {
+    border-color: #76ff03;
+    background-color: #f0fff0;
+}
+
+input[type="file"] {
+    display: none;
+}

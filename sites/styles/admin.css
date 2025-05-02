@@ -2,125 +2,62 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     margin: 5vw;
 }
 
+form{
 
-form {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping of items */
-    justify-content: flex-start; /* Align items to the left */
-    width: 40vw;
-    border-radius: 5px;
-    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1);
-    gap: 10px; /* Add spacing between items */
-    padding: 1vw;
-    margin-bottom: 10vh;
-}
-
-input, label, textarea {
-    display: block; /* Ensure each element stays on its line */
-    width: 100%; /* Make them full-width by default */
-}
-
-input {
-    padding: 2px 2px 0 2px;
-    height: 35px;
-    border-radius: 8px;
-    border: 1px solid rgb(214, 214, 214);
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    width: auto; /* Let the browser decide */
-    height: auto; /* Reset any inherited height */
-    padding: 0; /* Remove padding if any */
-    border: none; /* Remove unnecessary border styles */
-    background: none; /* Ensure no background color */
-    border-radius: 0; /* Reset border-radius */
-}
-
-textarea {
-    border: none;
-    background-color: rgb(231, 231, 231);
-    padding: 2px 2px 0 2px;
-    border-radius: 2px;
-    border: 2px solid rgb(214, 214, 214);
-    resize: none;
-}
-
-input[type="file"] {
     background-color: white;
-    border: none;
+    min-width: 80vw;
+    height: auto;
+    gap: 5%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    float: left;
+
+}
+.form-container {
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.2),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.7);
 }
 
+input[type=submit] {
+    width: 30%;
+    margin: auto;
+    margin-top: 3%;
+    padding: 15px;
+    background-color: #FF9914;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 1rem;
+    float: left;
 
-.radio {
+}
 
-    display: flex;
-    gap: 20px;
+input{
+    margin-bottom: 2vh;
+
+}
+
+.existing{
+    min-width: 80vw;
+    font-size: 1rem;
 
 }
 
 .subNav {
     display: flex;
     flex-direction: row; /* Use 'row' instead of 'horizontal' */
+    width: 100%;
     color: Black;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     height: 8vh;
     align-items: center;
     position: sticky;
     top: 0; /* Make the element stick to the top */
     z-index: 1000; /* Ensure it appears above other content */
-    background-color: #fff; /* Optional: set a background color to avoid transparency issues */
-}
-
-
-.subNav ul {
-    list-style: none;
-    height: 100%;
-}
-
-.subNav li{
-    float: left;
-    margin: 0 5vw 0 5vw;
-    height: 100%;
-}
-
-.subNav button {
-    border: none;
-    background-color: white;
-    height: 100%;
-    padding: 0 0.2% 0 2%;
-    transition: all 0.3s ease;
-}
-
-.subNav button:hover {
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-#novice{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.fit {
-    padding: -1vw;
-    margin: 1vw;
-    white-space: nowrap;
-    width: auto;
-}
-
-.contentDiv {
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-    margin-bottom: 10vh; /* Add space below each section */
-    width: 100%; /* Ensure div takes full width */
-    gap: 2rem; /* Add spacing between children */
+    background-color: #fff;
 }

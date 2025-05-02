@@ -1,0 +1,55 @@
+main {
+    padding: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: middle;
+
+}
+
+h2{
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 1.5vw;
+    max-width: fit-content;
+}
+
+hr{
+    margin:auto;
+    display: block;
+    width: 30%;
+    margin-bottom: 3vh;
+}
+
+.form-container{
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+    padding: 2vw .5vw;
+    border-radius: 8px;
+    width: 60vw;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+
+}
+
+input {
+    margin-bottom: 1.5vh;
+
+}
+
+textarea{
+    margin-bottom: 1.5vh;
+
+}
+
+input[type="submit"]{
+    width: 45%;
+    margin: auto;
+    margin-top: 2vh;
+    font-size: 1rem;
+    padding: 1vh;
+
+}

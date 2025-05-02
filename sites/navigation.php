@@ -69,6 +69,7 @@ nav #marker {
 
     <img src="../assets/aks-glava-2.svg" alt="" width="100%">
 
+
     <script>
         var marker = document.querySelector('#marker');
         var items = document.querySelectorAll('nav a');
