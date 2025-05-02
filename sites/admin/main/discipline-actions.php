@@ -40,11 +40,7 @@
                 
                 $result = $stmt->get_result();
 
-                if($row = $result->fetch_assoc()){
-
-                    echo var_dump($row);
-
-                }
+                $row = $result->fetch_assoc();
 
                 ?>
                 

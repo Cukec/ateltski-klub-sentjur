@@ -219,7 +219,7 @@
 
     <!-- SELEKCIJE div-->
     <div id="selekcije" class="contentDiv">
-        <form action="selection-actions.php" method="POST">
+        <form id="selectionForm" action="selection-actions.php" method="POST">
             <select name="selection" id="selection">
 
             <?php
@@ -251,10 +251,23 @@
 
             <button type="submit" name="action" value="save">Save</button>
             <button type="submit" name="action" value="change">Change</button>
-            <button type="submit" name="action" value="delete">Delete</button>
+            <button type="submit" name="action" value="delete" id="deleteBtn">Delete</button>
 
         </form>
     </div>
+
+    <script>
+    document.getElementById('selectionForm').addEventListener('submit', function(e) {
+        const clickedButton = document.activeElement;
+
+        if (clickedButton.name === 'action' && clickedButton.value === 'delete') {
+            const confirmDelete = confirm("Ali si prepričan, da želiš izbrisati to selekcijo? Morda so nanjo vezani podatki!");
+            if (!confirmDelete) {
+                e.preventDefault(); // Prekliči oddajo obrazca
+            }
+        }
+    });
+    </script>
 
     <!-- DISCIPLINE div-->
     <div id="discipline" class="contentDiv">
@@ -296,17 +309,17 @@
     </div>
 
     <script>
-document.getElementById('disciplineForm').addEventListener('submit', function(e) {
-    const clickedButton = document.activeElement;
+    document.getElementById('disciplineForm').addEventListener('submit', function(e) {
+        const clickedButton = document.activeElement;
 
-    if (clickedButton.name === 'action' && clickedButton.value === 'delete') {
-        const confirmed = confirm("Ali ste prepričani, da želite izbrisati to disciplino? Na njo so lahko vezani podatki!");
-        if (!confirmed) {
-            e.preventDefault(); // Prekliči pošiljanje obrazca
+        if (clickedButton.name === 'action' && clickedButton.value === 'delete') {
+            const confirmed = confirm("Ali ste prepričani, da želite izbrisati to disciplino? Na njo so lahko vezani podatki!");
+            if (!confirmed) {
+                e.preventDefault(); // Prekliči pošiljanje obrazca
+            }
         }
-    }
-});
-</script>
+    });
+    </script>
 
     
 
