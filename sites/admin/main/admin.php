@@ -67,6 +67,10 @@
             <option value="discipline">Discipline</option>
             <option value="selekcije">Selekcije</option>
             <option value="galerije">Galerije</option>
+            <option value="povezave">Povezave</option>
+            <option value="vodstvo">Vodstvo</option>
+            <option value="dokumenti">Dokumenti</option>
+            <option value="staticne">Staticne strani</option>
         </select>
     </nav>
 
@@ -307,6 +311,86 @@
 
         </form>
     </div>
+    
+    <!-- POVEZAVE div-->
+    <div id="povezave" class="contentDiv">
+        <select name="povezava" name="povezava" id="povezava" size="5" onchange="populateForm(this)">
+
+        <?php
+
+        $sql = "SELECT * FROM links";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        while($row = $result->fetch_assoc()){
+
+            ?>
+            
+            <option 
+                value="<?php echo $row['id'] ?>" 
+                data-title="<?php echo htmlspecialchars($row['title'], ENT_QUOTES) ?>" 
+                data-url="<?php echo htmlspecialchars($row['url'], ENT_QUOTES) ?>">
+                <?php echo $row['title'] ?>
+            </option>
+
+
+            <?php
+
+        }
+
+        ?>
+
+        </select>
+
+        <form action="povezave-actions.php" method="POST" onsubmit="return confirmDelete(event)">
+
+            <input type="text" name="id" id="id" value="" hidden>
+
+            <label for="title">Naziv strani: </label>
+            <input type="text" id="title" name="title" value="">
+
+            <label for="url">povezava: </label>
+            <input type="text" name="url" id="url" value=""><br>
+
+            <input type="submit" name="action" id="action" value="save">
+            <input type="submit" name="action" id="action" value="change">
+            <input type="submit" name="action" id="action" value="delete">
+
+        </form>
+        
+    </div>
+    
+
+    
+    <script>
+        // Funkcija za potrjevanje (DELETE) gumba pri povezavah
+        function confirmDelete(event) {
+            // Preveri, kateri gumb je bil kliknjen
+            const clickedButton = event.submitter;
+
+            if (clickedButton && clickedButton.value === "delete") {
+                return confirm("Ali ste prepričani, da želite izbrisati povezavo?");
+            }
+
+            return true; // Dovoli oddajo za druge gumbe
+        }
+    </script>
+
+    <script>
+        // Funkcija za dodajanje vrednosti obrazca povezav
+        function populateForm(select) {
+            const selectedOption = select.options[select.selectedIndex];
+
+            // Fill in the form fields
+            document.getElementById('id').value = selectedOption.value;
+            document.getElementById('title').value = selectedOption.getAttribute('data-title');
+            document.getElementById('url').value = selectedOption.getAttribute('data-url');
+        }
+    </script>
+
 
     <script>
     document.getElementById('disciplineForm').addEventListener('submit', function(e) {
@@ -321,7 +405,7 @@
     });
     </script>
 
-    
+
 
     <script>
         Dropzone.autoDiscover = false;
