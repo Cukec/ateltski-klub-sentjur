@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_in'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,9 +36,15 @@
             width: fit-content;
         }
     </style>
+    <?php include "../../navigation.php"; include "../../config.php" ?>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/css/elfinder.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/css/theme.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/js/elfinder.min.js"></script>
+
 </head>
 <header>
-<?php include "../../navigation.php"; include "../../config.php" ?>
+
 
 <!-- Place the first <script> tag in your HTML's <head> -->
 <script src="https://cdn.tiny.cloud/1/u336cycduxe8y6tqewtt8ylyrx1zi5rlqauhgtozzsx80cg9/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
@@ -362,7 +376,15 @@
         </form>
         
     </div>
-    
+
+    <!-- DOKUMENTI div-->
+    <div id="dokumenti" class="contentDiv">
+
+        <div class="iframe-container">
+            <iframe src="filegator/index.php" style="width:100%; height: 700px;"></iframe>
+        </div>
+        
+    </div>
 
     
     <script>
