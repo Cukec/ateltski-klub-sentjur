@@ -386,7 +386,37 @@ if (!isset($_SESSION['logged_in'])) {
         
     </div>
 
+
+    <!-- VODSTVO div-->
+    <div id="vodstvo" class="contentDiv">
+
+        <table id="teamTable" class="display-table">
+            <thead>
+                <tr>
+                <th>Ime</th>
+                <th>Priimek</th>
+                <th>Funkcija</th>
+                <th>Iizpis</th>
+                <th>Operacije</th>
+                </tr>
+            </thead>
+            <tbody id="teamBody">
+                <!-- Filled by JS from DB -->
+            </tbody>
+        </table>
+        
+        <form id="addForm" onsubmit="submitAddForm(event)" style="margin-bottom: 1em;">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="surname" placeholder="Surname" required>
+            <input type="text" name="function" placeholder="Function" required>
+            <button type="submit">Add Member</button>
+        </form>
+
+        <script src="vodstvo.js"></script>
+
+    </div>
     
+
     <script>
         // Funkcija za potrjevanje (DELETE) gumba pri povezavah
         function confirmDelete(event) {
