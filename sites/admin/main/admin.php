@@ -415,6 +415,40 @@ if (!isset($_SESSION['logged_in'])) {
         <script src="vodstvo.js"></script>
 
     </div>
+
+    <!-- STATIČNE STRANI div-->
+    <div class="contentDiv" id="staticne">
+
+        <form action="staticne-actions.php" method="POST">
+
+            <select name="static" id="static">
+            <?php
+            
+            $sql = "SELECT * FROM page_content";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            while($row = $result->fetch_assoc()){
+
+                ?>
+                
+                    <option value="<?php echo $row['id'] ?>"><?php echo $row['title'] ?></option>
+                
+                <?php
+
+            }
+            
+            ?>
+            </select>
+
+            <input type="submit" id="action" name="action" value="uredi">
+
+        </form>
+
+    </div>
     
 
     <script>
