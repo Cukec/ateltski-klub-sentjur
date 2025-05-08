@@ -14,6 +14,7 @@
 
         $id = isset($_POST['static']) ? $_POST['static'] : 0;
 
+
         if($id > 0){
 
             $sql = "SELECT * FROM page_content WHERE id=?";
@@ -43,7 +44,7 @@
 
             <form action="save-static.php" method="POST">
 
-                <input type="text" name="id" id="id" hidden>
+                <input type="text" name="id" id="id" value="<?php echo $id ?>"hidden>
 
                 <label for="section_1">1. Odstavek:</label><br>
                 <textarea name="section_1" id="section_1" style="resize: none; height:10vh; width: 20%"><?php echo $section1 ?></textarea><br>

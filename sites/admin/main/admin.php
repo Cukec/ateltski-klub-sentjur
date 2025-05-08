@@ -108,9 +108,9 @@ if (!isset($_SESSION['logged_in'])) {
             ?>
         </select>
 
-            <button type="submit" name="action" value="save">Save</button>
-            <button type="submit" name="action" value="change">Change</button>
-            <button type="submit" name="action" value="delete">Delete</button>
+            <button type="submit" name="action" value="save">Dodaj</button>
+            <button type="submit" name="action" value="change">Spremeni</button>
+            <button type="submit" name="action" value="delete">Izbriši</button>
         
         </form>
     </div>
@@ -134,9 +134,9 @@ if (!isset($_SESSION['logged_in'])) {
             ?>
         </select>
 
-            <button type="submit" name="action" value="save">Save</button>
-            <button type="submit" name="action" value="change">Change</button>
-            <button type="submit" name="action" value="delete">Delete</button>
+            <button type="submit" name="action" value="save">Dodaj</button>
+            <button type="submit" name="action" value="change">Spremeni</button>
+            <button type="submit" name="action" value="delete">Izbriši</button>
         
         </form>
     </div>
@@ -166,9 +166,9 @@ if (!isset($_SESSION['logged_in'])) {
 
         </select>
 
-            <button type="submit" name="action" value="save">Save</button>
-            <button type="submit" name="action" value="change">Change</button>
-            <button type="submit" name="action" value="delete">Delete</button>
+            <button type="submit" name="action" value="save">Dodaj</button>
+            <button type="submit" name="action" value="change">Spremeni</button>
+            <button type="submit" name="action" value="delete">Izbriši</button>
         
         </form>
     </div>
@@ -194,16 +194,16 @@ if (!isset($_SESSION['logged_in'])) {
                 ?>
             </select>
 
-            <button type="submit" name="action" value="save">Save</button>
-            <button type="submit" name="action" value="change">Change</button>
-            <button type="submit" name="action" value="delete">Delete</button>
+            <button type="submit" name="action" value="save">Dodaj</button>
+            <button type="submit" name="action" value="change">Spremeni</button>
+            <button type="submit" name="action" value="delete">Izbriši</button>
         
         </form>
     </div>
 
     <!-- DOSEŽKI div -->
     <div id="dosezki" class="contentDiv">
-    <a href="add-accom.php">Dodaj nov dogodek</a>
+    <a id="addLink" href="add-accom.php">Dodaj nov dogodek</a>
 
     <table>
         <thead>
@@ -267,9 +267,9 @@ if (!isset($_SESSION['logged_in'])) {
             ?>
             </select>
 
-            <button type="submit" name="action" value="save">Save</button>
-            <button type="submit" name="action" value="change">Change</button>
-            <button type="submit" name="action" value="delete" id="deleteBtn">Delete</button>
+            <button type="submit" name="action" value="save">Dodaj</button>
+            <button type="submit" name="action" value="change">Spremeni</button>
+            <button type="submit" name="action" value="delete" id="deleteBtn">Izbriši</button>
 
         </form>
     </div>
@@ -319,9 +319,9 @@ if (!isset($_SESSION['logged_in'])) {
             ?>
             </select>
 
-            <button type="submit" name="action" value="save">Save</button>
-            <button type="submit" name="action" value="change">Change</button>
-            <button type="submit" name="action" value="delete" id="deleteBtn">Delete</button>
+            <button type="submit" name="action" value="save">Dodaj</button>
+            <button type="submit" name="action" value="change">Spremeni</button>
+            <button type="submit" name="action" value="delete" id="deleteBtn">Izbriši</button>
 
         </form>
     </div>
@@ -369,9 +369,9 @@ if (!isset($_SESSION['logged_in'])) {
             <label for="url">povezava: </label>
             <input type="text" name="url" id="url" value=""><br>
 
-            <input type="submit" name="action" id="action" value="save">
-            <input type="submit" name="action" id="action" value="change">
-            <input type="submit" name="action" id="action" value="delete">
+            <input type="submit" name="action" id="action" value="dodaj">
+            <input type="submit" name="action" id="action" value="spremeni">
+            <input type="submit" name="action" id="action" value="izbriši">
 
         </form>
         
@@ -381,7 +381,7 @@ if (!isset($_SESSION['logged_in'])) {
     <div id="dokumenti" class="contentDiv">
 
         <div class="iframe-container">
-            <iframe src="filegator/index.php" style="width:100%; height: 700px;"></iframe>
+            <iframe src="filegator/index.php" scrolling="no" style="width:100%; height: 700px;"></iframe>
         </div>
         
     </div>
@@ -409,7 +409,7 @@ if (!isset($_SESSION['logged_in'])) {
             <input type="text" name="name" placeholder="Name" required>
             <input type="text" name="surname" placeholder="Surname" required>
             <input type="text" name="function" placeholder="Function" required>
-            <button type="submit">Add Member</button>
+            <button type="submit" value="">Dodaj osebo</button>
         </form>
 
         <script src="vodstvo.js"></script>
@@ -444,7 +444,7 @@ if (!isset($_SESSION['logged_in'])) {
             ?>
             </select>
 
-            <input type="submit" id="action" name="action" value="uredi">
+            <input type="submit" id="action" name="action" value="spremeni">
 
         </form>
 
@@ -586,10 +586,10 @@ function fetchAccomplishments() {
                 tr.innerHTML = `
                     <td>
                         <a href="save-accom.php?id=${row.id}">
-                            <img src="../../../assets/change.svg" alt="" width="20%" height="20%">
+                            ✏️ 
                         </a> | 
                         <a href="delete-accom.php?id=${row.id}" onclick="return confirmDeleteAccom(${row.id});">
-                            <img src="../../../assets/delete.svg" alt="Delete" width="20%" height="20%">
+                            🗑️
                         </a>
                     </td>
                     <td>${row.date}</td>
@@ -651,6 +651,6 @@ function confirmDeleteAccom(id) {
     }
 }
 </script>
-<?php include"../../footer.php" ?>
+<?php //include"../../footer.php" ?>
 </body>
 </html>

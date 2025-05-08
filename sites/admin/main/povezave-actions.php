@@ -4,7 +4,7 @@ include("../../config.php");
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'])) {
 
-    if ($_POST['action'] == "save") {
+    if ($_POST['action'] == "dodaj") {
 
         $title = isset($_POST['title']) ? trim($_POST['title']) : '';
         $url = isset($_POST['url']) ? trim($_POST['url']) : '';
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'])) {
             echo "<script>alert('Napaka pri dodajanju povezave'); window.location.href = document.referrer;</script>";
         }
 
-    } else if ($_POST['action'] == "change") {
+    } else if ($_POST['action'] == "spremeni") {
 
         $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
         $title = isset($_POST['title']) ? trim($_POST['title']) : '';
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'])) {
             }
         }
 
-    } else if ($_POST['action'] == "delete") {
+    } else if ($_POST['action'] == "izbriši") {
 
         $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
 
