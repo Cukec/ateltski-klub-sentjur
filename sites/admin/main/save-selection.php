@@ -2,6 +2,9 @@
 
 include("../../config.php");
 
+$msgs = [];
+$error = "false";
+
 $title = isset($_POST['title']) ? trim($_POST['title']) : '';
 $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 
@@ -15,11 +18,14 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("si", $title, $id);
 
 if ($stmt->execute()) {
-    echo "USPEŠNO posodabljanje selekcije!";
+    $msgs[] = "Uspešno posodabljanje selekcije!";
 } else {
-    echo "NAPAKA pri posodabljanju selekcije!";
+    $msgs[] = "Napaka pri posodabljanju selekcije!";
 }
 
 $conn->close();
+
+$status_msg = implode(" ", $msgs);
+header("location: admin.php?status_msg=" . urlencode($status_msg) . "&error=" . urlencode($error));
 
 ?>

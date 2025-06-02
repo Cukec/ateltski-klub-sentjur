@@ -2,6 +2,9 @@
 
 include('../../config.php');
 
+$msgs = [];
+$error = "false";
+
 // Get the current highest value
 $query = "SELECT MAX(num_out) AS max_num_out FROM discipline";
 $result = mysqli_query($conn, $query);
@@ -21,12 +24,15 @@ if (empty($title)) {
 
 if($stmt->execute()){
 
-    echo "USPEŠNO dodajanje nove discipline.";
+    $msgs[] = "Uspešno dodajanje nove discipline!";
 
 }else{
 
-    echo "NAPAKA pri dodajanju nove discipline.";
+    $msgs[] = "Napaka pri dodajanju nove discipline!";
     
 }
+
+$status_msg = implode(" ", $msgs);
+header("location: admin.php?status_msg=" . urlencode($status_msg) . "&error=" . urlencode($error));
 
 ?>

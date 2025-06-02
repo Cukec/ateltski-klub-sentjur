@@ -1,6 +1,9 @@
 <?php
 include('../../config.php');
 
+$msgs = [];
+$error = "false";
+
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     // Sanitize input just to be safe
     $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
@@ -17,17 +20,21 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         if ($stmt->execute()) {
             // Redirect back with a success message
             //header("Location: staticne-actions.php?success=1");
-            echo "Uspešno posodobljena vsebina.";
-            exit();
+            $msgs[] = "Uspešno posodobljena vsebina.";
+            
         } else {
             //header("Location: staticne-actions.php?error=1");
-            echo "Napaka pri posodabljanju vsebine.";
-            exit();
+            $msgs[] = "Napaka pri posodabljanju vsebine.";
+            
         }
     } else {
         //header("Location: staticne-actions.php?error=1");
-        echo "Napaka!";
-        exit();
+        $msgs[] = "Napaka pri pridobivanju id!";
+        
     }
 }
+
+$status_msg = implode(" ", $msgs);
+header("location: admin.php?status_msg=" . urlencode($status_msg) . "&error=" . urlencode($error));
+exit();
 ?>

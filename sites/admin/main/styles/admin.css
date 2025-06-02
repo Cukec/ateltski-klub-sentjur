@@ -236,3 +236,57 @@ tbody#accomTableBody{
     overflow-y: auto;
 
 }
+
+td button{
+
+    border: none;
+    background-color: white;
+    font-size: 1.5rem;
+
+}
+
+#galerije {
+    width: 50vw;
+
+}
+
+#galerije form{
+    border: 3px dashed #ccc;
+    border-radius: 8px;
+
+}
+
+#galerije button{
+    height: 2.5rem;
+    padding: 5px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    color: white;
+
+    background-color: rgb(64, 122, 208);
+    border: 3px solid rgb(52, 99, 169);
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#galerije button:hover{
+    background-color: rgb(52, 99, 169);
+
+}
+
+#folders button{
+    background-color: #ccc;
+    color: black;
+    transition: background-color 0.3s;
+    font-weight: normal;
+    border: none;
+
+}
+
+#folders button:hover{
+    background-color: #aaaaaa;
+    color: black;
+
+}

@@ -12,9 +12,9 @@ function fetchTeam() {
               <td contenteditable onblur="updateField(${member.id}, 'function', this.innerText)">${member.function}</td>
               <td>${member.display_order}</td>
               <td>
-                <button onclick="moveUp(${member.id})">↑</button>
-                <button onclick="moveDown(${member.id})">↓</button>
-                <button onclick="deleteMember(${member.id})">🗑</button>
+                <button onclick="moveUp(${member.id})">🔼</button>
+                <button onclick="moveDown(${member.id})">🔽</button>
+                <button onclick="deleteMember(${member.id})"> 🗑️</button>
               </td>
             </tr>`;
         });

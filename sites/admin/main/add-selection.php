@@ -2,6 +2,9 @@
 
 include("../../config.php");
 
+$msgs = [];
+$error = "false";
+
 $title = isset($_POST['title']) ? trim($_POST['title']) : '';
 
 if (empty($title)) {
@@ -14,11 +17,14 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $title);
 
 if ($stmt->execute()) {
-    echo "USPEŠNO dodajanje nove selekcije!";
+    $msgs[] = "Uspešno dodajanje nove selekcije!";
 } else {
-    echo "NAPAKA pri dodajanju nove selekcije!";
+    $msgs[] = "Napaka pri dodajanju nove selekcije!";
 }
 
 $conn->close();
+
+$status_msg = implode(" ", $msgs);
+header("location: admin.php?status_msg=" . urlencode($status_msg) . "&error=" . urlencode($error));
 
 ?>

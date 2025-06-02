@@ -1,11 +1,13 @@
 <?php
-session_start();
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user = $_POST['username'] ?? '';
-    $pass = $_POST['password'] ?? '';
+require_once '../../config.php';
 
-    if ($user === 'admin' && $pass === 'yourpassword') {
-        $_SESSION['logged_in'] = true;
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if (authenticate($username, $password)) {
         header("Location: admin.php");
         exit;
     } else {

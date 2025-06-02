@@ -10,6 +10,9 @@ if(isset($_POST)){
         $data = htmlspecialchars($data);      
         return $conn->real_escape_string($data); 
     }
+
+    $msgs = [];
+    $error = "false";
     
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -71,9 +74,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
     imagedestroy($src);
     imagedestroy($dst);
 
-    echo "Slika uspešno naložena, preoblikovana na 100x120 in prepisana.<br>";
+    $msgs[] = "Uspešno nalaganje slike, preoblikovana na 100x120 in prepisana.";
 } else {
-    echo "Slika ni bila naložena ali je prišlo do napake.<br>";
+    $msgs[] = "(opozorilo) Slika ni bila naložena ali je prišlo do napake.<br>";
 }
 
 
@@ -87,9 +90,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
     
         // Execute the statement
         if ($stmt->execute()) {
-            echo "Uspešna posodobitev podatkov osebe!<br>";
+            $msgs[] = "Uspešna posodobitev podatkov osebe!";
         } else {
-            echo "Error: " . $stmt->error . "<br>";
+            $msgs[] = "Napaka pri posodabljanju podatkov osebe! Poskusite znova...";
         }
     
         // Close connections
@@ -123,9 +126,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         
             // Execute the insert statement
             if ($stmt_insert->execute()) {
-                echo "New athlete record inserted successfully! <br>";
+                $msgs[] = "Uspešno dodajanje atleta!";
             } else {
-                echo "Error: " . $stmt_insert->error . '<br>';
+                $msgs[] = "Napaka pri dodajanju atleta! Poskusite znova...";
             }
         
             // Close insert statement
@@ -140,9 +143,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $stmt_update->bind_param("iii", $active, $registered, $id_people);
         
             if ($stmt_update->execute()) {
-                echo "Athlete record updated successfully! <br>";
+                $msgs[] =  "Uspešno posodabljanje vsebine atleta!";
             } else {
-                echo "Error: " . $stmt_update->error . '<br>';
+                $msgs[] = "Napaka pri posodabljanju vsebine atleta! Poskusite znova...";
             }
         
             // Close update statement
@@ -150,7 +153,14 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         }
         
 
-        
+        $stmt_get_id = $conn->prepare("SELECT id FROM athlete WHERE id_people = ?");
+        $stmt_get_id->bind_param("i", $id_people);
+        $stmt_get_id->execute();
+        $stmt_get_id->bind_result($id_athlete);
+        $stmt_get_id->fetch();
+        $stmt_get_id->close();
+
+
         
 
         if (!empty($_POST['discipline'])) {
@@ -171,12 +181,12 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 if ($count == 0) { // If no existing record, insert new one
                     $stmt_insert->bind_param("ii", $id_athlete, $sanitized_discipline);
                     if ($stmt_insert->execute()) {
-                        echo "Uspešen vnos discipline atleta: " . $sanitized_discipline . "<br>";
+                        $msgs[] = "Uspešen vnos discipline atleta: (id discipline) -> " . $sanitized_discipline;
                     } else {
-                        echo "Napaka pri vnosu discipline atleta: " . $sanitized_discipline . "<br>";
+                        $msgs[] = "Napaka pri vnosu discipline atleta: (id discipline) -> " . $sanitized_discipline;
                     }
                 } else {
-                    echo "Disciplina '" . $sanitized_discipline . "' je že povezana z atletom.<br>";
+                    $msgs[] =  "(opozorilo) Disciplina (id discipline) -> " . $sanitized_discipline . " je že povezana z atletom.";
                 }
 
                 $stmt_check->free_result(); // ✅ Free result to avoid sync issues
@@ -191,7 +201,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 
         if (!empty($_POST['selection'])) {
             $stmt_check = $conn->prepare("SELECT COUNT(*) FROM athlete_selection WHERE id_athlete = ? AND id_selection = ?");
-            $stmt_insert = $conn->prepare("INSERT INTO athlete_selection (id_athlete, id_selection) VALUES (?, ?)");
+            $stmt_insert_selection = $conn->prepare("INSERT INTO athlete_selection (id_athlete, id_selection) VALUES (?, ?)");
 
             foreach ($_POST['selection'] as $selection) {
                 $sanitized_selection = htmlspecialchars($selection);
@@ -199,27 +209,30 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 // Check if the selection already exists for the athlete
                 $stmt_check->bind_param("ii", $id_athlete, $sanitized_selection);
                 $stmt_check->execute();
+                $stmt_check->store_result();  // <<<<< ADD THIS LINE
                 $stmt_check->bind_result($count);
-                $stmt_check->fetch();  // Fetch result to store count value
+                $stmt_check->fetch();
 
                 if ($count == 0) { // If no existing record, insert new one
-                    $stmt_insert->bind_param("ii", $id_athlete, $sanitized_selection);
-                    if ($stmt_insert->execute()) {
-                        echo "Uspešen vnos izbora atleta: " . $sanitized_selection . "<br>";
+                    $stmt_insert_selection->bind_param("ii", $id_athlete, $sanitized_selection);
+                    if ($stmt_insert_selection->execute()) {
+                        $msgs[] = "Uspešen vnos izbora atleta: (id selekcije) -> " . $sanitized_selection;
                     } else {
-                        echo "Napaka pri vnosu izbora atleta: " . $sanitized_selection . "<br>";
+                        $msgs[] = "Napaka pri vnosu izbora atleta: (id selekcije) -> " . $sanitized_selection;
                     }
                 } else {
-                    echo "Izbor '" . $sanitized_selection . "' je že povezan z atletom.<br>";
+                    $msgs[] = "(opozorilo) Izbor (id selekcije)" . $sanitized_selection . " je že povezan z atletom.";
                 }
 
                 // Clear results of the SELECT statement after use to prevent "commands out of sync"
-                $stmt_check->free_result(); // Free the result set before reusing the statement for the next loop iteration
+                $stmt_check->free_result();
             }
 
             // Close statements after finishing the loop
             $stmt_check->close();
-            $stmt_insert->close();
+            $stmt_insert_selection->close();
+        }
+
 
 
 
@@ -228,7 +241,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 
     }else{
 
-        echo "Napak pri vnosu podatkov!<br>";
+        $msgs[] = "(opozorilo) Podatki za atleta niso bili vnešeni!";
 
     }
 
@@ -256,9 +269,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $stmt_update->bind_param("sssi", $mail, $tel, $location, $id_people);
 
             if ($stmt_update->execute()) {
-                echo "Uspešen vnos trenerja (posodobljeno)<br>";
+                $msgs[] = "Uspešen vnos trenerja (posodobljeno)!";
             } else {
-                echo "Napaka pri posodobitvi trenerja: " . $stmt_update->error . "<br>";
+                $msgs[] = "Napaka pri posodobitvi trenerja!";
             }
 
             $stmt_update->close();
@@ -271,9 +284,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $stmt_insert->bind_param("isss", $id_people, $mail, $tel, $location);
 
             if ($stmt_insert->execute()) {
-                echo "Uspešen vnos trenerja (dodano novo)<br>";
+                $msgs[] = "Uspešen vnos trenerja (dodano novo)!";
             } else {
-                echo "Napaka pri vnosu trenerja: " . $stmt_insert->error . "<br>";
+                $msgs[] = "Napaka pri vnosu trenerja!";
             }
 
             $stmt_insert->close();
@@ -286,7 +299,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 
     }else{
 
-        echo "Napaka pri vnosu podatkov!<br>";
+        $msgs[] = "(opozorilo) Podatki trenerja niso bili vnešeni!";
 
     }
 
@@ -308,9 +321,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $stmt_update->bind_param("ii", $id_people, $id_people);
 
             if ($stmt_update->execute()) {
-                echo "Uspešen vnos sodnika (posodobljeno)<br>";
+                $msgs[] = "Uspešen vnos sodnika (posodobljeno)";
             } else {
-                echo "Napaka pri posodobitvi sodnika: " . $stmt_update->error . "<br>";
+                $msgs[] = "Napaka pri posodobitvi sodnika!";
             }
 
             $stmt_update->close();
@@ -323,9 +336,9 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $stmt_insert->bind_param("i", $id_people);
 
             if ($stmt_insert->execute()) {
-                echo "Uspešen vnos sodnika (dodano novo)<br>";
+                $msgs[] = "Uspešen vnos sodnika (dodano novo)";
             } else {
-                echo "Napaka pri vnosu sodnika: " . $stmt_insert->error . "<br>";
+                $msgs[] = "Napaka pri vnosu sodnika!";
             }
 
             $stmt_insert->close();
@@ -337,10 +350,11 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 
     }else{
 
-        echo "Napaka pri vnosu podatkov!<br>";
+        $msgs = "(opozorilo) Podatki sodnika niso bili vnešeni!";
 
     }
 
-}
+$status_msg = implode(" ", $msgs);
+header("location: admin.php?status_msg=" . urlencode($status_msg) . "&error=" . urlencode($error));
 
 ?>

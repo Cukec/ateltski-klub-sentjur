@@ -2,6 +2,9 @@
 
 include('../../config.php');
 
+$msgs = [];
+$error = "false";
+
 $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 $title = isset($_POST['title']) ? trim($_POST['title']) : '';
 $type = isset($_POST['type']) ? (int)$_POST['type'] : 0;
@@ -14,11 +17,15 @@ $stmt = $conn->prepare("UPDATE discipline SET title = ?, type = ? WHERE id = ?")
 $stmt->bind_param("sii", $title, $type, $id);
 
 if ($stmt->execute()) {
-    echo "USPEŠNO posodobljena disciplina.";
+    $msgs[] = "Uspešno posodobljena disciplina!";
 } else {
-    echo "NAPAKA pri posodabljanju discipline: " . $stmt->error;
+    $msgs[] = "Napaka pri posodabljanju discipline!";
 }
 
 $stmt->close();
 $conn->close();
+
+$status_msg = implode(" ", $msgs);
+header("location: admin.php?status_msg=" . urlencode($status_msg) . "&error=" . urlencode($error));
+
 ?>

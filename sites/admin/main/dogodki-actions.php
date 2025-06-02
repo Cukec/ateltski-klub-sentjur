@@ -1,8 +1,54 @@
+<?php
+
+include("../../config.php");
+
+$msg = "";
+$error = "false";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
+    $action = $_POST['action'];
+    $id = isset($_POST['news']) ? (int)$_POST['news'] : 0; // Selected news ID
+
+    if ($action === "delete" && $id > 0) {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            if ($id > 0) {
+                $stmt = $conn->prepare("DELETE FROM events WHERE id = ?");
+                $stmt->bind_param("i", $id);
+                    
+                if ($stmt->execute()) {
+                    //echo "Dogodek uspešno izbrisan!";
+                    $msg = "Uspešno brisanje vsebine!";
+
+                }else {
+                    //echo "Napaka pri brisanju dogodka: " . $stmt->error;
+                    $msg = "Napaka pri bridanju vsebine! Poskusite znova...";
+                    $error = "true";
+                }
+            
+                $stmt->close();
+            } else {
+                //echo "Napaka: Neveljaven ID dagodka.";
+                $msg = "Napaka pri bridanju vsebine! Poskusite znova...";
+                $error = "true";
+            }
+        }
+
+        header("location: admin.php?status_msg=" . urlencode($msg) . "&error=" . urlencode($error));
+        exit;
+
+    }
+} 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/secondary.css">
     <title>Document</title>
 </head>
 <header>
@@ -26,8 +72,6 @@
     });
     </script>
 
-    <?php include("../../config.php"); ?>
-
 </header>
 <body>
     
@@ -39,33 +83,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
 
     if ($action === "save") {
         
-        //FORM za dodajanje novice
+        //FORM za dodajanje dogodka
         ?>
         
         <form action="add-event.php" method="POST">
-            <label for="title">Naslov:</label>
-            <input type="text" name="title" id="title" placeholder="Naslov" >
+            <div class="form-div">
+                <div class="title">
+                    <h2>Dodajate dogodek</h2>
+                    <a href="admin.php">⮨ nazaj</a>
+                </div>
 
-            <label for="place">Kraj:</label>
-            <input type="text" name="location" id="location" placeholder="Kraj dogodka" >
+                <input type="text" name="title" id="title" placeholder="Naslov">
+                
+                <input type="text" name="location" id="location" placeholder="Kraj dogodka">
 
-            <label for="date_start">Začetek:</label>
-            <input type="date" name="date_start" id="date_start">
+                <select name="type">
+                    <option value="1">Tekmovanje</option>
+                    <option value="2">Dogodek</option>
+                </select>
+                
+                <label for="date_start">Začetek</label>
+                <input class="custom-date" type="date" name="date_start" id="date_start">
+                
+                <label for="date_end">Konec</label>
+                <input class="custom-date" type="date" name="date_end" id="date_end">
+                
+                <textarea name="content" id="content" ></textarea>
 
-            <label for="date_end">Konec:</label>
-            <input type="date" name="date_end" id="date_end">
+                <button type="submit">Dodaj</button>
 
-            <label for="content">Vsebina:</label>
-            <textarea name="content" id="content" ></textarea>
-
-            <label for="shown">Tip:</label>
-            <select name="type">
-                <option value="1">Tekovanje</option>
-                <option value="2">Dogodek</option>
-            </select>
-
-
-            <button type="submit">Dodaj</button>
+                <div class="info">
+                    <i>🛈 polj NASLOV in VSEBINA ne puščajte praznih, drugače bo prišlo do napčnih podatkov v bazi.</i>
+                </div>
+            </div>
         </form>
 
         
@@ -88,56 +138,42 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
         ?>
         
         <form action="save-event.php" method="POST">
-            <input type="hidden" name="id" value="<?= $id ?>"> <!-- Hidden field for ID -->
+            <div class="form-div">
+                <div class="title">
+                    <h2>Spreminjate dogodek</h2>
+                    <a href="admin.php">⮨ nazaj</a>
+                </div>
 
-            <label for="title">Naslov:</label>
-            <input type="text" name="title" id="title" placeholder="Naslov" value="<?= $event['title'] ?>">
+                <input type="hidden" name="id" value="<?= $id ?>"> <!-- Hidden field for ID -->
 
-            <label for="title">Kraj:</label>
-            <input type="text" name="location" id="location" placeholder="Kraj" value="<?= $event['location'] ?>">
+                <input type="text" name="title" id="title" placeholder="Naslov" value="<?= $event['title'] ?>">
 
-            <label for="date_start">Začetek:</label>
-            <input type="date" name="date_start" id="date_start" value="<?= $event['date_start'] ?>" >
 
-            <label for="date_end">Konec:</label>
-            <input type="date" name="date_end" id="date_end" value="<?= $event['date_end'] ?>">
+                <input type="text" name="location" id="location" placeholder="Kraj" value="<?= $event['location'] ?>">
 
-            <label for="content">Vsebina:</label>
-            <textarea name="content" id="content"><?= $event['content'] ?></textarea>
+                <select name="type">
+                    <option value="1" <?= $event['type'] == 1 ? 'selected' : '' ?>>Tekmovanje</option>
+                    <option value="2" <?= $event['type'] == 2 ? 'selected' : '' ?>>Dogodek</option>
+                </select>
 
-            <label for="type">Tip:</label>
-            <select name="type">
-                <option value="1" <?= $event['type'] == 1 ? 'selected' : '' ?>>Tekovanje</option>
-                <option value="2" <?= $event['type'] == 2 ? 'selected' : '' ?>>Dogodek</option>
-            </select>
+                <label for="date_start">Začetek</label>
+                <input class="custom-date" type="date" name="date_start" id="date_start" value="<?= $event['date_start'] ?>" >
 
-            <button type="submit">Shrani</button>
+                <label for="date_end">Konec</label>
+                <input class="custom-date" type="date" name="date_end" id="date_end" value="<?= $event['date_end'] ?>">
+
+                <textarea name="content" id="content"><?= $event['content'] ?></textarea>
+
+                <button type="submit">Shrani</button>
+
+                <div class="info">
+                    <i>🛈 polj NASLOV, KRAJ in VSEBINA ne puščajte praznih, drugače bo prišlo do napčnih podatkov v bazi.</i>
+                </div>
+            </div>
         </form>
         
         <?php
         
-
-
-    } elseif ($action === "delete" && $id > 0) {
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-            if ($id > 0) {
-                $stmt = $conn->prepare("DELETE FROM events WHERE id = ?");
-                $stmt->bind_param("i", $id);
-                
-                if ($stmt->execute()) {
-                    echo "Dogodek uspešno izbrisan!";
-                } else {
-                    echo "Napaka pri brisanju dogodka: " . $stmt->error;
-                }
-        
-                $stmt->close();
-            } else {
-                echo "Napaka: Neveljaven ID dagodka.";
-            }
-        }
-
     } else {
         echo "Invalid request!";
     }

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vnos novega dosežka</title>
+    <title>AK Šentjur - Vnos dosežka</title>
+    <link rel="stylesheet" href="styles/secondary.css">
 </head>
 <header>
     <?php
@@ -13,122 +14,129 @@
     ?>
 </header>
 <body>
+    <div class="title">
+        <h2>Dodajate dosežek</h2>
+        <a href="admin.php">⮨ nazaj</a>
+    </div>
     <form method="POST" action="dodaj-dosezek.php">
         
-        <h3>Prikazovanje</h3>
-        <label for="tablica">Tablica</label>
-        <input type="checkbox" name="tablica" id="tablica"></input><br>
+        <div class="form-div">
+            <h3>Prikazovanje</h3>
+            
+            <input type="checkbox" name="tablica" id="tablica"></input>
+            <label class="check-label" for="tablica">Tablica</label><br>
 
-        <label for="club_acc">Dosežek kluba</label>
-        <input type="checkbox" name="club_acc" id="club_acc"></input>
+            <input type="checkbox" name="club_acc" id="club_acc"></input>
+            <label class="check-label" for="club_acc">Dosežek kluba</label><br>
 
-        <h3>Podatki dosežka</h3>
-        <label for="date">Datum:</label><br>
-        <input type="date" name="date" id="date"><br>
-        <label for="description">Kratek opis:</label><br>
-        <textarea name="description" id="description"></textarea><br>
-        <label for="location">Lokacija:</label><br>
-        <input type="text" name="location" id="location">
+            <h3>Podatki dosežka</h3>
+            <label for="date">Datum:</label><br>
+            <input type="date" name="date" id="date"><br>
+            <label for="description">Kratek opis:</label><br>
+            <textarea name="description" id="description"></textarea><br>
+            <label for="location">Lokacija:</label><br>
+            <input type="text" name="location" id="location">
 
-        <h3>Podatki za tablice <i style="color:lightgray;">(opcijsko)</i></h3>
-        <select name="people" id="people">
-            <option disabled>-- Ljudje --</option>
-            <?php
-                // Fetch all individuals (those with a first name)
-                $stmt = $conn->prepare("SELECT id, CONCAT(surname, ' ', name) AS fullname 
-                                        FROM people 
-                                        WHERE name IS NOT NULL AND name != '' ORDER BY fullname");
-                $stmt->execute();
-                $peopleResult = $stmt->get_result();
+            <h3>Podatki za tablice <i style="color:lightgray;">(opcijsko)</i></h3>
+            <select name="people" id="people">
+                <option disabled>-- Ljudje --</option>
+                <?php
+                    // Fetch all individuals (those with a first name)
+                    $stmt = $conn->prepare("SELECT id, CONCAT(surname, ' ', name) AS fullname 
+                                            FROM people 
+                                            WHERE name IS NOT NULL AND name != '' ORDER BY fullname");
+                    $stmt->execute();
+                    $peopleResult = $stmt->get_result();
 
-                if ($peopleResult->num_rows > 0) {
-                    while ($person = $peopleResult->fetch_assoc()) {
-                        $selected = ($person['id'] == $id_people) ? "selected" : "";
-                        echo "<option value='{$person['id']}' $selected>{$person['fullname']}</option>";
+                    if ($peopleResult->num_rows > 0) {
+                        while ($person = $peopleResult->fetch_assoc()) {
+                            $selected = ($person['id'] == $id_people) ? "selected" : "";
+                            echo "<option value='{$person['id']}' $selected>{$person['fullname']}</option>";
+                        }
+                    } else {
+                        echo "<option disabled>Ni posameznikov</option>";
                     }
-                } else {
-                    echo "<option disabled>Ni posameznikov</option>";
-                }
-            ?>
+                ?>
 
-            <option disabled>-- Štafete --</option>
-            <?php
-                // Fetch all relays (those without a first name)
-                $stmt = $conn->prepare("SELECT id, surname AS fullname FROM people WHERE name IS NULL OR name = ''");
-                $stmt->execute();
-                $relayResult = $stmt->get_result();
+                <option disabled>-- Štafete --</option>
+                <?php
+                    // Fetch all relays (those without a first name)
+                    $stmt = $conn->prepare("SELECT id, surname AS fullname FROM people WHERE name IS NULL OR name = ''");
+                    $stmt->execute();
+                    $relayResult = $stmt->get_result();
 
-                if ($relayResult->num_rows > 0) {
-                    while ($relay = $relayResult->fetch_assoc()) {
-                        $selected = ($relay['id'] == $id_people) ? "selected" : "";
-                        echo "<option value='{$relay['id']}' $selected>{$relay['fullname']}</option>";
+                    if ($relayResult->num_rows > 0) {
+                        while ($relay = $relayResult->fetch_assoc()) {
+                            $selected = ($relay['id'] == $id_people) ? "selected" : "";
+                            echo "<option value='{$relay['id']}' $selected>{$relay['fullname']}</option>";
+                        }
+                    } else {
+                        echo "<option disabled>Ni štafet</option>";
                     }
-                } else {
-                    echo "<option disabled>Ni štafet</option>";
+                ?>
+            </select>
+
+            <select name="selection" id="selection">
+                <option disabled selected>-- Selekcija --</option>
+                <?php
+                    $stmt = $conn->prepare("SELECT id, title FROM selection");
+                    $stmt->execute();
+                    $selectionResult = $stmt->get_result();
+                    
+                    while ($selection = $selectionResult->fetch_assoc()) {
+                        echo "<option value='{$selection['id']}'>{$selection['title']}</option>";
+                    }
+                ?>
+            </select>
+
+            <select name="discipline" id="discipline" onchange="updateInputs()">
+                <option disabled selected>-- Disciplina --</option>
+                <?php
+                    $stmt = $conn->prepare("SELECT id, title FROM discipline");
+                    $stmt->execute();
+                    $disciplineResult = $stmt->get_result();
+                    
+                    while ($discipline = $disciplineResult->fetch_assoc()) {
+                        echo "<option value='{$discipline['id']}'>{$discipline['title']}</option>";
+                    }
+                ?>
+            </select>
+
+            <h3>Izberite vrsto vnosa</h3>
+            <select name="tip" id="tip" onchange="updateVisibility()">
+                <option value="" disabled selected>-- Izberite tip --</option>
+                <option value="2">Tehnična</option>
+                <option value="1">Tek</option>
+            </select>
+
+            <div class="discipline-inputs" id="technical" style="display: none;">
+                <input type="text" name="meters"> <p>m</p>
+                <input type="text" name="cm"> <p>cm</p>
+            </div>
+
+            <div class="discipline-inputs" id="run" style="display: none;">
+                <input type="text" name="minutes"> <p>min</p>
+                <input type="text" name="seconds"> <p>sec</p>
+                <input type="text" name="milliseconds"> <p>mili sec</p>
+            </div>
+
+            <style>
+                .discipline-inputs {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
                 }
-            ?>
-        </select>
-
-        <select name="selection" id="selection">
-            <option disabled selected>-- Selekcija --</option>
-            <?php
-                $stmt = $conn->prepare("SELECT id, title FROM selection");
-                $stmt->execute();
-                $selectionResult = $stmt->get_result();
-                
-                while ($selection = $selectionResult->fetch_assoc()) {
-                    echo "<option value='{$selection['id']}'>{$selection['title']}</option>";
+                .discipline-inputs input {
+                    width: 60px;
+                    text-align: center;
                 }
-            ?>
-        </select>
-
-        <select name="discipline" id="discipline" onchange="updateInputs()">
-            <option disabled selected>-- Disciplina --</option>
-            <?php
-                $stmt = $conn->prepare("SELECT id, title FROM discipline");
-                $stmt->execute();
-                $disciplineResult = $stmt->get_result();
-                
-                while ($discipline = $disciplineResult->fetch_assoc()) {
-                    echo "<option value='{$discipline['id']}'>{$discipline['title']}</option>";
+                .discipline-inputs p {
+                    margin: 0;
                 }
-            ?>
-        </select>
+            </style>
 
-        <h3>Izberite vrsto vnosa</h3>
-        <select name="tip" id="tip" onchange="updateVisibility()">
-            <option disabled selected>-- Izberite tip --</option>
-            <option value="2">Tehnična</option>
-            <option value="1">Tek</option>
-        </select>
-
-        <div class="discipline-inputs" id="technical" style="display: none;">
-            <input type="text" name="meters"> <p>m</p>
-            <input type="text" name="cm"> <p>cm</p>
+            <input type="submit" name="save" id="save" value="Shrani">
         </div>
-
-        <div class="discipline-inputs" id="run" style="display: none;">
-            <input type="text" name="minutes"> <p>min</p>
-            <input type="text" name="seconds"> <p>sec</p>
-            <input type="text" name="milliseconds"> <p>mili sec</p>
-        </div>
-
-        <style>
-            .discipline-inputs {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            .discipline-inputs input {
-                width: 60px;
-                text-align: center;
-            }
-            .discipline-inputs p {
-                margin: 0;
-            }
-        </style>
-
-        <input type="submit" name="save" id="save" value="Shrani">
 
         <script>
             function updateVisibility() {

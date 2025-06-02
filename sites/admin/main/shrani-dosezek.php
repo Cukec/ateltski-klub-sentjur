@@ -4,6 +4,9 @@ include("../../config.php");
 
 //var_dump($_POST);
 
+$msgs = [];
+$error = "false";
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Sanitize inputs
     function sanitize($value, $conn) {
@@ -20,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_discipline = (int) ($_POST["discipline"] ?? 0);
     $is_tablica = isset($_POST["tablica"]) ? 1 : 0;
     $is_club_acc = 0; // Default to 0 if not provided
-    $tip = (int) ($_POST["tip"] ?? 0);
+    $tip = (int) ($_POST["tip"] && $is_tablica == 1 ?? 0);
 
     // Initialize results
     $result_technical = null;
@@ -55,18 +58,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Execute the query
         if ($stmt->execute()) {
-            echo "Record updated successfully!";
+            $msgs[] = "Uspešno posodabljanje dosežka!";
         } else {
-            echo "Error: " . $stmt->error;
+            $msgs[] = "Napaka pri posodabljanju dosežka!Poskusite znova...";
         }
 
         // Close statement
         $stmt->close();
     } else {
-        echo "Invalid record ID!";
+        $msgs[] = "(opozorilo) Napačen id dosežka!Poskusite znova...";
     }
 
     // Close database connection
     $conn->close();
 }
+
+$status_msg = implode(" ", $msgs);
+header("location: admin.php?status_msg=" . urlencode($status_msg) . "&error=" . urlencode($error));
+
 ?>

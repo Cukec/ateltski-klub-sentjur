@@ -1,9 +1,11 @@
 <?php
+/*
 session_start();
 if (!isset($_SESSION['logged_in'])) {
     header("Location: login.php");
     exit;
 }
+*/
 ?>
 
 <!DOCTYPE html>
@@ -71,6 +73,76 @@ if (!isset($_SESSION['logged_in'])) {
 </header>
 <body>
     
+    <?php if (isset($_GET['status_msg'])): ?>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    const rawMsgs = <?php echo json_encode($_GET['status_msg']); ?>;
+
+    // Split by sentence or manually added separator
+    const messages = rawMsgs.split(/(?<=[.!?])\s+|<br>|;/).filter(msg => msg.trim().length > 0);
+
+    messages.forEach(msg => {
+        const trimmedMsg = msg.trim();
+        const lowerMsg = trimmedMsg.toLowerCase();
+
+        const isError = lowerMsg.includes('napaka');
+        const isWarning = lowerMsg.startsWith('(opozorilo)');
+
+        const toast = document.createElement('div');
+        toast.textContent = trimmedMsg;
+
+        // Add required classes and attributes
+        toast.classList.add('toast');
+        toast.setAttribute('data-toast', 'true');
+
+        // Styling
+        toast.style.position = 'fixed';
+        toast.style.right = '20px';
+        toast.style.backgroundColor = isError 
+            ? '#e74c3c'           // red
+            : isWarning 
+                ? '#f1c40f'       // yellow
+                : '#2ecc71';      // green
+        toast.style.color = '#fff';
+        toast.style.padding = '12px 20px';
+        toast.style.marginTop = '10px';
+        toast.style.borderRadius = '6px';
+        toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+        toast.style.zIndex = '9999';
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.5s ease';
+
+        // Offset each toast vertically if multiple
+        const existingToasts = document.querySelectorAll('div[data-toast]');
+        toast.style.bottom = `${20 + existingToasts.length * 60}px`;
+
+        // Click to dismiss
+        toast.addEventListener('click', () => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 500);
+        });
+
+        document.body.appendChild(toast);
+
+        // Animate in
+        requestAnimationFrame(() => {
+            toast.style.opacity = '1';
+        });
+
+        // Auto-dismiss after 3 seconds
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 500);
+        }, 3000);
+    });
+});
+</script>
+    <?php endif; ?>
+
+
+
+
+
     <nav class="subNav">
         <select onchange="showDiv(this.value)">
             <option value="novice">Novice</option>
@@ -91,6 +163,7 @@ if (!isset($_SESSION['logged_in'])) {
 <main>
     <!-- NOVICE div -->
     <div id="novice" class="contentDiv">
+        <h2>Izberite novico</h2>
         <form action="novice-actions.php" method="POST">
 
         <select name="news" id="news">
@@ -117,6 +190,7 @@ if (!isset($_SESSION['logged_in'])) {
     
     <!-- DOGODKI div -->
     <div id="dogodki" class="contentDiv">
+        <h2>Izberite dogodek</h2>
         <form action="dogodki-actions.php" method="POST">
 
         <select name="news" id="news">
@@ -143,6 +217,7 @@ if (!isset($_SESSION['logged_in'])) {
 
     <!-- OSEBE div -->
     <div id="osebe" class="contentDiv">
+        <h2>Izberite osebo</h2>
         <form action="osebe-actions.php" method="POST">
 
         <select name="people" id="people">
@@ -175,6 +250,7 @@ if (!isset($_SESSION['logged_in'])) {
     
     <!-- ŠTAFETE div -->
     <div id="stafete" class="contentDiv">
+        <h2>Izberite štafeto</h2>
         <form action="relay-actions.php" method="POST">
             <select name="relays" id="relays">
                 <option disabled>-- Štafete --</option>
@@ -203,7 +279,9 @@ if (!isset($_SESSION['logged_in'])) {
 
     <!-- DOSEŽKI div -->
     <div id="dosezki" class="contentDiv">
-    <a id="addLink" href="add-accom.php">Dodaj nov dogodek</a>
+    <h2>Urejate dosežke</h2>
+
+    <a id="addLink" href="add-accom.php">Dodaj nov dosežek</a>
 
     <table>
         <thead>
@@ -228,15 +306,86 @@ if (!isset($_SESSION['logged_in'])) {
 
     <!-- GALERIJA div -->
     <div id="galerije" class="contentDiv">
+        <h2>Urejate galerijo</h2>
+
         <input type="text" id="archive-name" placeholder="Enter archive name">
         <button id="upload-btn">Upload Files</button>
         <form action="test.php" class="dropzone" id="file-dropzone"></form>
 
+        <?php
+            $galleryDir = '../../../gallery/galerija/';
+            $folders = array_filter(glob($galleryDir . '*'), 'is_dir');
+        ?>
+        <h1 style="margin: 1vh 0;">Pregled arhivov</h1>
 
+        <div id="folders">
+            <?php foreach ($folders as $folderPath): 
+                $folderName = basename($folderPath);
+            ?>
+                <div class="folder" data-folder="<?= htmlspecialchars($folderName) ?>">
+                    <strong class="folder-name"><?= htmlspecialchars($folderName) ?></strong>
+                    <hr>
+                    <div class="actions">
+                        <input type="text" class="rename-input" placeholder="Novo ime">
+                        <button id="actionsBtn" onclick="renameFolder(this)">✏️ Preimenuj</button>
+                        <button id="actionsBtn" onclick="deleteFolder(this)">🗑️ Izbriši</button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <script>
+            function renameFolder(btn) {
+                const folderDiv = btn.closest('.folder');
+                const oldName = folderDiv.dataset.folder;
+                const newName = folderDiv.querySelector('.rename-input').value.trim();
+
+                if (!newName) return alert("Vnesi novo ime.");
+                if (newName === oldName) return alert("Ime mora biti drugačno.");
+
+                fetch('rename-folder.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ oldName, newName })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        folderDiv.querySelector('.folder-name').textContent = newName;
+                        folderDiv.dataset.folder = newName;
+                        folderDiv.querySelector('.rename-input').value = '';
+                    } else {
+                        alert("Napaka: " + data.message);
+                    }
+                });
+            }
+
+            function deleteFolder(btn) {
+                const folderDiv = btn.closest('.folder');
+                const folder = folderDiv.dataset.folder;
+
+                if (!confirm(`Ali res želiš izbrisati mapo "${folder}"?`)) return;
+
+                fetch('delete-folder.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ folder })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        folderDiv.remove();
+                    } else {
+                        alert("Napaka: " + data.message);
+                    }
+                });
+            }
+        </script>
     </div>
 
     <!-- SELEKCIJE div-->
     <div id="selekcije" class="contentDiv">
+        <h2>Izberite selekcijo</h2>
         <form id="selectionForm" action="selection-actions.php" method="POST">
             <select name="selection" id="selection">
 
@@ -289,6 +438,8 @@ if (!isset($_SESSION['logged_in'])) {
 
     <!-- DISCIPLINE div-->
     <div id="discipline" class="contentDiv">
+
+        <h2>Izberite disciplino</h2>
         <form id="disciplineForm" action="discipline-actions.php" method="POST">
             <select name="discipline" id="discipline">
 
@@ -328,6 +479,7 @@ if (!isset($_SESSION['logged_in'])) {
     
     <!-- POVEZAVE div-->
     <div id="povezave" class="contentDiv">
+        <h2>Urejate povezave</h2>
         <select name="povezava" name="povezava" id="povezava" size="5" onchange="populateForm(this)">
 
         <?php
@@ -379,6 +531,7 @@ if (!isset($_SESSION['logged_in'])) {
 
     <!-- DOKUMENTI div-->
     <div id="dokumenti" class="contentDiv">
+        <h2>Urejate dokumente</h2>
 
         <div class="iframe-container">
             <iframe src="filegator/index.php" scrolling="no" style="width:100%; height: 700px;"></iframe>
@@ -389,7 +542,7 @@ if (!isset($_SESSION['logged_in'])) {
 
     <!-- VODSTVO div-->
     <div id="vodstvo" class="contentDiv">
-
+        <h2>Urejate vodstvo kluba</h2>
         <table id="teamTable" class="display-table">
             <thead>
                 <tr>
@@ -418,7 +571,7 @@ if (!isset($_SESSION['logged_in'])) {
 
     <!-- STATIČNE STRANI div-->
     <div class="contentDiv" id="staticne">
-
+        <h2>Izberite statično stran</h2>
         <form action="staticne-actions.php" method="POST">
 
             <select name="static" id="static">
@@ -450,6 +603,28 @@ if (!isset($_SESSION['logged_in'])) {
 
     </div>
     
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtons = Array.from(document.querySelectorAll('button[type="submit"], input[type="submit"]'))
+        .filter(btn =>
+            btn.value?.toLowerCase() === "delete" ||
+            btn.value?.toLowerCase() === "izbriši" ||
+            btn.textContent?.toLowerCase() === "izbriši"
+        );
+
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", function (e) {
+            const confirmDelete = confirm("Ste prepričani, da želite izbrisati vsebino?");
+            if (!confirmDelete) {
+                e.preventDefault(); // Cancel submission if user clicks "Cancel"
+            }
+            // If user clicks "OK", form submits normally
+        });
+    });
+});
+</script>
+
+
 
     <script>
         // Funkcija za potrjevanje (DELETE) gumba pri povezavah
@@ -652,5 +827,6 @@ function confirmDeleteAccom(id) {
 }
 </script>
 <?php //include"../../footer.php" ?>
+
 </body>
 </html>

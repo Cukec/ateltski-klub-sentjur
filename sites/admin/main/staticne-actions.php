@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles/secondary.css">
+    <title>AK Šentjur - Urejanje 'statičnih'</title>
 </head>
 <body>
     <?php
@@ -38,25 +39,31 @@
 
             ?>
 
-            <h2><?php echo $title ?></h2>
+            <div class="title">
+                <h2>Spreminjate vsebino statičnih strani</h2>
+                <a href="admin.php">⮨ nazaj</a>
+            </div>
+
+            <h3><?php echo $title ?></h3>
             <i style="color: #ccc;">Info: Če je odstavek prazen pomeni, da tisti odstavek ni vsebina strani.</i><br>
             <i style="color: #ccc;">Npr.: če imajo vsebino samo trije odstavki, pomeni da se na tej strani nahajajo le trije odstavki -> četrti prazen</i><br>
 
+            
             <form action="save-static.php" method="POST">
+                <div class="form-div">
+                    <input type="text" name="id" id="id" value="<?php echo $id ?>"hidden>
 
-                <input type="text" name="id" id="id" value="<?php echo $id ?>"hidden>
+                    <label for="section_1">1. Odstavek:</label><br>
+                    <textarea class="static" name="section_1" id="section_1" ><?php echo $section1 ?></textarea><br>
+                    <label for="section_2">2. Odstavek:</label><br>
+                    <textarea class="static" name="section_2" id="section_2" ><?php echo $section2 ?></textarea><br>
+                    <label for="section_3">3. Odstavek:</label><br>
+                    <textarea class="static" name="section_3" id="section_3" ><?php echo $section3 ?></textarea><br>
+                    <label for="section_4">4. Odstavek:</label><br>
+                    <textarea class="static" name="section_4" id="section_4" ><?php echo $section4 ?></textarea><br>
 
-                <label for="section_1">1. Odstavek:</label><br>
-                <textarea name="section_1" id="section_1" style="resize: none; height:10vh; width: 20%"><?php echo $section1 ?></textarea><br>
-                <label for="section_2">2. Odstavek:</label><br>
-                <textarea name="section_2" id="section_2" style="resize: none; height:10vh; width: 20%"><?php echo $section2 ?></textarea><br>
-                <label for="section_3">3. Odstavek:</label><br>
-                <textarea name="section_3" id="section_3" style="resize: none; height:10vh; width: 20%"><?php echo $section3 ?></textarea><br>
-                <label for="section_4">4. Odstavek:</label><br>
-                <textarea name="section_4" id="section_4" style="resize: none; height:10vh; width: 20%"><?php echo $section4 ?></textarea><br>
-
-                <input type="submit" value="posodobi">
-
+                    <input type="submit" value="posodobi">
+                </div>
             </form>
             
             <?php

@@ -10,7 +10,10 @@ if(isset($_POST)){
         $data = htmlspecialchars($data);      
         return $conn->real_escape_string($data); 
     }
-    
+
+    $error = "false";
+    $msgs = [];
+
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Get and sanitize user input
@@ -38,9 +41,9 @@ if(isset($_POST)){
     
         // Execute the statement
         if ($stmt->execute()) {
-            echo "New record inserted successfully!<br>";
+            $msgs[] = "Uspešno dodajanje štafete!";
         } else {
-            echo "Error: " . $stmt->error . "<br>";
+            $msgs[] = "Napaka pri dodajanju štafete! Poskusite znova...";
         }
     
         // Close connections
@@ -58,9 +61,9 @@ if(isset($_POST)){
 
     // Execute the statement
     if ($stmt->execute()) {
-        echo "New record inserted successfully! <br>";
+        $msgs[] = "Uspešno dodajanje štafete!";
     } else {
-        echo "Error: " . $stmt->error . '<br>';
+        $msgs[] = "Napaka pri dodajanju štafete! Poskusite znova...";
     }
     
     // Close connections
@@ -76,8 +79,8 @@ if(isset($_POST)){
             $sanitized_discipline = htmlspecialchars($discipline); 
             $stmt->bind_param("ii", $id_athlete, $sanitized_discipline);
             if($stmt->execute()){
-                echo "Uspešen vnos disciplin štafete<br>";
-            }else echo "Napaka pri vnosu disciplin štafete<br>";
+                $msgs[] = "Uspešen vnos disciplin štafete!";
+            }else $msgs[] = "Napaka pri vnosu disciplin štafete! Poskusite znova...";
         }
     }
 
@@ -88,8 +91,8 @@ if(isset($_POST)){
             $sanitized_selection = htmlspecialchars($selection); 
             $stmt->bind_param("ii", $id_athlete, $sanitized_selection);
             if($stmt->execute()){
-                echo "Uspešen vnos disciplin štafete<br>";
-            }else echo "Napaka pri vnosu disciplin štafete<br>";
+                $msgs[] = "Uspešen vnos disciplin štafete!";
+            }else $msgs[] = "Napaka pri vnosu disciplin štafete! Poskusite znova...";
         }
     }
 
@@ -100,12 +103,15 @@ if(isset($_POST)){
             $sanitized_person = htmlspecialchars($person); 
             $stmt->bind_param("ii", $id_people, $sanitized_person);
             if($stmt->execute()){
-                echo "Uspešen vnos ateltov štafete<br>";
-            }else echo "Napaka pri vnosu atletov štefete<br>";
+                $msgs[] =  "Uspešen vnos ateltov štafete!";
+            }else $msgs[] = "Napaka pri vnosu atletov štefete! Poskusite znova...";
         }
     }
 
     $conn->close();
 }
+
+$status_msg = implode(" ", $msgs);
+header("location: admin.php?status_msg=" . urlencode($status_msg) . "&error=" . urlencode($error));
 
 ?>

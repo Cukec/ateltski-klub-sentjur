@@ -5,6 +5,9 @@ function sanitizeInput($input) {
     return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
 }
 
+$msg ="";
+$error = "false";
+
 function isSafeInput($input) {
     // Seznam nevarnih SQL ukazov in znakov
     $blacklist = [
@@ -37,9 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = $stmt->execute([$type, $title, $content, $location, $date_start, $date_end ,$id_admin]);
 
     if ($success) {
-        echo "News added successfully!";
+        //echo "News added successfully!";
+        $msg = "Uspešno posodabljanje vsebine!";
     } else {
-        echo "Error adding news.";
+        //echo "Error adding news.";
+        $msg = "Napaka pri posodabljanju vsebine! Poskusite znova...";
+        $error = "true";
     }
 }
+
+header("location: admin.php?status_msg=" . urlencode($msg) . "&error=" . urlencode($error));
+exit;
 ?>
