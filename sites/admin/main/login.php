@@ -1,31 +1,45 @@
-<?php
-require_once '../../config.php';
-
-$error = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-
-    if (authenticate($username, $password)) {
-        header("Location: admin.php");
-        exit;
-    } else {
-        $error = "Invalid credentials.";
-    }
-}
-?>
-
+<!-- login.php -->
+<?php require_once '../../config.php'; ?>
 <!DOCTYPE html>
-<html>
-<head><title>Login</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
 <body>
-    <h2>Login</h2>
-    <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
-    <form method="POST">
-        <input type="text" name="username" required placeholder="Username"><br><br>
-        <input type="password" name="password" required placeholder="Password"><br><br>
-        <button type="submit">Login</button>
-    </form>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="text" name="username" placeholder="Username" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+    
+  </form>
+  <p id="message" style="color: red;"></p>
+
+    
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+
+      const res = await fetch('login-handler.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      try {
+        const result = await res.json();
+        if (result.success) {
+          window.location.href = 'admin.php';
+        } else {
+          document.getElementById('message').textContent = result.message;
+        }
+      } catch (err) {
+        document.getElementById('message').textContent = 'Unexpected response from server.';
+        console.error('JSON parse error:', err);
+      }
+    });
+  </script>
 </body>
 </html>

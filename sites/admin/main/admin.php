@@ -1,11 +1,10 @@
 <?php
-/*
-session_start();
-if (!isset($_SESSION['logged_in'])) {
+require_once '../../config.php';
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: login.php");
     exit;
 }
-*/
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +37,7 @@ if (!isset($_SESSION['logged_in'])) {
             width: fit-content;
         }
     </style>
-    <?php include "../../navigation.php"; include "../../config.php" ?>
+    <?php include "../../navigation.php"; //include "../../config.php" ?>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/css/elfinder.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/css/theme.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -157,6 +156,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <option value="vodstvo">Vodstvo</option>
             <option value="dokumenti">Dokumenti</option>
             <option value="staticne">Staticne strani</option>
+            <option value="admini">Admini</option>
         </select>
     </nav>
 
@@ -568,6 +568,50 @@ window.addEventListener('DOMContentLoaded', () => {
         <script src="vodstvo.js"></script>
 
     </div>
+
+    
+
+    <!-- ADMINI div -->
+<div id="admini" class="contentDiv"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    loadAdmini();
+
+    function loadAdmini() {
+        fetch("fetch-admini.php")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("admini").innerHTML = data;
+                bindFormSubmit(); // Bind form once it's loaded
+            });
+    }
+
+    function bindFormSubmit() {
+        const form = document.getElementById("dodaj-admin-form");
+        if (!form) return;
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // ❗ PREPREČI osvežitev strani
+
+            const formData = new FormData(form);
+
+            fetch("add-admini.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert(result);        // ali izpiši spodaj v div
+                loadAdmini();         // ponovno naloži seznam z novo dodanim adminom
+            });
+        });
+    }
+});
+</script>
+
+
+
 
     <!-- STATIČNE STRANI div-->
     <div class="contentDiv" id="staticne">

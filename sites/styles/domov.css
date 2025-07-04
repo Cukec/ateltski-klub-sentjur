@@ -1,280 +1,283 @@
-/* Global styles */
-
-
-/* Main content container to avoid conflict with navigation */
-.main-content {
-    display: flex;
-    color: black;
-    width: 100%;
-    margin-top: -20vh;
-}
-
-.naslov-novice h1 {
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.novice-container {
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-}
-
-.novica-placeholder {
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    padding: 2%;
-}
-
-.novica-image {
-    height: 70%;
-    width: 100%;
-}
-
-.novica-image img {
-    height: 100%;
-    width: 100%;
-    border-radius: 5px;
-    margin: -5px;
-}
-
-.novica-title {
-    overflow: hidden;
-    text-overflow: none;
-    white-space: wrap; /* Keeps text on one line and truncates with ellipsis if too long */
-}
-
-.novica-title a {
-    font-size: 0.8rem; /* Initial font size */
-}
-
-.novica-title a:hover h2 {
-    color: blue;
-}
-
-.desni-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5vw;
-    width: 40%;
-}
-
-.atletska-sola img {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 50%;
-}
-
-.atletska-sola img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    opacity: 0.9;
-}
-
-/* Novice (News) - takes full width */
-.novice {
-    background-image: url(../../assets/red-blurry-center.svg);
-    background-repeat: no-repeat;
-    padding: 5vw;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 25vh 25vh 25vh;
-    gap: 20px;
-}
-
-/* Individual Novica (News) background */
-.novica-img, .novica-img-null {
-    display: flex;
-    background-color: #ffffff; /* White background for individual news */
-    border-radius: 8px; /* Rounded corners for individual news */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-    overflow: hidden;
-    padding: 10px;
-    height: 100%;
-}
-
-.novica-img-null {
-    flex-direction: column;
-}
-
-.novica-text {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-}
-
-.novica-title {
-    display: flex;
-    height: 100%;
-    width: 100%;
-}
-
-.novica-img a, .novica-img-null a {
-    text-decoration: none;
-    color: inherit;
+main {
+  margin: -10vh 5vh 10vh 5vh;
 
 }
 
-.novica-img a:hover, .novica-img-null a:hover {
-    color: #e07070;
+.section-title {
+  width: max-content;
+  margin: 5vh auto;
+  padding: 0 5%;
+  border-bottom: 1px solid rgb(167, 167, 167);
 }
 
-.novica-img .novica-left {
-    width: 60%;
-    margin-right: 1vw;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.main-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr; /* levi del 3x širši od desnega */
+  gap: 20px;
+  height: auto;
 }
 
-.novica-img .novica-right {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
+/* Levi grid s 3 stolpci */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: 20px;
 }
 
-.novica-img .novica-left img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
+/* Prvi element širok 2 stolpca */
+.news-item.wide {
+  grid-column: span 2;
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-@media (max-width: 768px) {
-    .novice {
-        grid-template-columns: 100%;
-        grid-template-rows: repeat(6, 35vh)
-    }
-    .novica-img, .novica-img-null {
-        flex-direction: column;
-        align-items: center;
-    }
-    .novica-img .novica-left, .novica-img .novica-right, .novica-title {
-        width: 100%;
-    }
-    .novica-img .novica-left {
-        height: 100%;
-    }
-    .novica-img .novica-right {
-        margin-top: auto;
-        height: auto;
-        align-items: center;
-    }
-    .novica-img .novica-right p {
-        display: none;
-    }
+/* Ostali elementi */
+.news-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-.novica-img h2, .novica-img-null h2 {
-    margin: 0;
-    font-size: 18px;
+/* Desni sidebar */
+.sidebar {
+  background-color: #fff;
+  padding: 20px 0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
 
-.novica-img p, .novica-img-null p {
-    margin: 0;
-    font-size: 14px;
+.link-item {
+  padding: 15px 0;
+  border-radius: 8px;
 }
 
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+.link-item a {
+  text-decoration: none;
+  font-weight: 600;
+  display: block; /* da cel div klikneš */
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 10% auto; /* 10% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.link-item h3{
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  color: #fa9c33;
+  border-bottom: .5px solid #fa9c33;
+  padding: 5px 0;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+#itm-2 {
+  background-color: #ffe2b3; /* oranžkasto ozadje */
+  padding: 20px;
+  position: relative; /* da ul ostane v okviru */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.close:hover, .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+#itm-2 ul {
+  background-color: #fff; /* druga barva za kontrast */
+  margin: 0;
+  padding: 15px 20px;
+  list-style: none;
+  position: relative;
+  top: 4vh;   /* zamik navzdol */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
-.close-event {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+.link-item li{
+  list-style: none;
+
 }
 
-.close-event:hover, .close-event:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.link-item li a{
+  color: #6a6a6a;
+  font-weight: 100;
+
 }
 
-@keyframes slideIn {
-    0% {
-        transform: translateX(-100%); /* Start off-screen to the left */
-    }
-    100% {
-        transform: translateX(0); /* End in its final position */
-    }
+.link-item li a:hover{
+  color: black;
+  text-decoration: underline;
+  font-weight: 200;
+
+}
+
+.news-item {
+  text-align: left;
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.news-item hr {
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.news-item p {
+  font-size: 14px;
+  color: #555;
+}
+
+.read-more-btn {
+  position: relative;
+  overflow: hidden;
+  margin: 0.5vh 0;
+  padding: 0.4rem 1rem;
+  border: 2px solid #fa9c33;
+  border-radius: 20px;
+  background-color: #fff;
+  z-index: 1;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.read-more-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #fa9c33;
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+
+.read-more-btn:hover::before {
+  width: 100%;
+}
+
+.read-more-btn:hover {
+  color: white;
+}
+
+.filler-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 enako široki stolpci */
+  gap: 5vw;
+  padding: 10vh 0;
+}
+
+.filler-item {
+  position: relative;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  text-align: left;
+  color: #333;
+  height: auto;
+}
+
+/* Novi div znotraj filler-item */
+.gallery-wrapper {
+  aspect-ratio: 800 / 535;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background-image: url('../../assets/random-placeholder.jpg');
+  background-size: cover;       /* slika se raztegne/zmanjša, da popolnoma pokrije element */
+  background-position: center;  /* slika je centrirana */
+  background-repeat: no-repeat; /* brez ponavljanja slike */
+  margin: auto; /* centriranje po širini */
+  position: relative;
+  top: -5vh;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Slika se lepo prikaže brez raztezanja */
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Lahko zamenjaš s contain, če ne želiš odrezanih robov */
+  display: block;
+  border-radius: 6px;
 }
 
 
-.add-news-btn {
-    height: auto;
-    width: auto;
-    background: linear-gradient(135deg, #e07070, #b81212); /* Gradient effect */
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 30px; /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
-    cursor: pointer;
-    transition: all 0.3s ease; /* Smooth transitions */
-    margin: 2%;
+/* Gumb pozicioniran na spodnji desni rob */
+.more-btn {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  overflow: hidden;
+  padding: 0.4rem 1.2rem;
+  border: 2px solid #a3ce73;
+  border-radius: 20px;
+  background-color: #a4ce739e;
+  z-index: 1;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  color: #333;
 }
 
-.add-news-btn:hover {
-    background: linear-gradient(135deg, #e08686, #d43b3b); /* Hover effect with gradient */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
-    transform: translateY(-3px); /* Slight lift effect */
+/* Hover animacija za ozadje */
+.more-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #a3ce73;
+  z-index: -1;
+  transition: width 0.3s ease;
 }
 
-.add-news-btn:active {
-    transform: translateY(0); /* Remove lift on click */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
-}
-/* Button for adding news */
-/*.add-news-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+/* Aktivacija hover animacije */
+.more-btn:hover::before {
+  width: 100%;
 }
 
-.add-news-btn:hover {
-    background-color: #45a049;
-}*/
+.more-btn:hover {
+  color: white;
+}
+
+.past-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.past-item {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Pagination */
+.pagination {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  border: none;
+  background-color: #fa9c33;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #333;
+}

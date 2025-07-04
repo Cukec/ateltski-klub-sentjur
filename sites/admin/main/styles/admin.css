@@ -37,11 +37,11 @@ select[size]:focus {
 
 .contentDiv input{
 
-    margin: 1vh 0;
+    margin: 1vh 1vh;
 
 }
 
-.contentDiv input[type="text"]{
+.contentDiv input[type="text"], .contentDiv input[type="email"], .contentDiv input[type="password"]{
     height: 2.5rem;
     border-radius: 8px;
     border: 2px solid #ccc;
