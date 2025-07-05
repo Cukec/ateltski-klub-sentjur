@@ -17,6 +17,25 @@
 <body>
     <?php include "navigation.php"; include "config.php";?>
 
+    <?php
+    
+        $query = "SELECT * FROM page_content WHERE title = 'atleti'";
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $content_result = $stmt->get_result();
+
+        if ($content_result && $content_result->num_rows > 0) {
+            $content_row = $content_result->fetch_assoc();
+
+        } else {
+            //echo "<p>Ni najdenih vsebin za naslov 'atleti'.</p>";
+        }
+
+
+    ?>
+
     <main>
         <?php 
         // Database connection
@@ -53,7 +72,7 @@
             <div class="description-main">
                 <h1>Delo z atleti</h1>
                 <hr>
-                <p>V AK Šentjur stavimo veliko na delo z mladimi, zato so v večini naši atleti in atletinje člani mlajših selekcij. Naš osnovni in vedno prisoten cilj je s trdim delom ter skrbno načrtovanimi treningi vzgajati tekmovalce od mladih nog, da bodo nekoč morda nekateri med njimi sposobni v slovenskem prostoru in širše posegati po najvišjih mestih.</p>
+                <p><?php echo $content_row['section_1']?></p>
             </div>
             <div class="atletska-sola">
                 <a href="treningi.php"><img src="../assets/logo-atletska-sola.png" alt="logo-atletska-sola"></a>
@@ -102,73 +121,14 @@
                 <button id="next-page">></button>
             </div>
         </div>
+    </main>
+
+    <?php include("footer.php"); ?>
 
 
-        <!-- Sql querry-ji za dosežke in tablice -->
+</body>
 
-        <div class="acc-filters" style="display: none">
-        <!-- <div class="acc-filters">
-            <ul>
-                <li>
-                    <label for="discipline-filter">Disciplina:</label>
-                    <select id="discipline-filter" name="discipline">
-                        <option value="">Izberite disciplino</option>
-                        <?php 
-                        if ($vse_discipline_result && $vse_discipline_result->num_rows > 0) {
-                            while ($discipline = $vse_discipline_result->fetch_assoc()) {
-                                echo "<option value='{$discipline['id']}'>{$discipline['title']}</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No disciplines found</option>";
-                        }
-                        ?>
-                    </select>
-                </li>
-
-                <li>
-                    <label for="selection-filter">Selekcija:</label>
-                    <select id="selection-filter" name="selection">
-                        <option value="">Izberite selekcijo</option>
-                        <?php 
-                        if ($vse_selekcije_result && $vse_selekcije_result->num_rows > 0) {
-                            while ($selection = $vse_selekcije_result->fetch_assoc()) {
-                                echo "<option value='{$selection['id']}'>{$selection['title']}</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No selections found</option>";
-                        }
-                        ?>
-                    </select>
-                </li>
-            </ul>
-        </div> -->
-
-        <div class="display-accomplishments" id="accom">
-            <table>
-        <!--<div class="display-accomplishments">
-            <table id="tablice">
-                <thead>
-                    <tr>
-                        <th>Rezultat</th>
-                        <th>Atlet</th>
-                        <th>Leto</th>
-                        <th>Kraj</th>
-                    </tr>
-                </thead>
-                <tbody id="tables-body">
-                    --comment Data from fetch-accomplishments.php will populate here comment--
-                </tbody>
-            </table>
-        </div>
-
-
-    </div>
-        
-
-    
-        </div> -->
-        
-        <script>
+<script>
           document.querySelectorAll(".acc-toggle").forEach(button => {
     button.addEventListener("click", function () {
         // Determine the target id based on the button's data-type attribute
@@ -326,22 +286,17 @@
                     .catch(error => {
                         console.error('Error loading accomplishments:', error);
                     });
-            }
+        }
 
-            // Add event listeners for filter changes to update the table dynamically
-            document.getElementById('discipline-filter').addEventListener('change', loadAccomplishments);
-            document.getElementById('selection-filter').addEventListener('change', loadAccomplishments);
+        // Add event listeners for filter changes to update the table dynamically
+        document.getElementById('discipline-filter').addEventListener('change', loadAccomplishments);
+        document.getElementById('selection-filter').addEventListener('change', loadAccomplishments);
 
-            // Initial load of accomplishments when page is first loaded
-            loadAccomplishments();
-        });
+        // Initial load of accomplishments when page is first loaded
+        loadAccomplishments();
+    });
 
 
-        </script>
+</script>
 
-    </main>
-
-    <?php include "footer.php"; ?>
-
-</body>
 </html>

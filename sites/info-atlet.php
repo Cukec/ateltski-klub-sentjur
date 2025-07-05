@@ -10,7 +10,7 @@ if ($athleteId > 0) {
     $athleteQuery = "SELECT p.name, p.surname, p.gender, p.date_of_birth, p.description, a.id AS athlete_id, p.id AS people_id
                      FROM people p
                      JOIN athlete a ON p.id = a.id_people
-                     WHERE a.id = $athleteId AND a.active = 1";
+                     WHERE a.id = $athleteId";
     
     $athleteResult = $conn->query($athleteQuery);
 
@@ -38,27 +38,45 @@ if ($athleteId > 0) {
         // Process the result
         if ($resultAcc->num_rows > 0) {
 
-            $accom = $resultAcc->fetch_assoc();
-
-            $id_discipline = $accom['id_discipline'];
-            $id_accomplishment = $accom['id'];
-            
-            $queryPersonalBest = "SELECT * FROM discipline d JOIN athlete_discipline ad ON d.id = ad.id_discipline JOIN athlete a ON ad.id_athlete = a.id JOIN people p ON a.id_people = p.id JOIN people_accomplishments pa ON p.id = pa.id_people JOIN accomplishments ac ON pa.id_accomplishment = ac.id
-                                WHERE d.id = $id_discipline
-                                AND pa.id_accomplishment = $id_accomplishment
-                                AND p.id = $ppl_id";
-
+            // 1. Najprej napolnimo clubAccArray in tablicaArray iz $resultAcc:
             while ($row = $resultAcc->fetch_assoc()) {
-                // Check for is_club_acc
                 if ($row['is_club_acc'] == 1) {
-                    $clubAccArray[] = htmlspecialchars($row['description']); // Store titles for club accomplishments
-                }
-                
-                // Check for is_tablica
-                if ($row['is_tablica'] == 1) {
-                    $tablicaArray[] = htmlspecialchars($row['result']); // Store titles for tablica accomplishments
+                    $clubAccArray[] = htmlspecialchars($row['description']); // klub dosežki
                 }
             }
+
+            // 2. Nato naložimo osebne rekorde po disciplinah (personal bests)
+            $personalBests = [];
+
+            $queryPersonalBest = "
+                SELECT 
+                    d.id AS discipline_id,
+                    d.title AS discipline_title,
+                    CASE 
+                        WHEN MIN(a.result_time) IS NOT NULL THEN CAST(MIN(a.result_time) AS CHAR)
+                        ELSE CAST(MAX(a.result_technical) AS CHAR)
+                    END AS result 
+                FROM accomplishments a 
+                JOIN discipline d ON a.id_discipline = d.id 
+                WHERE a.is_tablica = 1 
+                AND a.id_people = ? 
+                GROUP BY d.id, d.title;
+            ";
+
+            $stmt = $conn->prepare($queryPersonalBest);
+            $stmt->bind_param('i', $ppl_id);
+            $stmt->execute();
+            $resPB = $stmt->get_result();
+
+            while ($row = $resPB->fetch_assoc()) {
+                $disciplineId = $row['discipline_id'];
+                $personalBests[$disciplineId] = [
+                    'title' => $row['discipline_title'],
+                    'result' => $row['result']
+                ];
+            }
+
+
         }
 
         if ($disciplineResult->num_rows > 0) {
@@ -75,7 +93,7 @@ if ($athleteId > 0) {
         $clubAccList = implode(', ', $clubAccArray);
         $tablicaList = implode(', ', $tablicaArray);
     } else {
-        echo "<p>No athlete found with this ID.</p>";
+        //echo "<p>No athlete found with this ID.</p>";
     }
 } else {
     echo "<p>Invalid athlete ID.</p>";
@@ -93,27 +111,70 @@ if ($athleteId > 0) {
 <body>
 
 <main>
+    <?php
+    if (!isset($athlete) || !is_array($athlete)) {
+        ?>
+        <div class="no-athlete-message" style="text-align:center; margin:10vh auto; max-width:600px; padding:30px; border:1px solid #ddd; background:#f8f8f8; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); color:#444;">
+            <h2 style="margin-bottom:10px; color:#c00;">Podatki o tem atletu niso na voljo</h2>
+            <p>Oprostite, iskanega atleta ni v naši podatkovni bazi.</p>
+        </div>
+        <div class="go-back" style="margin-bottom: 20vh;">
+            <a href="atleti.php">nazaj ↶</a>
+        </div>
+        <?php
+        exit;  // ustavi nadaljnjo obdelavo in izpis strani
+    }
+    ?>
+
     <div class="athlete-wrapper">
         <div class="athlete-info">
-            <?php if (isset($athlete)) : ?>
-                <h2><?= htmlspecialchars($athlete['name']) . ' ' . htmlspecialchars($athlete['surname']) ?></h2>
-                <p><strong>Spol:</strong> <?= htmlspecialchars($gender) ?></p>
-                <p><strong>Datum rojstva:</strong> <?= htmlspecialchars($formattedDob) ?></p>
-                <p><strong>Discipline:</strong> <br> <?= $disciplinesList ? htmlspecialchars($disciplinesList) : 'Disciplin ni navedenih' ?></p>
-                <p><strong>Opis:</strong> <br> <?= !empty($athlete['description']) ? htmlspecialchars($athlete['description']) : 'Za osebo ni navedenega opisa' ?></p>
-                <p><strong>Klubski dosežki:</strong> <br> <?= $clubAccList ? htmlspecialchars($clubAccList) : 'Dosežkov ni navedenih' ?></p>
-            <?php else : ?>
-                <p>Athlete information could not be retrieved.</p>
+            <h2><?= htmlspecialchars($athlete['name']) . ' ' . htmlspecialchars($athlete['surname']) ?></h2>
+
+            <?php
+            $imagePath = "../gallery/osebje/$ppl_id.jpg";
+            $placeholderPath = "../assets/random-placeholder-ppl.jpg";
+            $finalImage = file_exists($imagePath) ? $imagePath : $placeholderPath;
+            ?>
+            
+            <div class="polaroid float-left">
+                <img src="<?= htmlspecialchars($finalImage) ?>" alt="Slika osebe" class="polaroid-img" width="100" height="120">
+                <p class="caption"><?= htmlspecialchars($athlete['name'] . ' ' . $athlete['surname']) ?></p>
+            </div>
+
+            <p><strong>Spol:</strong> <?= htmlspecialchars($gender) ?></p>
+            <p><strong>Datum rojstva:</strong> <?= htmlspecialchars($formattedDob) ?></p>
+            <p><strong>Discipline:</strong> <br> <?= $disciplinesList ? htmlspecialchars($disciplinesList) : 'Disciplin ni navedenih' ?></p>
+            <p class="caption"><strong>Opis:</strong> <br> <?= !empty($athlete['description']) ? htmlspecialchars($athlete['description']) : 'Za osebo ni navedenega opisa' ?></p>
+        </div>
+
+        <div class="accom">
+            <p><strong>Klubski dosežki:</strong> <br>
+            <?php if (!empty($clubAccArray) && is_array($clubAccArray)): ?>
+                <ul>
+                    <?php foreach ($clubAccArray as $acc): ?>
+                        <li><?= htmlspecialchars($acc) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                Dosežkov ni navedenih
+            <?php endif; ?>
+            </p>
+            <p><strong>Osebni rekordi:</strong></p>
+            <?php if (!empty($personalBests)): ?>
+                <ul>
+                    <?php foreach ($personalBests as $pb): ?>
+                        <li>
+                            <?= htmlspecialchars($pb['title']) ?>: <?= htmlspecialchars($pb['result']) ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p>Osebnih rekordov ni navedenih.</p>
             <?php endif; ?>
         </div>
-        <div class="image-container">
-            <img src="https://eu.ui-avatars.com/api/?name=John+Doe&size=250" alt="Athlete Image" class="polaroid-image">
+        <div class="go-back">
+            <a href="atleti.php">nazaj ↶</a>
         </div>
-        <div id="green"></div>
-        <div id="red"></div>
-    </div>
-    <div class="go-back">
-        <a href="atleti.php">nazaj ↶</a>
     </div>
 </main>
 

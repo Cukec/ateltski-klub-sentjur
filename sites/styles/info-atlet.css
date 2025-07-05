@@ -1,71 +1,48 @@
-main {
-    display: flex; /* Keep the button below */
-    flex-direction: column; /* Keep the column layout for the main content */
-    align-items: flex-start; /* Align items to the top */
-    height: auto; /* Allow height to adjust based on content */
-    margin: -20vh 5vw 5vh 5vw;
+main{
+    margin: -10vh 5vw 20vh 5vw;
+    display: flex;
+    flex-direction: column;
+
 }
 
-.athlete-wrapper {
-    display: flex; /* Flexbox for side-by-side layout */
-    align-items: center; /* Align items to the top */
-    justify-content: center;
-    width: 100%; /* Ensure it takes the full width */
-    margin-bottom: 20vh;
+/* Container za zgornji del (podatki + slika/tekst) */
+.float-left {
+  float: left;
+  margin: 5px 20px 15px 0; /* desni odmik + spodnji odmik */
 }
 
-.athlete-info {
-    width: 45vw;
-    background: white;
-    border-radius: 5px;
-    padding: 5%;
-    height: max-content; /* Adjusts based on content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+/* Obvezno za preprečevanje zlomljenega layouta */
+.athlete-info::after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-.image-container {
-    position: relative;
-    margin-left: -20px; /* Allows image to poke out */
+.caption {
+  margin-top: 8px;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
 }
 
-.polaroid-image {
-    width: 250px; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
-    border: 10px solid white; /* White border for polaroid effect */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    border-radius: 5px; /* Rounded corners */
-    position: absolute; /* Position absolutely within the container */
-    top: -20px; /* Offset the image upwards */
-    right: -40px; /* Offset the image to the right */
-    z-index: 1; /* Ensure it appears in front */
+
+.accom {
+  width: 100%;
 }
 
-#green {
-    display: block;
-    position: absolute;
-    width: 30vh;
-    height: 30vw;
-    margin: 0; /* Set margin to zero initially */
-    top: 30vh; /* Adjust positioning to make sure it's visible */
-    left: 46vw;
-    background-color: #A1CF6B; /* Optional: Add a background color to make it visible */
-    z-index: -1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    border-radius: 5px;
+@media (max-width: 700px) {
+  .athlete-info {
+    grid-template-columns: 1fr; /* stolpčna postavitev na majhnih zaslonih */
+  }
 }
 
-#red {
-    display: block;
-    position: absolute;
-    width: 30vh;
-    height: 20vh;
-    margin: 0; /* Set margin to zero initially */
-    top: 55vh; /* Adjust positioning to make sure it's visible */
-    left: 30vw;
-    background-color: #840C0C; /* Optional: Add a background color to make it visible */
-    z-index: -1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    border-radius: 5px;
+
+h2 {
+    border-bottom: .5px solid #c0c0c0;
+    margin-bottom: 2vh;
+    width:max-content;
+    padding-right: 5%;
+
 }
 
 .go-back a {
@@ -100,14 +77,62 @@ main {
     animation: bounce 0.5s ease-out;
 }
 
-@keyframes bounce {
-    0% {
-        transform: scaleX(1);
-    }
-    50% {
-        transform: scaleX(1.05); /* Slight overshoot for bounce effect */
-    }
-    100% {
-        transform: scaleX(1);
-    }
+.accom {
+  width: 100%;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  color: #555; /* temno siva barva za manj močan tekst */
+  line-height: 1.5;
 }
+
+.accom strong {
+  color: #333; /* malo temnejša barva za naslove */
+  font-weight: 600;
+}
+
+.accom ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.accom ul li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #666; /* še malo bolj svetla siva za posamezne dosežke */
+}
+
+.accom p {
+  margin-bottom: 12px;
+}
+
+.polaroid {
+  display: inline-block;
+  background-color: white;
+  padding: 10px 10px 20px 10px; /* večji spodnji rob za podpis */
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  text-align: center;
+  border-radius: 5px;
+  transition: transform 0.2s ease;
+  width: max-content;
+}
+
+.polaroid:hover {
+  transform: scale(1.02);
+}
+
+.polaroid-img {
+  display: block;
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.caption {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #333;
+  font-style: italic;
+}
+
