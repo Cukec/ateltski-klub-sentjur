@@ -1,13 +1,21 @@
-body {
-    margin: 0;
-    box-sizing: border-box;
-}
-
 main{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: -20vh;
+    margin: 5vw;
+    border: 1px solid black;
+}
+
+.first{
+   padding-top: 5vw;
+
+}
+
+.background-sec{
+  background-image: url('../../assets/green-blue-gradient-top.svg');
+  background-repeat: no-repeat;
+  background-size: cover; /* ali 'contain' ali določene mere */
+  background-position: center;
+  margin-top: -5vw;
 }
 
 .atleti-info {
@@ -54,7 +62,7 @@ main{
     width: 50%;
 }
 
-.nav-dogodki {
+.sub-nav {
     display: flex;
     flex-direction: row; /* Use 'row' instead of 'horizontal' */
     color: Black;
@@ -69,14 +77,26 @@ main{
 }
 
 
-.nav-dogodki ul {
+.sub-nav ul {
     list-style: none;
 }
 
-.nav-dogodki li{
+.sub-nav li{
     float: left;
     margin: 0 5vw 0 5vw;
 }
+
+.sub-nav a {
+    color: black;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease, color 0.3s ease;
+}
+
+.sub-nav a:hover {
+    text-decoration: underline;
+    color: #333; /* po želji, da dodaš subtilen efekt */
+}
+
 
 .vodstvo, .trenerji, .sodniki {
     display: flex;
@@ -231,4 +251,252 @@ article {
     .profile-container {
         margin-top: 10vh; /* Adjust for smaller screens */
     }
+}
+
+p{
+    font-size: 1.1rem;
+
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 enaki stolpci */
+    gap: 2vh 10vw; /* razmik med elementi */
+}
+
+.team-grid > div {
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.team-member {
+  text-align: center;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-pic img {
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+  object-position: top; /* odreže spodnji del slike */
+}
+
+.member-name {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.contact-info {
+  text-align: left;
+  padding: 0 1rem;
+  font-size: 0.95rem;
+}
+
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20vw; /* razmak med karticami */
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 20vh;
+}
+
+@media (max-width: 768px) {
+  .staff-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.staff-desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto 0;
+    height: fit-content;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 4rem 2rem;
+    border-radius: 15px;
+}
+
+.staff-members {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* dva enaka stolpca */
+  gap: .5rem; /* razmik med elementi */
+  justify-items: left; /* poravnava vsebine v stolpcih */
+  width: 30vw;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+}
+
+
+.staff-member {
+  flex: 1 1 calc(50% - 2rem); /* vsak zavzame približno polovico prostora minus razmik */
+  box-sizing: border-box;
+  max-width: max-content; /* po želji omeji širino posameznega */
+}
+
+@media (max-width: 768px) {
+  .staff-members {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team-title{
+    margin: 0 auto;
+    width: 25vw;
+    text-align: center  ;
+    margin-bottom: 10vh;
+}
+
+.reff-grid{
+    margin: 0 auto;
+
+}
+
+.reff-grid .columns-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.reff-grid .column {
+  flex: 1;
+}
+
+.reff-grid .column p {
+  white-space: nowrap;       /* Ne dovoli preloma vrstice */
+  text-align: justify;       /* Poravnava obojestransko */
+  margin: 0 0 0.5em 0;       /* Spodnji razmik med vrsticami */
+}
+
+.staff-member p{
+  white-space: nowrap;       /* Ne dovoli preloma vrstice */
+  text-align: left;       /* Poravnava obojestransko */
+  margin: 0 0 0.5em 0;       /* Spodnji razmik med vrsticami */
+
+}
+
+.seperator{
+    height: .2rem;
+    background-color: #ccc;
+    color: #ccc;
+    border:none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 768px) {
+  main {
+    margin: 2vw;
+  }
+
+  .atleti-info {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  .description-main,
+  .atletska-sola {
+    width: 100%;
+    padding: 0 5vw;
+  }
+
+  .profile-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-card {
+    width: 90%; /* celotna širina */
+  }
+
+  .staff-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .staff-members {
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .reff-grid .columns-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .reff-grid .column {
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  .naslov-vodstvo,
+  .naslov-trenerji,
+  .naslov-sodniki {
+    width: 90%;
+    text-align: center;
+  }
+
+  .content {
+    flex-direction: column;
+    margin: 2vh 2vw;
+  }
+
+  article {
+    max-width: 100%;
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+
+  .team-title {
+    width: 90%;
+  }
+
+  .sub-nav {
+    flex-direction: row; /* ostane vodoravna */
+    flex-wrap: wrap;     /* omogoči prelom v novo vrstico, če zmanjka prostora */
+    justify-content: center;
+    padding: 0.5rem 0;
+    height: auto;
+  }
+
+  .sub-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sub-nav li {
+    float: left; /* ohrani poravnavo v vrstici */
+    margin: 0 3vw;
+  }
 }

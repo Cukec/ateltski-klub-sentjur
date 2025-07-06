@@ -280,6 +280,11 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $sql_insert = "INSERT INTO coach (id, mail, tel, location) VALUES (?, ?, ?, ?)";
             $stmt_insert = $conn->prepare($sql_insert);
 
+            // Sanitize and bind parameters
+            $mail = isset($_POST['mail']) ? sanitize_input($_POST['mail'], $conn) : NULL;
+            $tel = isset($_POST['phone']) ? sanitize_input($_POST['phone'], $conn) : NULL;
+            $location = isset($_POST['location']) ? sanitize_input($_POST['location'], $conn) : NULL;
+
             // Bind parameters
             $stmt_insert->bind_param("isss", $id_people, $mail, $tel, $location);
 
@@ -350,7 +355,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 
     }else{
 
-        $msgs = "(opozorilo) Podatki sodnika niso bili vnešeni!";
+        $msgs[] = "(opozorilo) Podatki sodnika niso bili vnešeni!";
 
     }
 

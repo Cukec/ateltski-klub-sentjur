@@ -8,180 +8,163 @@
 </head>
 <body>
     <?php include "navigation.php";  include "config.php"; ?>
-    <main>
-        <?php 
-        $profiles = [
-            ['name' => 'Vladimir', 'surname' => 'Artnak', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Cmok', 'surname' => 'Luka', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Katja', 'surname' => 'Jevšnik', 'email' => '', 'roles' => 'trenerka'],
-            ['name' => 'Ivan', 'surname' => 'Kukovič', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Rok', 'surname' => 'Novak', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Bojan', 'surname' => 'Očko', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Borut', 'surname' => 'Pihlar', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Andrej', 'surname' => 'Podgoršek', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Robert', 'surname' => 'Švegler', 'email' => '', 'roles' => 'trener'],
-        ];
-        ?>
-        
-        <section class="atleti-info">
-            <div class="description-main">
-                <h1>Vodstvo, trenerji in sodniki</h1>
+
+    <?php
+    
+        $query = "SELECT * FROM page_content WHERE title = 'naša ekipa'";
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $content_result = $stmt->get_result();
+
+        if ($content_result && $content_result->num_rows > 0) {
+            $content_row = $content_result->fetch_assoc();
+
+        } else {
+            //echo "<p>Ni najdenih vsebin za naslov 'atleti'.</p>";
+        }
+
+
+    ?>
+
+    <section class="atleti-info">
+        <div class="description-main">
+            <h1>Vodstvo, trenerji in sodniki</h1>
+            <hr>
+            <p>Atletski klub je zavezan spodbujanju športnega duha, timskega dela in osebne rasti vseh svojih članov. Vodstvo kluba sestavljajo trenerji in strokovnjaki navdušeni nad atletiko.</p>
+        </div>
+        <div class="atletska-sola">
+            <a href="treningi.php"><img src="../assets/logo-atletska-sola.png" alt="logo-atletska-sola"></a>
+        </div>
+    </section>
+    <div class="sub-nav">
+        <ul>
+            <li><a href="#vodstvo">Vodstvo</a></li>
+            <li><a href="#trenerji">Trenerji</a></li>
+            <li><a href="#sodniki">Sodniki</a></li>
+        </ul>
+    </div>
+<section class="background-sec">
+    <main class="first">
+        <div class="staff-grid" id="vodstvo">
+            <div class="staff-desc">
+                <h1>Vodstvo</h1>
                 <hr>
-                <p>Atletski klub je zavezan spodbujanju športnega duha, timskega dela in osebne rasti vseh svojih članov. Vodstvo kluba sestavljajo trenerji in strokovnjaki navdušeni nad atletiko.</p>
+                <p><?php echo $content_row['section_2'] ?></p>
             </div>
-            <div class="atletska-sola">
-                <a href="treningi.php"><img src="../assets/logo-atletska-sola.png" alt="logo-atletska-sola"></a>
-            </div>
-        </section>
+            <div class="staff-members">
+            <?php
+        
+            $query = "SELECT * FROM team_members ORDER BY display_order ASC";
 
-        <div class="nav-dogodki" id="past-events-section">
-            <ul>
-                <li><p>Vodstvo</p></li>
-                <li><p>Trenerji</p></li>
-                <li><p>Sodniki</p></li>
-            </ul>
-        </div>
+            $result = $conn->query($query);
 
-        <div class="vodstvo">
-            <div class="naslov-vodstvo">
-                <h2>VODSTVO</h2>
-                <p>
-                    Vodstvo atletskega kluba Šentjur, ki ga sestavljajo trenerji in strokovnjaki navdušeni nad atletiko
-                </p>
-            </div>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const shape = document.querySelector('.custom-shape');
-                    shape.classList.add('slide-in');
-                });
-            </script>
-
-            <div class="content">
-                <section class="profile-container">
-
-                    <?php
-                    foreach ($profiles as $profile) {
-                        echo '
-                        <div class="profile-card">
-                            <div class="empty-pfp">?</div>
-                            <div class="profile-info">
-                                <h2>' . $profile['name'] . '</h2>
-                                <h3>' . $profile['surname'] . '</h3>
-                                <p class="email">' . $profile['email'] . '</p>
-                                <p class="roles">' . $profile['roles'] . '</p>
-                            </div>
-                        </div>';
-                    }
-                    ?>
-
-                </section>
-            </div>
-        </div>
-
-        <?php 
-        $profiles = [
-            ['name' => 'Vladimir', 'surname' => 'Artnak', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Cmok', 'surname' => 'Luka', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Katja', 'surname' => 'Jevšnik', 'email' => '', 'roles' => 'trenerka'],
-            ['name' => 'Ivan', 'surname' => 'Kukovič', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Rok', 'surname' => 'Novak', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Bojan', 'surname' => 'Očko', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Borut', 'surname' => 'Pihlar', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Andrej', 'surname' => 'Podgoršek', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Robert', 'surname' => 'Švegler', 'email' => '', 'roles' => 'trener'],
-        ];
-        ?>
-
-        <div class="trenerji">
-            <div class="naslov-trenerji">
-                <h2>TRENERJI</h2>
-                <p>
-                Pri delu stavimo na usposobljen doma vzgojen trenerski kader z ustrezno izobrazbo ali usposobljenostjo in trenersko licenco. Trenutno aktivni trenerji so
-                </p>
-            </div>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const shape = document.querySelector('.custom-shape');
-                    shape.classList.add('slide-in');
-                });
-            </script>
-
-            <div class="content">
-                <section class="profile-container">
-
-                    <?php
-                    foreach ($profiles as $profile) {
-                        echo '
-                        <div class="profile-card">
-                            <div class="empty-pfp">?</div>
-                            <div class="profile-info">
-                                <h2>' . $profile['name'] . '</h2>
-                                <h3>' . $profile['surname'] . '</h3>
-                                <p class="email">' . $profile['email'] . '</p>
-                                <p class="roles">' . $profile['roles'] . '</p>
-                            </div>
-                        </div>';
-                    }
-                    ?>
-
-                </section>
-            </div>
-        </div>
-
-        <?php 
-        $profiles = [
-            ['name' => 'Vladimir', 'surname' => 'Artnak', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Cmok', 'surname' => 'Luka', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Katja', 'surname' => 'Jevšnik', 'email' => '', 'roles' => 'trenerka'],
-            ['name' => 'Ivan', 'surname' => 'Kukovič', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Rok', 'surname' => 'Novak', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Bojan', 'surname' => 'Očko', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Borut', 'surname' => 'Pihlar', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Andrej', 'surname' => 'Podgoršek', 'email' => '', 'roles' => 'trener'],
-            ['name' => 'Robert', 'surname' => 'Švegler', 'email' => '', 'roles' => 'trener'],
-        ];
-        ?>
-
-        <div class="sodniki">
-            <div class="naslov-sodniki">
-                <h2>SODNIKI</h2>
-                <p>
-                    Društvo atletskih sodnikov AK Šentjur, je bilo ustanovljeno 7.10.2005. Člani društva so predvsem nekdanji atleti in ljubitelji atletike. 
-                    Od leta 2003 je določeno število atletov v AK Šentjur, zaključilo s tekmovalno aktivnostjo, bodi si zaradi študijskih obveznosti, ali družinskih obveznosti
-                </p>
-            </div>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const shape = document.querySelector('.custom-shape');
-                    shape.classList.add('slide-in');
-                });
-            </script>
-
-            <div class="content">
-                <section class="profile-container">
-
-                    <?php
-                    foreach ($profiles as $profile) {
-                        echo '
-                        <div class="profile-card">
-                            <div class="empty-pfp">?</div>
-                            <div class="profile-info">
-                                <h2>' . $profile['name'] . '</h2>
-                                <h3>' . $profile['surname'] . '</h3>
-                                <p class="email">' . $profile['email'] . '</p>
-                                <p class="roles">' . $profile['roles'] . '</p>
-                            </div>
-                        </div>';
-                    }
-                    ?>
-
-                </section>
+            if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                ?>
+                <div class="staff-member">
+                    <p><strong style="text-transform: uppercase"><?= htmlspecialchars($row['function']) ?></strong> - <?= htmlspecialchars($row['name'] . ' ' . $row['surname'])?></p>
+                </div>
+                <?php
+            }
+            } else {
+            echo "<p>Ni najdenih trenerjev v bazi.</p>";
+            }
+        
+            ?>
             </div>
         </div>
     </main>
+</section>
+
+    <main>
+        <div class="team-title" id="trenerji">
+            <h1>Trenerji</h1>
+            <hr>
+            <p><?php echo $content_row['section_3']?></p>
+        </div>
+        <div class="team-grid">
+        <?php
+            $query = "SELECT * FROM coach c JOIN people p ON c.id = p.id";
+            $result = $conn->query($query);
+
+            if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                ?>
+                <div class="team-member">
+                <div class="profile-pic">
+                    <img src="<?= file_exists("../gallery/osebje/{$row['id']}.jpg") ? "../gallery/osebje/{$row['id']}.jpg" : "../assets/random-placeholder-ppl.jpg" ?>" alt="Oseba">
+                </div>
+                <h3 class="member-name"><?= htmlspecialchars($row['name'] . ' ' . $row['surname']) ?></h3>
+                <hr>
+                <div class="contact-info">
+                    <p><strong>Email:</strong> <?= htmlspecialchars($row['mail']) ?></p>
+                    <p><strong>Telefon:</strong> <?= htmlspecialchars($row['tel']) ?></p>
+                    <p><strong>Lokacija:</strong> <?= htmlspecialchars($row['location']) ?></p>
+                </div>
+                </div>
+                <?php
+            }
+            } else {
+            echo "<p>Ni najdenih trenerjev v bazi.</p>";
+            }
+        ?>
+        </div>
+        
+    </main>
+    <main>
+        <div class="team-title" id="sodniki">
+            <h1>Društvo sodnikov</h1>
+            <hr>
+            <p><?php echo $content_row['section_4']?></p>
+        </div>
+        <div class="reff-grid">
+            <?php
+            $query = "SELECT name, surname
+                    FROM people p
+                    JOIN referees r ON p.id = r.id_people
+                    ORDER BY surname ASC";
+
+            $result = $conn->query($query);
+
+            $people = [];
+
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $people[] = $row;
+                }
+
+                // Razdeli v 3 stolpce
+                $columnCount = 3;
+                $total = count($people);
+                $rowsPerColumn = ceil($total / $columnCount);
+
+                $columns = array_fill(0, $columnCount, []);
+                foreach ($people as $index => $person) {
+                    $columnIndex = floor($index / $rowsPerColumn);
+                    if (!isset($columns[$columnIndex])) {
+                        $columns[$columnIndex] = [];
+                    }
+                    $columns[$columnIndex][] = $person;
+                }
+
+                echo '<div class="columns-container">';
+                foreach ($columns as $column) {
+                    echo '<div class="column">';
+                    foreach ($column as $person) {
+                        echo '<p>' . htmlspecialchars($person['surname'] . ' ' . $person['name']) . '</p>';
+                    }
+                    echo '</div>';
+                }
+                echo '</div>';
+            } else {
+                echo "<p>Ni sodnikov v bazi.</p>";
+            }
+            ?>
+            </div>
+    </main>
+
     <?php include "footer.php"; ?>
 </body>
 </html>
