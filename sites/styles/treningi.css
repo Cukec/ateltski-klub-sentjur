@@ -157,3 +157,64 @@
     justify-self: center;
 }
 
+@media screen and (max-width: 768px) {
+
+    .explenation-box {
+        flex-direction: column;
+        padding: 5vw;
+        margin-top: 0;
+    }
+
+    .explenation-box div {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 2vh;
+    }
+
+    .explenation-box img {
+        width: 60%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+        height: auto;
+        padding: 1vh 0;
+        align-items: flex-start;
+    }
+
+    .filter-bar label {
+        font-size: 1.5rem;
+        margin-left: 1vw;
+    }
+
+    .ostalo,
+    .ostalo-1 {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .ostalo div,
+    .ostalo-1 div {
+        width: 100%;
+        padding: 2vw 4vw;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1vh;
+        width: 100%;
+    }
+
+    .treningi {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .treningi div {
+        width: 100%;
+        padding: 2vh 1vh;
+    }
+}

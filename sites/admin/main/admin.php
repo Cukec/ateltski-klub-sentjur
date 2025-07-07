@@ -156,6 +156,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <option value="vodstvo">Vodstvo</option>
             <option value="dokumenti">Dokumenti</option>
             <option value="staticne">Staticne strani</option>
+            <option value="treningi">Treningi</option>
             <option value="admini">Admini</option>
         </select>
     </nav>
@@ -572,7 +573,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
 
     <!-- ADMINI div -->
-<div id="admini" class="contentDiv"></div>
+    <div id="admini" class="contentDiv"></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -611,7 +612,188 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
+    <div id="treningi" class="contentDiv">
+        <!-- Obrazec za dodajanje novega treninga -->
+        <h2>Dodaj nov trening</h2>
+        <form id="addPracticeForm">
+        <select name="id_coach" id="coachSelect" required>
+            <option value="">Izberi trenerja</option>
+            <!-- Dinamično se napolni -->
+        </select>
 
+        <input type="text" name="age" placeholder="Starostna skupina" required>
+        <input type="text" name="location" placeholder="Lokacija" required>
+        <input type="text" name="schedule" placeholder="Urnik" required>
+        <input type="text" name="town" placeholder="Kraj" required>
+        <input type="text" name="note" placeholder="Opomba">
+        <button type="submit">Dodaj</button>
+        </form>
+
+        <hr>
+
+        <h2>Obstoječi treningi</h2>
+        <table id="practiceTable" border="1" cellpadding="5">
+        <thead>
+            <tr>
+            <th>Trener</th>
+            <th>Starost</th>
+            <th>Lokacija</th>
+            <th>Urnik</th>
+            <th>Kraj</th>
+            <th>Opomba</th>
+            <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- JavaScript napolni to tabelo -->
+        </tbody>
+        </table>
+
+        <!-- nalaganje trenerjev v select -->
+        <script>
+            // Napolni select z trenerji
+            function loadCoaches() {
+            fetch('load-coaches.php')
+                .then(res => res.json())
+                .then(data => {
+                const select = document.getElementById('coachSelect');
+                data.forEach(coach => {
+                    const option = document.createElement('option');
+                    option.value = coach.id;
+                    option.textContent = coach.name + ' ' + coach.surname;
+                    select.appendChild(option);
+                });
+                });
+            }
+
+            // Naloži trenerje in treninge ob zagonu
+            loadCoaches();
+            loadPractices();
+        </script>
+
+        <!-- logika za dodajanje, brisanje... -->
+        <script>
+            // 1. Naloži obstoječe treninge
+            function loadPractices() {
+                fetch('load-practices.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Napaka pri nalaganju podatkov.');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const tbody = document.querySelector('#practiceTable tbody');
+                        tbody.innerHTML = '';
+
+                        data.forEach(practice => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td contenteditable="false" data-field="coach_name">${practice.coach_name}</td>
+                                <td contenteditable="true" data-field="age">${practice.age}</td>
+                                <td contenteditable="true" data-field="location">${practice.location}</td>
+                                <td contenteditable="true" data-field="schedule">${practice.schedule}</td>
+                                <td contenteditable="true" data-field="town">${practice.town}</td>
+                                <td contenteditable="true" data-field="note">${practice.note || ''}</td>
+                                <td><button onclick="deletePractice(${practice.id})">🗑️</button></td>
+                            `;
+                            tbody.appendChild(row);
+
+                            // Poslušanje sprememb in shranjevanje
+                            row.querySelectorAll('[contenteditable]').forEach(cell => {
+                                cell.addEventListener('blur', () => {
+                                    const field = cell.getAttribute('data-field');
+                                    const newValue = cell.textContent.trim();
+
+                                    if (field === 'coach_name') return; // Coach se ne ureja tukaj
+
+                                    fetch('update-practice.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            id: practice.id,
+                                            field: field,
+                                            value: newValue
+                                        })
+                                    })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        if (!data.success) {
+                                            alert('Napaka pri shranjevanju: ' + (data.message || ''));
+                                        }
+                                    })
+                                    .catch(err => {
+                                        console.error('Napaka pri povezavi:', err);
+                                        alert('Napaka pri povezavi.');
+                                    });
+                                });
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Napaka:', error);
+                    });
+            }
+
+
+            // 2. Dodaj nov trening
+            document.getElementById('addPracticeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('add-practice.php', {
+                method: 'POST',
+                body: formData
+            }).then(res => res.text())
+                .then(msg => {
+                alert(msg);
+                this.reset();
+                loadPractices();
+                });
+            });
+
+            
+            function deletePractice(id) {
+            if (confirm('Ali si prepričan, da želiš izbrisati ta trening?')) {
+                fetch('delete-practice.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'id=' + encodeURIComponent(id)
+                })
+                .then(res => res.text())
+                .then(response => {
+                alert(response);
+                loadPractices();
+                });
+            }
+            }
+
+            // 3. Posodobi trening
+            function updatePractice(id, rowElement) {
+            const formData = new FormData();
+            formData.append('id', id);
+
+            rowElement.querySelectorAll('input').forEach(input => {
+                formData.append(input.name, input.value);
+            });
+
+            fetch('update-practice.php', {
+                method: 'POST',
+                body: formData
+            }).then(res => res.text())
+                .then(msg => {
+                alert(msg);
+                loadPractices();
+                });
+            }
+
+            // Zaženi ob nalaganju
+            loadPractices();
+        </script>
+
+    </div>
 
     <!-- STATIČNE STRANI div-->
     <div class="contentDiv" id="staticne">
