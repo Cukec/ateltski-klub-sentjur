@@ -33,7 +33,7 @@
 
     <?php
     
-        $query = "SELECT * FROM page_content WHERE title = 'atleti'";
+        $query = "SELECT * FROM page_content WHERE title = 'dogodki in tekmovanja'";
 
         $stmt = $conn->prepare($query);
         $stmt->execute();

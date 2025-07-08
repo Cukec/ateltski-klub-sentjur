@@ -1,9 +1,7 @@
 
 main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -20vh;
+    margin: 5vw;
+    
 }
 
 .content {
@@ -85,17 +83,6 @@ section h2 {
     font-size: 2rem;
 }
 
-.predstavitev-zgodovina {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 5vh 5vw 5vh 0;
-    border-bottom: 1px solid gray;
-    background-image: url(../../assets/green-blue-gradient-top.svg);
-    background-size: cover; /* Adjust as necessary */
-    background-repeat: no-repeat; /* Prevents repeating */
-    background-position: center; /* Centers the image */
-}
 
 .dokumenti {
     display: flex;
@@ -117,24 +104,62 @@ section h2 {
 
 .predstavitev, .zgodovina {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;   /* Vse eno pod drugim */
+    align-items: flex-start;  /* Poravnava na levo */
     width: 100%;
 }
 
 .predstavitev h2, .zgodovina h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40%;
     font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
 }
 
-.predstavitev p, .zgodovina p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
+.predstavitev hr, .zgodovina hr {
+    width: 100%;
+    border: none;
+    border-top: 2px solid #444;
+    margin: 0.5rem 0 1rem 0;
 }
+
+.predstavitev p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify;
+    text-indent: 2rem;
+    padding: 0;
+}
+
+.zgodovina p {
+    margin: 0;                   /* odstrani morebitni zunanji odmik */
+    padding: 0;                  /* odstrani notranji odmik */
+    
+    width: 100%;                 /* naj zavzame vso širino */
+    box-sizing: border-box;     /* upoštevaj padding, če se doda kasneje */
+
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify;
+    text-indent: 2rem;
+
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid #ccc;
+}
+
+
+.predstavitev p::first-letter,
+.zgodovina p::first-letter {
+    float: left;
+    font-size: 5rem;
+    line-height: 1;
+    font-weight: bold;
+    padding-right: 0.5rem;
+    padding-top: 0.2rem;
+    color: #222;
+    font-family: serif;
+}
+
 
 .custom-shape {
     display: flex;

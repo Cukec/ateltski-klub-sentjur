@@ -10,15 +10,32 @@
 </head>
 <body>
     <?php include "navigation.php";  include "config.php"; ?>
-    
-    <main>
 
-        <section class="atleti-info">
+    <?php
+    
+        $query = "SELECT * FROM page_content WHERE title = 'o klubu'";
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $content_result = $stmt->get_result();
+
+        if ($content_result && $content_result->num_rows > 0) {
+            $content_row = $content_result->fetch_assoc();
+
+        } else {
+            //echo "<p>Ni najdenih vsebin za naslov 'atleti'.</p>";
+        }
+
+
+    ?>
+    
+    <section class="atleti-info">
             <div class="description-main">
                 <h1>Predstavitev AK Šentjur</h1>
                 <hr>
                 <p>
-                    Atletski klub Šentjur deluje na področju občine Šentjur in pokriva tudi področje širšega Kozjanskega
+                    <?php echo $content_row['section_1'] ?>
                 </p>
             </div>
             <div class="atletska-sola">
@@ -28,41 +45,27 @@
 
         <div class="nav-dogodki" id="past-events-section">
             <ul>
-                <li><p>Predstavitev</p></li>
-                <li><p>Dokumenti</p></li>
-                <li><p>Kako do nas</p></li>
+                <li><a href="#predstavitev">Predstavitev</a></li>
+                <li><a href="#dokumenti">Dokumenti</a></li>
+                <li><a href="#kakoDoNas">Kako do nas</a></li>
             </ul>
         </div>
+    
+    <main>
 
-        <section class="predstavitev-zgodovina">
+        
+
+        <section id="predstavitev">
             <article class="predstavitev">
                 <h2>Predstavitev</h2>
-                <p>Atletski klub Šentjur deluje na področju občine Šentjur in pokriva tudi področje širšega Kozjanskega. 
-                V klubu se ukvarjamo s tekmovalno atletiko, šolsko atletiko, spodbujamo pa tudi rekreativno ukvarjanje s tekom. 
-                Organiziran imamo svoj sodniški zbor tako, da organiziramo tudi atletska tekmovanja na vseh naštetih področjih. 
-                Vse, ki vas zanima aktivno sodelovanje ali delo v klubu nas preko naših kontaktnih naslovov obvestite in radi vas bomo sprejeli medse. 
-                AK Šentjur ima tudi status nevladne organizacije v javnem interesu na področju športa, ki mu lahko po veljavni zakonodaji namenite del dohodnine. 
-                Smo člani naslednjih sorodnih zvez in organizacij, to so Atletske zveze Slovenije, Športne unije Slovenije in Športne zveze Šentjur</p>
+                <hr>
+                <p><?php echo $content_row['section_2'] ?></p>
             </article>
             <article class="zgodovina">
                 <h2>Zgodovina</h2>
+                <hr>
                 <p>
-                    Atletski klub Šentjur je bil ustanovljen leta 1994. Ustanovni člani so bili štirje nekdanji atleti celjskega atletskega kluba: Cmok Samo, Kukovič Ivan, Podgoršek Andrej in Artnak Vlado, 
-                    ki je do takrat deloval v Celju tudi kot atletski trener. Med podporniki ustanovitve sta bila tudi Gradišnik Marjan, 
-                    takratni ravnatelj OŠ Franja Malgaja Šentjur in Jože Artnak, takrat aktiven v lokalni skupnosti.
-
-                    Atletski klub Šentjur je bil ustanovljen s ciljem, nuditi možnost talentiranim otrokom in mladini iz občine Šentjur in širšega Kozjanskega vadbo in treninge atletike bližje kraju bivanja. 
-                    Motiv za ustanovitev pa je bil predvsem v dejstvu, da so številni uspešni atleti iz tega okolja svoje rezultate dosegali za klub in kraj drugje.
-
-                    Prvi predsednik Atletskega kluba Šentjur je postal Marjan Gradišnik, ki je bil to vse do leta 2011. Leta 2010 prejme tudi posebno priznanje župana Občine Šentjur za vodenje našega AK.  
-                    Na rednem volilnem občnem zboru leta 2011 ga nasledi za 4 leta Vladimir Artnak, ki je eden izmed ustanoviteljev in trenerjev v klubu. 
-                    V letu 2014 smo s svečano kulturno prireditvijo obeležili 20. obletnico delovanja kluba in izdali ZBORNIK Šentjurske atletike 1994 - 2014. 
-                    Konec leta 2014 postane na rednem volilnem občnem zboru predsednik Jože Artnak,  dolgoletni atletski delavec, atletski sodnik in že član IO ter rekreativni tekač. 
-                    Ponovno je za predsednika izvoljen leta 2018 ter 2023. V letu 2024 obeležujemo 30. obletnico našega društva.
-
-                    Klub v vseh letih goji pozitivni odnos do športa in kraja ter vzgaja mlade predvsem v duhu pripadnosti idejam športa in predvsem atletike. 
-                    Vsako leto uspemo vpisati v šolo atletike od 60 do 120 otrok, v mladinski in članski kategoriji pa je aktivnih od 6 do 16 atletov. 
-                    Ob tem se lahko pohvalimo tudi s številnimi rezultati, uspehi in dosežki, ki so ponesli ime našega kraja po Sloveniji in navzven. To so:
+                    <?php echo $content_row['section_3'] ?>
                 </p>
             </article>
         </section>
@@ -77,10 +80,8 @@
                 </div>
 
 
-                <div class="file-tree-container">
-                    <div class="title"><h2>Dokumenti</h2></div>
-                    <ul class="file-tree" id="fileTree"></ul>
-                </div>
+                <iframe src="admin/main/filegator" frameborder="0" width="100%" height="600px" style="border: none;"></iframe>
+
             </article>
 
             <article class="kako-do-nas-article">
