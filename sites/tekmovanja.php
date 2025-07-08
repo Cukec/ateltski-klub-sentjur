@@ -9,16 +9,52 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
     <link rel="stylesheet" href="styles/tekmovanja.css"/>
+    <?php
+        include "config.php";
+
+        // Pridobi datume vseh prihajajočih dogodkov
+        $eventQuery = "SELECT date_start FROM events WHERE date_start > CURDATE()";
+        $eventResult = $conn->query($eventQuery);
+
+        $eventDates = [];
+        while ($row = $eventResult->fetch_assoc()) {
+            $eventDates[] = $row['date_start'];
+        }
+    ?>
+    <script>
+        const eventDates = <?= json_encode($eventDates); ?>;
+    </script>
+
+
 </head>
 <body>
 
-    <?php include "navigation.php"; include "config.php"; ?>
+    <?php include "navigation.php";  ?>
+
+    <?php
+    
+        $query = "SELECT * FROM page_content WHERE title = 'atleti'";
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $content_result = $stmt->get_result();
+
+        if ($content_result && $content_result->num_rows > 0) {
+            $content_row = $content_result->fetch_assoc();
+
+        } else {
+            //echo "<p>Ni najdenih vsebin za naslov 'atleti'.</p>";
+        }
+
+
+    ?>
     <main>
         <section class="dogodki-info">
             <div class="description-main">
                 <h1>Dogodki in tekmovanja</h1>
                 <hr>
-                <p>Prihajajoči dogodki in tekmovanja so barvno označeni na koledarju. S klikom na želeni datum se vam bo prikazal urnik tistega dne.</p>
+                <p><?php echo $content_row['section_1']?></p>
             </div>
             <div id="calendar"></div>
         </section>
@@ -59,7 +95,7 @@
                         $totalPages = ceil($totalRows / $resultsPerPage);
 
                         // Query to get the events for the current page, most recent first
-                        $query = "SELECT * FROM events WHERE date_start < CURDATE() ORDER BY date_start DESC LIMIT $resultsPerPage OFFSET $offset;";
+                        $query = "SELECT * FROM events WHERE date_start >= CURDATE() ORDER BY date_start DESC LIMIT $resultsPerPage OFFSET $offset;";
                         $result = $conn->query($query);
 
                         if ($result->num_rows > 0) {
@@ -70,7 +106,18 @@
                                 // Ensure correct character encoding is handled
                                 $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8'); // Decode any HTML entities
                                 $cleanContent = strip_tags($row['content']);
-                                $contentPreview = substr($cleanContent, 0, 50) . '...';
+                                // Najprej dekodiramo HTML entitete, potem odstranimo HTML oznake
+                                $rawContent = html_entity_decode($row['content'], ENT_QUOTES, 'UTF-8');
+                                $cleanContent = strip_tags($rawContent);
+
+                                // Uporabimo varno krajšanje z mb_substr
+                                $maxLength = 100;
+                                if (mb_strlen($cleanContent, 'UTF-8') > $maxLength) {
+                                    $contentPreview = mb_substr($cleanContent, 0, $maxLength, 'UTF-8') . '...';
+                                } else {
+                                    $contentPreview = $cleanContent;
+                                }
+
                                 
                                 // Assume you have an 'id' field in your 'events' table to uniquely identify each event
                                 $eventId = $row['id'];
@@ -155,6 +202,12 @@
             flatpickr("#calendar", {
                 inline: true,
                 dateFormat: "Y-m-d",
+                onDayCreate: function(dObj, dStr, fp, dayElem) {
+                    const dateStr = dayElem.dateObj.toLocaleDateString('sv-SE');
+                    if (eventDates.includes(dateStr)) {
+                        dayElem.classList.add("event-day");
+                    }
+                },
                 onChange: function(selectedDates, dateStr, instance) {
                     console.log("Selected date:", dateStr);
                 },

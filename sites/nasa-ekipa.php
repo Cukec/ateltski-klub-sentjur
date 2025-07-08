@@ -113,12 +113,20 @@
         </div>
         
     </main>
+    <hr class="seperator">
     <main>
-        <div class="team-title" id="sodniki">
+        <div class="reff-title" id="sodniki">
             <h1>Društvo sodnikov</h1>
             <hr>
             <p><?php echo $content_row['section_4']?></p>
         </div>
+
+        <div>
+            <h2>Trenutno aktivni sodniki</h2>
+            <hr>
+        </div>
+
+        
         <div class="reff-grid">
             <?php
             $query = "SELECT name, surname

@@ -2,7 +2,6 @@ main{
     display: flex;
     flex-direction: column;
     margin: 5vw;
-    border: 1px solid black;
 }
 
 .first{
@@ -371,25 +370,29 @@ p{
     margin-bottom: 10vh;
 }
 
-.reff-grid{
-    margin: 0 auto;
-
+.reff-grid {
+  width: 100%;
+  margin-top: 5vh;
 }
 
 .reff-grid .columns-container {
   display: flex;
-  gap: 2rem;
-  justify-content: center;
+  justify-content: space-between; /* Levo, sredina, desno */
+  align-items: center;
 }
 
 .reff-grid .column {
-  flex: 1;
+  flex: 0 0 auto; /* Ne razteguje se */
 }
 
-.reff-grid .column p {
-  white-space: nowrap;       /* Ne dovoli preloma vrstice */
-  text-align: justify;       /* Poravnava obojestransko */
-  margin: 0 0 0.5em 0;       /* Spodnji razmik med vrsticami */
+.reff-grid .center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.reff-title{
+  margin: 0 0 10vh 0;
+
 }
 
 .staff-member p{
