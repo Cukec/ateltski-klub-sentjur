@@ -25,7 +25,7 @@
             
             // Remove HTML tags and decode any HTML entities
             $title = html_entity_decode(strip_tags($event['title']), ENT_QUOTES, 'UTF-8');
-            $content = html_entity_decode(strip_tags($event['content']), ENT_QUOTES, 'UTF-8');
+            $content = $event['content'];
             $dateStart = htmlspecialchars($event['date_start']);
             
             // Remove the leading year and semicolon (e.g., "2018;")
@@ -38,7 +38,8 @@
                     <h1 style="color: #dedede; margin-left: 1vw;"><?= $dateStart; ?></h1> <!-- Event date -->
                 </div>
                 <hr>
-                <p><?= htmlspecialchars($content); ?></p>
+                <?= $content ?>
+
             </div>
             <?php
         } else {
@@ -50,7 +51,7 @@
     ?>
 
     <div class="go-back">
-        <a href="tekmovanja.php">nazaj ↶</a>
+        <a href="dogodki.php">nazaj ↶</a>
     </div>
     </main>
     <?php include "footer.php"; ?>

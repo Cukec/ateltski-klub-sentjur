@@ -8,6 +8,48 @@ if ($page < 1) $page = 1;
 $resultsPerPage = 5;
 $offset = ($page - 1) * $resultsPerPage;
 
+function truncateHtml($text, $maxLength = 50) {
+    $printedLength = 0;
+    $position = 0;
+    $tags = [];
+
+    $result = '';
+
+    while ($printedLength < $maxLength && preg_match('/<[^>]+>|[^<]+/', $text, $match, PREG_OFFSET_CAPTURE, $position)) {
+        $matchText = $match[0][0];
+        $matchPos = $match[0][1];
+        $position = $matchPos + strlen($matchText);
+
+        if ($matchText[0] === '<') {
+            // Handle tag
+            if (preg_match('/^<\s*\/([^\s>]+)>$/', $matchText, $tagMatch)) {
+                array_pop($tags);
+                $result .= $matchText;
+            } elseif (preg_match('/^<\s*([^\s>\/]+).*?>$/', $matchText, $tagMatch)) {
+                $tags[] = $tagMatch[1];
+                $result .= $matchText;
+            } else {
+                $result .= $matchText;
+            }
+        } else {
+            // Handle text
+            $remaining = $maxLength - $printedLength;
+            $segment = mb_substr($matchText, 0, $remaining);
+            $result .= $segment;
+            $printedLength += mb_strlen($segment);
+        }
+    }
+
+    // Close any open tags
+    while (!empty($tags)) {
+        $tag = array_pop($tags);
+        $result .= "</$tag>";
+    }
+
+    return $result . '...';
+}
+
+
 // Get selected year and month from the request
 $selectedYear = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 $selectedMonth = isset($_GET['month']) && $_GET['month'] != 'all' ? $_GET['month'] : null;
@@ -38,7 +80,8 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $title = preg_replace('/^\d{4};/', '', $row['title']);
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-        $contentPreview = substr(strip_tags($row['content']), 0, 50) . '...';
+        $contentPreview = truncateHtml($row['content'], 50);
+
         
         $events[] = [
             'id' => $row['id'],

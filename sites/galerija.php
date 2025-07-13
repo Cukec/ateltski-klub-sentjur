@@ -21,133 +21,69 @@
 </section>
 
 <main>
-<!--
-    <div class="gallery-container">
-        <?php /*
-        $queryImg = "SELECT * 
-        FROM test_image 
-        WHERE url LIKE 'galerija/%' AND url NOT LIKE '%male/%'
-        ORDER BY 
-            CAST(SUBSTRING(url, REGEXP_INSTR(url, '[0-9]{4}'), 4) AS UNSIGNED) DESC
-        ";
-        $resultImg = $conn->query($queryImg);
-
-        if ($resultImg->num_rows > 0) {
-            $imagesByFolder = [];
-            while ($row = $resultImg->fetch_assoc()) {
-                $trimmedUrl = str_replace("galerija/", "", $row['url']);
-                $parts = explode("/", $trimmedUrl);
-                $folder = $parts[0]; // The first folder name
-                $imagesByFolder[$folder][] = $trimmedUrl;
-            }
-
-            $folderCount = 0; // Counter for folders
-            foreach ($imagesByFolder as $folder => $images) {
-                $style = $folderCount < 5 ? "" : "style='display: none;'"; // Display first 5 folders
-                echo "<div class='gallery-folder' $style data-folder-index='$folderCount'>";
-                echo "<div class='folder-title' data-gallery-id='$folder'>$folder</div>";
-                echo "<div class='folder-description no-description'>S klikom prikažete slike</div>";
-                echo "<div class='gallery-images' data-gallery-id='$folder' style='display: none;'>";
-                foreach ($images as $image) {
-                    echo "<div class='polaroid'>";
-                    echo "<img src='../gallery/galerija/$image' alt='$image'>";
-                    echo "<div class='caption'>$image</div>";
-                    echo "</div>";
-                }
-                echo "</div>"; // Close gallery-images
-                echo "</div>"; // Close gallery-folder
-                $folderCount++;
-            }
-
-            if ($folderCount > 5) {
-                echo "<button id='display-more-archives' class='centered-button'>Prikaži več</button>";
-            }
-        } else {
-            echo "<p>No images found.</p>";
-        }*/
-        ?>
-    </div>
+    <div id="archiveGallery"></div>
+    <div id="pagination"></div>
 </main>
-<div id="image-modal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-image" src="" alt="">
-    <div class="modal-caption"></div>
-    <button class="prev">&lt;</button>
-    <button class="next">&gt;</button>
-</div>
--->
-
-<!-- Inside any HTML file in your site -->
-<section id="gallery-wrapper">
-  <div id="my-gallery"></div>
-</section>
-
-<!-- Add these just before your closing </body> tag -->
-<link rel="stylesheet" href="gallery-viewer/css/style.css" />
-<script src="gallery-viewer/js/gallery-viewer.js"></script>
-<script>
-  fetch('gallery-viewer/config.json')
-    .then(res => res.json())
-    .then(config => {
-      config.containerId = 'my-gallery';
-
-      // Ensure publicBasePath is present and normalized
-      config.publicBasePath = config.publicBasePath || '/gallery/galerija';
-
-      GalleryViewer.init(config);
-    })
-    .catch(err => console.error('Failed to load gallery config', err));
-</script>
-
-
 
 <?php include("footer.php"); ?>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const folderTitles = document.querySelectorAll(".folder-title");
-        const displayMoreButton = document.getElementById("display-more-archives");
-        let currentFolderCount = 5;
+    function loadArchives(page = 1) {
+  fetch(`archives_ajax.php?page=${page}`)
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('archiveGallery');
+      container.innerHTML = '';
 
-        // Toggle folder visibility
-        folderTitles.forEach(title => {
-            title.addEventListener("click", () => {
-                const galleryId = title.getAttribute("data-gallery-id");
-                const galleryImages = document.querySelector(`.gallery-images[data-gallery-id='${galleryId}']`);
+      // Create grid container
+      const grid = document.createElement('div');
+      grid.style.display = 'grid';
+      grid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+      grid.style.gap = '1rem';
 
-                if (galleryImages.style.display === "none" || galleryImages.style.display === "") {
-                    galleryImages.style.display = "grid";
-                    galleryImages.classList.add("visible");
-                } else {
-                    galleryImages.style.display = "none";
-                    galleryImages.classList.remove("visible");
-                }
-            });
+      data.archives.forEach(archive => {
+        const item = document.createElement('div');
+        item.style.cursor = 'pointer';
+
+        item.innerHTML = `
+          <img src="../gallery/galerija/${archive.lead_image}" alt="${archive.title}" class="archive-thumb">
+          <p style="text-align:center; margin:0.5rem 0 0;">${archive.title}</p>
+        `;
+
+        item.addEventListener('click', () => {
+          // Redirect to archive view page (customize the URL if needed)
+          window.location.href = `archive.php?name=${encodeURIComponent(archive.title)}`;
         });
 
-        // Display more archives
-        if (displayMoreButton) {
-            displayMoreButton.addEventListener("click", () => {
-                const hiddenFolders = document.querySelectorAll(`.gallery-folder[data-folder-index]`);
-                let shownCount = 0;
+        grid.appendChild(item);
+      });
 
-                hiddenFolders.forEach(folder => {
-                    if (folder.style.display === "none" && shownCount < 5) {
-                        folder.style.display = "block";
-                        shownCount++;
-                    }
-                });
+      container.appendChild(grid);
 
-                // Hide the button if all folders are shown
-                const allFoldersShown = Array.from(hiddenFolders).every(folder => folder.style.display === "block");
-                if (allFoldersShown) {
-                    displayMoreButton.style.display = "none";
-                }
-            });
+      // Pagination
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+
+      for(let i = 1; i <= data.total_pages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.style.margin = '0 0.3rem';
+        if (i === data.current_page) {
+          btn.disabled = true;
         }
+        btn.addEventListener('click', () => loadArchives(i));
+        pagination.appendChild(btn);
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load archives', err);
     });
+}
+
+// Load first page initially
+loadArchives();
+
 </script>
-<script src="gallery.js"></script>
-<script src="gallery-modal.js"></script>
+
 </body>
 </html>

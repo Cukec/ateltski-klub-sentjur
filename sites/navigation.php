@@ -60,7 +60,7 @@ nav #marker {
         <div id="marker"></div>
         <a href="domov.php">domov</a>
         <a href="treningi.php">treningi</a>
-        <a href="tekmovanja.php">tekmovanja</a>
+        <a href="dogodki.php">dogodki</a>
         <a href="atleti.php">atleti</a>
         <a href="nasa-ekipa.php">naša ekipa</a>
         <a href="o-klubu.php">o klubu</a>

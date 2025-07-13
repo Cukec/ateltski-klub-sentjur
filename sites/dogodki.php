@@ -131,14 +131,24 @@
                                                 <?= $title; ?>
                                             </a>
                                         </h2>
-                                        <h2 style="color: #dedede; margin-left: 1vw;"> <?= htmlspecialchars($row['date_start']); ?> </h2>
+                                        <h2 style="color: #dedede; margin-left: 1vw;"> <?=$row['date_start']; ?> </h2>
                                     </div>
                                     <p> <?= htmlspecialchars($contentPreview); ?> </p>
                                 </div>
                                 <?php
                             }
                         } else {
-                            echo "No news available.";
+                                ?>
+                                <div class="novica">
+                                    <!-- Display title and date next to each other -->
+                                    <div style="display: flex; flex-direction: horizontal;">
+                                        <!-- Make title clickable and redirect to info-dogodek.php with event id as a query parameter -->
+                                        <h2>
+                                            Ni prihajajočih dogodkov!
+                                        </h2>
+                                    </div>
+                                </div>
+                                <?php
                         }
                         
                         
