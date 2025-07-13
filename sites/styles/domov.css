@@ -1,5 +1,5 @@
 main {
-  margin: -10vh 5vh 10vh 5vh;
+  margin: -10vh 5vw 10vh 5vw;
 
 }
 
@@ -98,7 +98,7 @@ main {
 }
 
 .link-item li a{
-  color: #6a6a6a;
+  color: #555;
   font-weight: 100;
 
 }

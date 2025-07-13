@@ -43,7 +43,7 @@
             </div>
         </section>
 
-        <div class="nav-dogodki" id="past-events-section">
+        <div class="sub-nav" id="past-events-section">
             <ul>
                 <li><a href="#predstavitev">Predstavitev</a></li>
                 <li><a href="#dokumenti">Dokumenti</a></li>
@@ -69,56 +69,7 @@
                 </p>
             </article>
         </section>
-
-        <section class="dokumenti">
-            <article class="dokumenti-article">
-                <div class="custom-shape">
-                    <h2>Uporabni Dokumenti</h2>
-                    <p>
-                        Skozi leta delovanja AK Šentjur se je nabralo nekaj uporabnih dokumentov. Najdete in jih lahko spodaj, s klikom na datoteko pa jo prenesete.
-                    </p>
-                </div>
-
-
-                <iframe src="admin/main/filegator" frameborder="0" width="100%" height="600px" style="border: none;"></iframe>
-
-            </article>
-
-            <article class="kako-do-nas-article">
-                <div class="naslov-kako-do-nas">
-                    <h2>Kako do Nas</h2>
-                </div>
-                <div class="google-maps">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1951.9571870400787!2d15.392774675641492!3d46.2207124080434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476577c4e12dcb29%3A0xcf26706d232b88ea!2sAtletski%20klub%20%C5%A0entjur!5e0!3m2!1sen!2ssi!4v1731767342342!5m2!1sen!2ssi" 
-                        width="600" 
-                        height="450" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </article>
-        </section>
-
-        <!-- <section class="kako-do-nas">
-            <div class="naslov-kako-do-nas">
-                <h2>Kako do Nas</h2>
-            </div>
-            <div class="google-maps">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1951.9571870400787!2d15.392774675641492!3d46.2207124080434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476577c4e12dcb29%3A0xcf26706d232b88ea!2sAtletski%20klub%20%C5%A0entjur!5e0!3m2!1sen!2ssi!4v1731767342342!5m2!1sen!2ssi" 
-                    width="600" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </section> -->
-
+        <!-- skripta za filetree -->
         <script>
             $(document).ready(function() {
                 // Function to load file tree
@@ -187,9 +138,37 @@
             }
 
                 // Initialize file tree with the desired folder path
-                loadFileTree('../documents', $('#fileTree')); // Change this to your target folder path
+                loadFileTree('admin/main/filegator/repository', $('#fileTree')); // Change this to your target folder path
             });
         </script>
     </main>
+    <hr class="spacer">
+    <section class="dokumenti" id="dokumenti">
+            <article class="dokumenti-article">
+                <div class="file-tree-container">
+                    <div class="title"><h2>Dokumenti</h2></div>
+                    <ul class="file-tree" id="fileTree"></ul>
+                </div>
+            </article>
+        </section>
+        <hr class="spacer">
+        <section class="kako-do-nas" id="kakoDoNas">
+            <h2>Najdete nas tukaj</h2>
+            <img src="../assets/arrow-right.png" height="25px" width="25px">
+            <article class="kako-do-nas-article">
+                <div class="google-maps">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1951.9571870400787!2d15.392774675641492!3d46.2207124080434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476577c4e12dcb29%3A0xcf26706d232b88ea!2sAtletski%20klub%20%C5%A0entjur!5e0!3m2!1sen!2ssi!4v1731767342342!5m2!1sen!2ssi" 
+                        width="600" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </article>
+        </section>
+    <?php include("footer.php"); ?>
 </body>
 </html>

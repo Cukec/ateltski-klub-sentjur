@@ -21,8 +21,9 @@
 </section>
 
 <main>
+<!--
     <div class="gallery-container">
-        <?php
+        <?php /*
         $queryImg = "SELECT * 
         FROM test_image 
         WHERE url LIKE 'galerija/%' AND url NOT LIKE '%male/%'
@@ -63,12 +64,10 @@
             }
         } else {
             echo "<p>No images found.</p>";
-        }
+        }*/
         ?>
     </div>
 </main>
-
-<!-- Modal Section -->
 <div id="image-modal" class="modal">
     <span class="close">&times;</span>
     <img class="modal-image" src="" alt="">
@@ -76,6 +75,31 @@
     <button class="prev">&lt;</button>
     <button class="next">&gt;</button>
 </div>
+-->
+
+<!-- Inside any HTML file in your site -->
+<section id="gallery-wrapper">
+  <div id="my-gallery"></div>
+</section>
+
+<!-- Add these just before your closing </body> tag -->
+<link rel="stylesheet" href="gallery-viewer/css/style.css" />
+<script src="gallery-viewer/js/gallery-viewer.js"></script>
+<script>
+  fetch('gallery-viewer/config.json')
+    .then(res => res.json())
+    .then(config => {
+      config.containerId = 'my-gallery';
+
+      // Ensure publicBasePath is present and normalized
+      config.publicBasePath = config.publicBasePath || '/gallery/galerija';
+
+      GalleryViewer.init(config);
+    })
+    .catch(err => console.error('Failed to load gallery config', err));
+</script>
+
+
 
 <?php include("footer.php"); ?>
 

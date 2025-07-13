@@ -138,7 +138,6 @@ if ($athleteId > 0) {
             
             <div class="polaroid float-left">
                 <img src="<?= htmlspecialchars($finalImage) ?>" alt="Slika osebe" class="polaroid-img" width="100" height="120">
-                <p class="caption"><?= htmlspecialchars($athlete['name'] . ' ' . $athlete['surname']) ?></p>
             </div>
 
             <p><strong>Spol:</strong> <?= htmlspecialchars($gender) ?></p>

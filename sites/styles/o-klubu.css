@@ -1,4 +1,3 @@
-
 main{
     margin: 5vw;
     
@@ -54,7 +53,7 @@ main{
     width: 50%;
 }
 
-.nav-dogodki {
+.sub-nav {
     display: flex;
     flex-direction: row; /* Use 'row' instead of 'horizontal' */
     color: Black;
@@ -69,13 +68,24 @@ main{
 }
 
 
-.nav-dogodki ul {
+.sub-nav ul {
     list-style: none;
 }
 
-.nav-dogodki li{
+.sub-nav li{
     float: left;
     margin: 0 5vw 0 5vw;
+}
+
+.sub-nav a {
+    color: black;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease, color 0.3s ease;
+}
+
+.sub-nav a:hover {
+    text-decoration: underline;
+    color: #333; /* po želji, da dodaš subtilen efekt */
 }
 
 section h2 {
@@ -86,8 +96,10 @@ section h2 {
 
 .dokumenti {
     display: flex;
+    flex-direction: column;
     width: 100%;
     padding: 5vh 5vw;
+    margin: 0 auto;
 }
 
 .dokumenti-article, .kako-do-nas-article {
@@ -95,7 +107,6 @@ section h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
 }
 
 .predstavitev {
@@ -122,33 +133,25 @@ section h2 {
     margin: 0.5rem 0 1rem 0;
 }
 
-.predstavitev p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-align: justify;
-    text-indent: 2rem;
-    padding: 0;
-}
-
 .zgodovina p {
-    margin: 0;                   /* odstrani morebitni zunanji odmik */
-    padding: 0;                  /* odstrani notranji odmik */
-    
-    width: 100%;                 /* naj zavzame vso širino */
-    box-sizing: border-box;     /* upoštevaj padding, če se doda kasneje */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
 
     font-size: 1.1rem;
     line-height: 1.6;
     text-align: justify;
-    text-indent: 2rem;
 
+    /* Stolpci */
     column-count: 2;
-    column-gap: 2rem;
+    column-gap: 4rem;
     column-rule: 1px solid #ccc;
+
+    /* Odstranimo zamik prve vrstice */
+    text-indent: 0;
 }
 
-
-.predstavitev p::first-letter,
 .zgodovina p::first-letter {
     float: left;
     font-size: 5rem;
@@ -158,6 +161,36 @@ section h2 {
     padding-top: 0.2rem;
     color: #222;
     font-family: serif;
+    margin-top: 0.2rem;
+}
+
+
+.predstavitev p, .zgodovina p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    color: #555;
+
+    /* odstranjeno: text-indent: 2rem; */
+}
+
+/* Prilagodi ::first-letter brez dodatnega zamika */
+.predstavitev p::first-letter {
+    float: left;
+    font-size: 5rem;
+    line-height: 1;
+    font-weight: bold;
+    padding-right: 0.5rem;
+    padding-top: 0.2rem;
+    color: #222;
+    font-family: serif;
+
+    /* Dodatno za poravnavo z osnovnim besedilom */
+    margin-top: 0.2rem;
 }
 
 
@@ -174,7 +207,7 @@ section h2 {
     border-radius: 10px;
     border: 1px solid gray;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Card-like shadow */
-    background-color: lightgray; /* Optional: Background color for the container */
+    background-color: rgb(255, 255, 255); /* Optional: Background color for the container */
     box-sizing: border-box;
     margin: 5vw 25vw 5vw 25vw;
 }
@@ -184,6 +217,11 @@ section h2 {
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+
+.file-tree ul{
+    list-style: none;
+
 }
 
 .file-tree li {
@@ -201,17 +239,17 @@ section h2 {
 }
 
 .file-tree .folder::before {
-    content: '\f07b'; /* Font Awesome folder icon */
+    content: '📁'; /* Font Awesome folder icon */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
 }
 
 .file-tree .folder.open::before {
-    content: '\f07c'; /* Font Awesome open folder icon */
+    content: '📂'; /* Font Awesome open folder icon */
 }
 
 .file-tree .file::before {
-    content: '\f15b'; /* Font Awesome file icon */
+    content: '📃'; /* Font Awesome file icon */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     margin-right: 10px; /* Space between icon and name */
@@ -237,17 +275,68 @@ section h2 {
     display: none;
 }
 
-.kako-do-nas {
+.dokumenti {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     background-image: url(../../assets/green-blue-gradient-top.svg);
-    background-size: cover; /* Adjust as necessary */
-    background-repeat: no-repeat; /* Prevents repeating */
-    background-position: center; /* Centers the image */
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center; 
 }
+
+.kako-do-nas {
+    padding: 5vw;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-image: url(../../assets/red-orange-gradient-full.svg);
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center; 
+}
+
+.kako-do-nas > h2{
+    color: white;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes moveLeftRight {
+  0%, 100% {
+    transform: translateX(-15px);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+}
+
+@keyframes moveUpDownRotated {
+  0%, 100% {
+    transform: translateY(-5px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(5px) rotate(90deg);
+  }
+}
+
+.kako-do-nas img {
+  animation: moveLeftRight 3s ease-in-out infinite;
+}
+
+.spacer{
+  background-color: #ccc;
+  border: 2px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 1000px) {
@@ -255,4 +344,90 @@ section h2 {
         width: 95vw; /* Adjust container width for smaller screens */
         padding: 15px;
     }
+}
+
+
+@media (max-width: 768px) {
+  .content,
+  .atleti-info,
+  .description-main,
+  .atletska-sola,
+  .dokumenti,
+  .dokumenti-article,
+  .kako-do-nas,
+  .kako-do-nas-article,
+  .predstavitev,
+  .zgodovina,
+  .custom-shape,
+  .file-tree-container {
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 2vh 5vw !important;
+    margin: 0 auto !important;
+  }
+
+  .atleti-info {
+    height: auto;
+  }
+
+  .description-main,
+  .atletska-sola {
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .sub-nav li {
+    float: none;
+    margin: 2vh 0;
+    text-align: center;
+  }
+
+  .file-tree-container {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .kako-do-nas img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .kako-do-nas > h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .zgodovina p {
+    column-count: 1;
+  }
+
+  .nav-dogodki,
+  .sub-nav {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+
+  .kako-do-nas img {
+    width: 1rem;                 /* smaller image */
+    max-width: 1rem;
+    transform: rotate(90deg);   /* rotate downward */
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+  }
+}
+
+@media (max-width: 768px) {
+  .kako-do-nas img {
+    width: 1rem;
+    height: 1rem;
+    animation: moveUpDownRotated 2s ease-in-out infinite;
+  }
 }
