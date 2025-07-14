@@ -30,28 +30,39 @@
 
             if ($result->num_rows > 0) {
                 $i = 0;
+                $i = 0; // Make sure this is initialized before the loop
+
                 while ($row = $result->fetch_assoc()) {
                     $id = $row['id'];
                     $title = htmlspecialchars($row['title']);
-                    $content = strip_tags($row['content']); // odstrani HTML iz TinyMCE
+
+                    // Step 1: Decode any HTML entities (in case content was encoded)
+                    $rawContent = html_entity_decode($row['content'], ENT_QUOTES, 'UTF-8');
+
+                    // Step 2: Remove only <img> tags
+                    $contentWithoutImg = preg_replace('#<img\b[^>]*?>#i', '', $rawContent);
+
+                    // Step 3: Convert to plain text (remove all tags)
+                    $plainText = strip_tags($contentWithoutImg);
+
+                    // Step 4: Limit to 500 or 100 chars
                     $charLimit = ($i === 0) ? 500 : 100;
 
-                    // Odrežemo na zadnji celi besedi
-                    if (strlen($content) > $charLimit) {
-                        $truncated = substr($content, 0, $charLimit);
-                        $truncated = preg_replace('/\s+\S*$/', '', $truncated); // odreži do zadnje cele besede
+                    if (mb_strlen($plainText) > $charLimit) {
+                        $truncated = mb_substr($plainText, 0, $charLimit);
+                        $truncated = preg_replace('/\s+\S*$/u', '', $truncated); // Cut off at last full word
                         $truncated .= '...';
                     } else {
-                        $truncated = $content;
+                        $truncated = $plainText;
                     }
 
-                    // Doda class "wide" samo prvi novici
+                    // CSS class for styling
                     $class = ($i === 0) ? "news-item wide" : "news-item";
                     ?>
                     <div class="<?= $class ?>">
                         <h3><?= $title ?></h3>
                         <hr>
-                        <p><?= $truncated ?></p>
+                        <p><?= nl2br($truncated) ?></p>
                         <a href="info-novica.php?id=<?= $id ?>">
                             <button class="read-more-btn">Preberi več</button>
                         </a>
@@ -59,6 +70,7 @@
                     <?php
                     $i++;
                 }
+
             } else {
                 echo '<div class="news-item wide"><p>Ni novic!</p></div>';
             }

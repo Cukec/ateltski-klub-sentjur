@@ -38,18 +38,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     <script src="https://cdn.tiny.cloud/1/u336cycduxe8y6tqewtt8ylyrx1zi5rlqauhgtozzsx80cg9/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: 'textarea',
-            plugins: 'link image imagetools',
-            toolbar: 'undo redo | bold italic underline | link',
-            placeholder: 'Vpišite vsebino...',
-            menu: {
-                edit: { title: 'Edit', items: 'undo, redo, selectall' },
-                insert: { title: 'Insert', items: 'link image' }
-            },
-            height: 500,
-            width: '30vw',
-            resize: true
-        });
+        selector: 'textarea',
+        plugins: 'link image imagetools',
+        toolbar: 'undo redo | bold italic underline | link image',
+        placeholder: 'Vpišite vsebino...',
+        menu: {
+            edit: { title: 'Edit', items: 'undo, redo, selectall' },
+            insert: { title: 'Insert', items: 'link image' }
+        },
+        height: 500,
+        width: '50vw',
+        resize: true,
+
+        // 👇 Added for relative image paths
+        relative_urls: true,
+        remove_script_host: true,
+        convert_urls: true,
+        document_base_url: '../../../gallery/tinymce/',
+
+        // Optional: enable image upload via drag/drop or paste
+        automatic_uploads: true,
+        images_upload_url: 'tinymce-upload.php', // Uncomment and adjust if you want upload handling
+    });
+
     </script>
 </head>
 <body>

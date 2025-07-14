@@ -58,18 +58,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['action'])) {
     <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
     <script>
     tinymce.init({
-    selector: 'textarea', // Target all textarea elements
-    plugins: 'link image imagetools', // Include the link plugin
-    toolbar: 'undo redo | bold italic underline | link', // Add link button to the toolbar
+    selector: 'textarea',
+    plugins: 'link image imagetools',
+    toolbar: 'undo redo | bold italic underline | link image',
     placeholder: 'Vpišite vsebino...',
     menu: {
         edit: { title: 'Edit', items: 'undo, redo, selectall' },
         insert: { title: 'Insert', items: 'link image' }
     },
-    height: 500, // Set the height in pixels
-    width: '100%', // Set the width to fit the form or a specific value like '600px'
-    resize: true // Allow users to manually resize the editor (optional)
-    });
+    height: 500,
+    width: '50vw',
+    resize: true,
+
+    // 👇 Added for relative image paths
+    relative_urls: true,
+    remove_script_host: true,
+    convert_urls: true,
+    document_base_url: '../../../gallery/tinymce/',
+
+    // Optional: enable image upload via drag/drop or paste
+    automatic_uploads: true,
+    images_upload_url: 'tinymce-upload.php', // Uncomment and adjust if you want upload handling
+});
+
     </script>
 
 </header>

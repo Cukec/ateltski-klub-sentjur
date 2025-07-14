@@ -33,7 +33,8 @@ if (isset($_GET['id'])) {
             </div>
             <hr>
             <div class="news-content">
-                <?= $event['content']; // Direct output to preserve images & formatting ?>
+                <?= html_entity_decode($event['content'], ENT_QUOTES, 'UTF-8'); ?>
+
             </div>
         </div>
         <?php
