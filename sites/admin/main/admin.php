@@ -1,10 +1,11 @@
 <?php
 require_once '../../config.php';
-/*
+
+// Check if user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: login.php");
     exit;
-}*/
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +38,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             width: fit-content;
         }
     </style>
-    <?php include "../../navigation.php"; //include "../../config.php" ?>
+    <?php //include "../../navigation.php"; //include "../../config.php" ?>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/css/elfinder.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/css/theme.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -71,75 +72,199 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
 </header>
 <body>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: #fff;
+        overflow-x: hidden;
+    }
+
+    /* Main nav styling */
+    nav {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        height: 80px;
+        background-color: #FF9914;
+    }
+
+    nav a {
+        color: white;
+        padding: 0 20px;
+        text-decoration: none;
+        text-transform: uppercase;
+        height: 80px;
+        line-height: 80px;
+        white-space: nowrap;
+        position: relative;
+    }
+
+    nav #marker {
+        position: absolute;
+        height: 4px;
+        width: 0;
+        background: white;
+        bottom: 0;
+        transition: 0.5s;
+        border-radius: 4px;
+    }
+
+        </style>
+    </head>
+    <body>
+
+        <nav>
+            <div id="marker"></div>
+            <a href="../../domov.php">domov</a>
+            <a href="../../treningi.php">treningi</a>
+            <a href="../../dogodki.php">dogodki</a>
+            <a href="../../atleti.php">atleti</a>
+            <a href="../../nasa-ekipa.php">naša ekipa</a>
+            <a href="../../o-klubu.php">o klubu</a>
+            <a href="../../galerija.php">galerija</a>
+        </nav>
+
+        <img src="../../../assets/aks-glava-2.svg" alt="" width="100%">
+
+
+        <script>
+            var marker = document.querySelector('#marker');
+            var items = document.querySelectorAll('nav a');
+            var activeIndex = 0;
+
+            function indicator(e) {
+                marker.style.left = e.offsetLeft+"px";
+                marker.style.width = e.offsetWidth+"px";
+            }
+
+            function setMarkerToActive() {
+                var activeLink = items[activeIndex];
+                indicator(activeLink);
+            }
+
+            function setActiveLink() {
+                const currentPath = window.location.pathname.split('/').pop();
+                const altPath = window.location.pathname.split('-').pop();
+                items.forEach((link, index) => {
+                    if (link.getAttribute('href') === currentPath) {
+                        activeIndex = index;
+                    }
+                    else if (link.getAttribute('href') === altPath) {
+                        activeIndex = index;
+                    }
+                })
+                setMarkerToActive();
+            }
+
+            items.forEach((link, index) => {
+                link.addEventListener('mouseenter', (e)=>{
+                    indicator(e.target);
+                })
+
+                link.addEventListener('click', (e) => {
+                    activeIndex = index;
+                    setMarkerToActive();
+                })
+            })
+
+            document.querySelector('nav').addEventListener('mouseleave', setMarkerToActive);
+            window.onload = () => {
+                marker.style.transition = "none";
+                setTimeout(() => {
+                    marker.style.transition = "0.5s";
+                }, 10)
+                setActiveLink();
+            };
+        </script>
+    </body>
     
     <?php if (isset($_GET['status_msg'])): ?>
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-    const rawMsgs = <?php echo json_encode($_GET['status_msg']); ?>;
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const rawMsgs = <?php echo json_encode($_GET['status_msg']); ?>;
 
-    // Split by sentence or manually added separator
-    const messages = rawMsgs.split(/(?<=[.!?])\s+|<br>|;/).filter(msg => msg.trim().length > 0);
+        // Split by sentence or manually added separator
+        const messages = rawMsgs.split(/(?<=[.!?])\s+|<br>|;/).filter(msg => msg.trim().length > 0);
 
-    messages.forEach(msg => {
-        const trimmedMsg = msg.trim();
-        const lowerMsg = trimmedMsg.toLowerCase();
+        messages.forEach(msg => {
+            const trimmedMsg = msg.trim();
+            const lowerMsg = trimmedMsg.toLowerCase();
 
-        const isError = lowerMsg.includes('napaka');
-        const isWarning = lowerMsg.startsWith('(opozorilo)');
+            const isError = lowerMsg.includes('napaka');
+            const isWarning = lowerMsg.startsWith('(opozorilo)');
 
-        const toast = document.createElement('div');
-        toast.textContent = trimmedMsg;
+            const toast = document.createElement('div');
+            toast.textContent = trimmedMsg;
 
-        // Add required classes and attributes
-        toast.classList.add('toast');
-        toast.setAttribute('data-toast', 'true');
+            // Add required classes and attributes
+            toast.classList.add('toast');
+            toast.setAttribute('data-toast', 'true');
 
-        // Styling
-        toast.style.position = 'fixed';
-        toast.style.right = '20px';
-        toast.style.backgroundColor = isError 
-            ? '#e74c3c'           // red
-            : isWarning 
-                ? '#f1c40f'       // yellow
-                : '#2ecc71';      // green
-        toast.style.color = '#fff';
-        toast.style.padding = '12px 20px';
-        toast.style.marginTop = '10px';
-        toast.style.borderRadius = '6px';
-        toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
-        toast.style.zIndex = '9999';
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.5s ease';
-
-        // Offset each toast vertically if multiple
-        const existingToasts = document.querySelectorAll('div[data-toast]');
-        toast.style.bottom = `${20 + existingToasts.length * 60}px`;
-
-        // Click to dismiss
-        toast.addEventListener('click', () => {
+            // Styling
+            toast.style.position = 'fixed';
+            toast.style.right = '20px';
+            toast.style.backgroundColor = isError 
+                ? '#e74c3c'           // red
+                : isWarning 
+                    ? '#f1c40f'       // yellow
+                    : '#2ecc71';      // green
+            toast.style.color = '#fff';
+            toast.style.padding = '12px 20px';
+            toast.style.marginTop = '10px';
+            toast.style.borderRadius = '6px';
+            toast.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+            toast.style.zIndex = '9999';
             toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 500);
+            toast.style.transition = 'opacity 0.5s ease';
+
+            // Offset each toast vertically if multiple
+            const existingToasts = document.querySelectorAll('div[data-toast]');
+            toast.style.bottom = `${20 + existingToasts.length * 60}px`;
+
+            // Click to dismiss
+            toast.addEventListener('click', () => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 500);
+            });
+
+            document.body.appendChild(toast);
+
+            // Animate in
+            requestAnimationFrame(() => {
+                toast.style.opacity = '1';
+            });
+
+            // Auto-dismiss after 3 seconds
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
         });
-
-        document.body.appendChild(toast);
-
-        // Animate in
-        requestAnimationFrame(() => {
-            toast.style.opacity = '1';
-        });
-
-        // Auto-dismiss after 3 seconds
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 500);
-        }, 3000);
     });
-});
-</script>
+    </script>
     <?php endif; ?>
 
 
-
+    <!-- Dashboard Widget -->
+    <div id="dashboard-widget">
+    <div class="content">
+        <span>Welcome, <?=htmlspecialchars($_SESSION['admin_username'] ?? 'Admin')?>!</span>
+        <a href="logout.php" class="logout-btn" title="Logout">Logout</a>
+    </div>
+    </div>
 
 
     <nav class="subNav">
@@ -157,7 +282,6 @@ window.addEventListener('DOMContentLoaded', () => {
             <option value="dokumenti">Dokumenti</option>
             <option value="staticne">Staticne strani</option>
             <option value="treningi">Treningi</option>
-            <option value="admini">Admini</option>
         </select>
     </nav>
 
