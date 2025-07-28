@@ -7,196 +7,193 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      background-color: #fff;
-      overflow-x: hidden;
-    }
+body {
+  background-color: #fff;
+  overflow-x: hidden;
+}
 
-    /* Main nav styling */
-    nav {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80px;
-      background-color: #FF9914;
-      user-select: none;
-    }
+nav {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  background-color: #FF9914;
+  user-select: none;
+  z-index: 9999;
+}
 
-    nav a {
-      color: white;
-      padding: 0 20px;
-      text-decoration: none;
-      text-transform: uppercase;
-      height: 80px;
-      line-height: 80px;
-      white-space: nowrap;
-      position: relative;
-      display: block;
-    }
+nav a {
+  color: white;
+  padding: 0 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  height: 80px;
+  line-height: 80px;
+  white-space: nowrap;
+  position: relative;
+  display: block;
+}
 
-    nav #marker {
-      position: absolute;
-      height: 4px;
-      width: 0;
-      background: white;
-      bottom: 0;
-      transition: 0.5s;
-      border-radius: 4px;
-      z-index: 10;
-    }
+nav #marker {
+  position: absolute;
+  height: 4px;
+  width: 0;
+  background: white;
+  bottom: 0;
+  transition: 0.5s;
+  border-radius: 4px;
+  z-index: 10;
+}
 
-    /* Dropdown menu styling */
-    nav .dropdown {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
-    }
+nav .nav-items {
+  position: relative;
+  display: flex;
+  gap: 20px;
+}
 
-    nav .dropdown:hover .submenu {
-      display: flex;
-    }
+nav .nav-item {
+  position: relative;
+}
 
-    nav .submenu {
-      display: none;
-      position: absolute;
-      top: 80px;
-      left: 0;
-      background-color: #FF9914;
-      flex-direction: column;
-      min-width: 160px;
-      z-index: 100;
-    }
+nav .dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
 
-    nav .submenu a {
-      padding: 10px 20px;
-      line-height: 1.2;
-      height: auto;
-      color: white;
-      text-transform: none;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
+/* Submenu - hidden by default but no layout shift */
+nav .submenu {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  background-color: #FF9914;
+  flex-direction: column;
+  min-width: 160px;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  display: flex;
+}
 
-    nav .submenu a:hover {
-      background-color: #e2810f;
-    }
+nav .dropdown:hover .submenu {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
 
-    /* ----------- BURGER MENU STUFF ----------- */
-    /* Burger icon container */
-    .burger {
-      display: none; /* skrito na desktop */
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 30px;
-      height: 25px;
-      cursor: pointer;
-      z-index: 200;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+nav .submenu a {
+  padding: 10px 20px;
+  line-height: 1.2;
+  height: auto;
+  color: white;
+  text-transform: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
 
-    /* Burger bars */
-    .burger div {
-      width: 100%;
-      height: 4px;
-      background-color: white;  
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
+nav .submenu a:hover {
+  background-color: #e2810f;
+}
 
-    /* Nav items container for mobile */
-    nav .nav-items {
-      position: relative;
-      display: flex;
-      gap: 20px;
-    }
+@media (max-width: 768px) {
+  nav {
+    justify-content: flex-start;
+    padding-left: 20px;
+  }
 
-    /* --- RESPONSIVE --- */
-    @media (max-width: 768px) {
-      nav {
-        justify-content: flex-start;
-        padding-left: 20px;
-      }
+  nav .nav-items {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 80px);
+    background-color: #FF9914;
+    flex-direction: column;
+    align-items: start;
+    padding: 20px;
+    gap: 10px;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 150;
+  }
 
-      /* Skrij originalne nav-item, uporabimo nav-items kot container */
-      nav .nav-items {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        height: calc(100% - 80px);
-        background-color: #FF9914;
-        flex-direction: column;
-        align-items: start;
-        padding: 20px;
-        gap: 10px;
-        overflow-y: auto;
+  nav .nav-items.active {
+    transform: translateX(0);
+  }
 
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        z-index: 150;
-      }
+  nav .nav-item {
+    width: 100%;
+  }
 
-      /* Ko je menu odprt */
-      nav .nav-items.active {
-        transform: translateX(0);
-      }
+  nav a {
+    padding: 15px 10px;
+    height: auto;
+    line-height: normal;
+  }
 
-      nav .nav-item {
-        width: 100%;
-      }
+  nav .submenu {
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #e2810f;
+    min-width: 100%;
+    border-radius: 0 0 4px 4px;
+    display: flex;
+    padding-left: 10px;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
 
-      nav a {
-        padding: 15px 10px;
-        height: auto;
-        line-height: normal;
-      }
+  nav .submenu a {
+    font-weight: 400;
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    color: #fff;
+    opacity: 0.9;
+    border-left: 3px solid rgba(255,255,255,0.3);
+  }
 
-      nav .dropdown:hover .submenu {
-        display: none; /* on mobile hover ne deluje */
-      }
+  nav #marker {
+    display: none;
+  }
 
-      /* Submenu default: skrito */
-      nav .submenu {
-        position: relative;
-        top: 0;
-        left: 0;
-        background-color: #e2810f;
-        min-width: 100%;
-        flex-direction: column;
-        border-radius: 0 0 4px 4px;
-        overflow: hidden;
-        max-height: 0;
-        transition: max-height 0.3s ease;
-      }
+  .burger {
+    display: flex;
+    left: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-      nav .submenu.active {
-        max-height: 500px; /* dovolj visoko da se pokaže */
-      }
+  .burger div {
+    width: 100%;
+    height: 4px;
+    background-color: white;  
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+}
 
-      nav .submenu a {
-        border-top: none;
-        padding-left: 30px;
-      }
-
-      /* Burger prikaz */
-      .burger {
-        display: flex;
-        left: 20px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -273,6 +270,17 @@
 <script>
   const marker = document.querySelector('#marker');
   const navItems = document.querySelectorAll('nav .nav-item');
+
+  // Close menu on any link click in mobile view
+  document.querySelectorAll('.nav-items a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        navItemsContainer.classList.remove('active');
+      }
+    });
+  });
+
+
   const burger = document.getElementById('burger');
   const navItemsContainer = document.querySelector('nav .nav-items');
   const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
@@ -299,6 +307,8 @@
   
 
   function moveMarkerToNavItem(navItem) {
+    if (window.innerWidth <= 768) return; // don't move marker on mobile
+
     const rect = navItem.getBoundingClientRect();
     const containerRect = navItemsContainer.getBoundingClientRect();
 
@@ -307,6 +317,7 @@
     marker.style.left = left + "px";
     marker.style.width = rect.width + "px";
   }
+
 
 
 
@@ -367,18 +378,7 @@
   });
 
   // Za mobilne dropdown menije: toggle submenu on click on the parent link
-  dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      if(window.innerWidth > 768) return; // samo na mobilnih
-
-      e.preventDefault(); // prepreči navigacijo
-
-      const submenu = toggle.nextElementSibling;
-      if (!submenu) return;
-
-      submenu.classList.toggle('active');
-    });
-  });
+  
 
   // Ob resize skrij meni in marker nastavi na desktop pravilno
   window.addEventListener('resize', () => {
