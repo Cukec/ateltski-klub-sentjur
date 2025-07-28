@@ -35,8 +35,29 @@
 
 
     ?>
+     
+        <section class="atleti-info">
+            <div class="description-main">
+                <h1>Delo z atleti</h1>
+                <hr>
+                <p><?php echo $content_row['section_1']?></p>
+            </div>
+            <div class="atletska-sola">
+                <a href="treningi.php"><img src="../assets/logo-atletska-sola.png" alt="logo-atletska-sola"></a>
+            </div>
+        </section>
 
-    <main>
+        
+
+    <div class="nav-atleti" id="past-events-section">
+        <ul>
+            <li><button id="active-athletes" class="athlete-toggle" data-type="active">Aktivni</button></li>
+            <li><button id="ex-athletes" class="athlete-toggle" data-type="ex-athlete">Nekdanji</button></li>
+            <li><a href="tablice-atleti.php"><button id="tables" class="acc-toggle" data-type="table">Tablice</button></a></li>
+        </ul>
+    </div>
+
+
         <?php 
         // Database connection
         // Assuming you have a $conn variable that connects to your database
@@ -67,19 +88,6 @@
                 ORDER BY p.surname ASC 
                 LIMIT $resultsPerPage OFFSET $offset";
         $result = $conn->query($query);
-        ?>
-        <section class="atleti-info">
-            <div class="description-main">
-                <h1>Delo z atleti</h1>
-                <hr>
-                <p><?php echo $content_row['section_1']?></p>
-            </div>
-            <div class="atletska-sola">
-                <a href="treningi.php"><img src="../assets/logo-atletska-sola.png" alt="logo-atletska-sola"></a>
-            </div>
-        </section>
-
-        <?php 
         
         $vse_discipline_query = "SELECT * FROM discipline";
         $vse_discipline_result = $conn->query($vse_discipline_query);
@@ -89,14 +97,7 @@
 
         ?>
 
-        <div class="nav-atleti" id="past-events-section">
-            <ul>
-                <li><button id="active-athletes" class="athlete-toggle" data-type="active">Aktivni</button></li>
-                <li><button id="ex-athletes" class="athlete-toggle" data-type="ex-athlete">Nekdanji</button></li>
-                <li><a href="dosezki-atleti.php"><button id="club-acc" class="acc-toggle" data-type="club-acc">Dosežki</button></a></li>
-                <li><a href="tablice-atleti.php"><button id="tables" class="acc-toggle" data-type="table">Tablice</button></a></li>
-            </ul>
-        </div>
+        
 
         <!-- Tabela atletov -->
 
@@ -121,7 +122,6 @@
                 <button id="next-page">></button>
             </div>
         </div>
-    </main>
 
     <?php include("footer.php"); ?>
 

@@ -24,11 +24,23 @@ function getArchives($repositoryPath, $page = 1, $perPage = 8) {
         return $archives;
     }
 
+    // Get all folders in the repository
     $folders = array_filter(scandir($repositoryPath), function($item) use ($repositoryPath) {
         return $item !== '.' && $item !== '..' && is_dir($repositoryPath . DIRECTORY_SEPARATOR . $item);
     });
 
-    sort($folders);
+    // Extract year from folder name and sort folders by year (desc)
+    usort($folders, function($a, $b) {
+        // Extract 4-digit years from folder names
+        preg_match('/\b(19|20)\d{2}\b/', $a, $yearA);
+        preg_match('/\b(19|20)\d{2}\b/', $b, $yearB);
+
+        $yearA = isset($yearA[0]) ? (int)$yearA[0] : 0;
+        $yearB = isset($yearB[0]) ? (int)$yearB[0] : 0;
+
+        // Sort descending: newest to oldest
+        return $yearB <=> $yearA;
+    });
 
     $totalArchives = count($folders);
     $start = ($page - 1) * $perPage;
@@ -40,7 +52,7 @@ function getArchives($repositoryPath, $page = 1, $perPage = 8) {
         if (count($images) > 0) {
             $archives[] = [
                 'title' => $folder,
-                'lead_image' => $folder . '/' . $images[0]  // relative path from repository
+                'lead_image' => $folder . '/' . $images[0]
             ];
         }
     }
@@ -53,4 +65,5 @@ function getArchives($repositoryPath, $page = 1, $perPage = 8) {
         'total_pages' => ceil($totalArchives / $perPage)
     ];
 }
+
 ?>

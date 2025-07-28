@@ -12,7 +12,6 @@ function truncateHtml($text, $maxLength = 50) {
     $printedLength = 0;
     $position = 0;
     $tags = [];
-
     $result = '';
 
     while ($printedLength < $maxLength && preg_match('/<[^>]+>|[^<]+/', $text, $match, PREG_OFFSET_CAPTURE, $position)) {
@@ -35,18 +34,24 @@ function truncateHtml($text, $maxLength = 50) {
             // Handle text
             $remaining = $maxLength - $printedLength;
             $segment = mb_substr($matchText, 0, $remaining);
+
+            // Dodamo "..." direktno v besedilo če bo to zadnji kos
+            if ($printedLength + mb_strlen($segment) >= $maxLength) {
+                $segment .= '...';
+            }
+
             $result .= $segment;
             $printedLength += mb_strlen($segment);
         }
     }
 
-    // Close any open tags
+    // Zapremo vse odprte tage
     while (!empty($tags)) {
         $tag = array_pop($tags);
         $result .= "</$tag>";
     }
 
-    return $result . '...';
+    return $result;
 }
 
 
@@ -80,7 +85,10 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $title = preg_replace('/^\d{4};/', '', $row['title']);
         $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
-        $contentPreview = truncateHtml($row['content'], 50);
+        $rawContent = html_entity_decode($row['content'], ENT_QUOTES, 'UTF-8');
+        $cleanContent = preg_replace('/<img[^>]*>/i', '', $rawContent);
+        $contentPreview = truncateHtml($cleanContent, 50);
+
 
         
         $events[] = [

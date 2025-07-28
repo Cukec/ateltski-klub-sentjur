@@ -1,6 +1,9 @@
 <?php
 require_once '../../config.php';
 
+session_start();
+
+
 
 $message = '';
 
@@ -9,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if ($username && $password) {
-        $stmt = $conn->prepare("SELECT id, username, password FROM admin WHERE username = ?");
+        $stmt = $conn->prepare("SELECT id, username, password FROM admins WHERE username = ?");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();

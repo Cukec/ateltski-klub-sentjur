@@ -29,6 +29,7 @@ main h3{
     height: 50vh;
     display: flex;
     flex-direction: horizontal;
+    margin-top: -20vh;
 }
 
 .atleti-info h1 {
@@ -141,15 +142,6 @@ tr:hover {
 /* Last row bottom border removed */
 tr:last-child td {
     border-bottom: none; /* Optional if you want to keep it clean */
-}
-
-/* Responsive table design */
-@media (max-width: 768px) {
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap; /* Force horizontal scrolling */
-    }
 }
 
 .pagination {
@@ -280,4 +272,102 @@ tr:last-child td {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+
+@media (max-width: 768px) {
+  main {
+    padding: 5vw;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .atleti-info {
+    flex-direction: column;
+    height: auto;
+    padding: 0 5vw;
+    align-items: center;
+    text-align: center;
+    margin-top: 20vh;
+  }
+
+  .description-main,
+  .atletska-sola {
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .atletska-sola img {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .subtitle {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .subtitle-middle {
+    flex-direction: column;
+    margin-bottom: 5vh;
+  }
+
+  .description {
+    width: 90vw;
+  }
+
+  .description h1 {
+    font-size: 1.5rem;
+  }
+
+  /* ✅ FULL-WIDTH nav with full background */
+  .nav-atleti {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    width: 100%; /* Force full viewport width */
+    margin-left: calc(-1 * (100vw - 100%)/2); /* Fix for scrollbars/margins */
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .nav-atleti li {
+    float: none;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .nav-atleti ul {
+    padding: 0;
+  }
+
+  /* ✅ Horizontal scrolling for table */
+  .display-accomplishments {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .display-accomplishments table {
+    width: max-content; /* Auto-expand table to fit content */
+    min-width: 600px; /* Ensures scroll if too wide */
+  }
+
+  table {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .pagination {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pagination button {
+    margin: 5px;
+  }
 }

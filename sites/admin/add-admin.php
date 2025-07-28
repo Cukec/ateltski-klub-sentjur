@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert admin into DB
-        $stmt = $conn->prepare("INSERT INTO admin (username, password, mail) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO admins (username, password, mail) VALUES (?, ?, ?)");
         if (!$stmt) {
             $message = "Prepare failed: " . $conn->error;
         } else {

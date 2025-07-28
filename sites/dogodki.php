@@ -49,8 +49,7 @@
 
 
     ?>
-    <main>
-        <section class="dogodki-info">
+    <section class="dogodki-info">
             <div class="description-main">
                 <h1>Dogodki in tekmovanja</h1>
                 <hr>
@@ -58,11 +57,13 @@
             </div>
             <div id="calendar"></div>
         </section>
+    <main>
+        
 
         <div class="nav-dogodki">
             <ul>
-                <li><p>Prihajajoči</p></li>
-                <li><p>Pretekli</p></li>
+                <li><a href="#future-events-container">Prihajajoči</a></li>
+                <li><a href="#pretekli">Pretekli</a></li>
             </ul>
         </div>
 
@@ -159,7 +160,7 @@
         </section>
         
         
-        <section class="past-events-content">
+        <section class="past-events-content" id="pretekli">
             <div class="subtitle-section">
                 <div class="past-description">
                     <h1>Pretekli dogodki</h1>

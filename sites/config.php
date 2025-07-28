@@ -1,10 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Show MySQLi errors
+
 $host = 'localhost';  
 $dbname = 'ak-sentjur-test';  
 $username = 'root';  
 $password = '';  
 
-session_start();
 
 $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {

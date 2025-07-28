@@ -1,5 +1,28 @@
 main {
-    margin: 5vh;
+    margin: 5vw;
+
+}
+
+.year-filter{
+  display: flex;
+  flex-direction: row; /* Use 'row' instead of 'horizontal' */
+  width: 100%;
+  color: Black;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  height: 8vh;
+  align-items: center;
+  position: sticky;
+  top: 0; /* Make the element stick to the top */
+  z-index: 1000; /* Ensure it appears above other content */
+  background-color: #fff;
+  padding: 0 5vw;
+  gap: 20px;
+}
+
+.year-filter > select{
+  border: none;
+  font-size: 1rem;
+  color: #999;
 
 }
 
@@ -123,4 +146,59 @@ main {
 .go-back a:hover::before {
     transform: translateX(0);
     animation: bounce 0.5s ease-out;
+}
+
+/* 📱 Responsiveness for mobile phones */
+@media (max-width: 768px) {
+
+  main {
+    margin: 5vw;
+  }
+
+  .year-filter {
+    flex-direction: column;
+    height: auto;
+    align-items: flex-start;
+    padding: 10px 5vw;
+    gap: 10px;
+  }
+
+  .year-filter > select {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 10px 0;
+    gap: 15px;
+  }
+
+  .acc {
+    padding: 10px 0;
+    text-align: left;
+  }
+
+  #acc-pagination {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #acc-pagination button.page-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .read-more-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .go-back a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
 }

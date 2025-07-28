@@ -121,11 +121,6 @@
             <p><?php echo $content_row['section_4']?></p>
         </div>
 
-        <div>
-            <h2>Trenutno aktivni sodniki</h2>
-            <hr>
-        </div>
-
         
         <div class="reff-grid">
             <?php
@@ -160,14 +155,16 @@
                 echo '<div class="columns-container">';
                 foreach ($columns as $column) {
                     echo '<div class="column">';
+                    echo '<ul>';
                     foreach ($column as $person) {
-                        echo '<p>' . htmlspecialchars($person['surname'] . ' ' . $person['name']) . '</p>';
+                        echo '<li style="color: #999">' . htmlspecialchars($person['surname'] . ' ' . $person['name']) . '</li>';
                     }
+                    echo '</ul>';
                     echo '</div>';
                 }
                 echo '</div>';
             } else {
-                echo "<p>Ni sodnikov v bazi.</p>";
+                echo "<p>V bazi ni sodnikov.</p>";
             }
             ?>
             </div>

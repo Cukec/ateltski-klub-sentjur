@@ -136,3 +136,56 @@ h2 {
   font-style: italic;
 }
 
+@media (max-width: 768px) {
+  main {
+    margin: 0 5vw 10vh 5vw;
+    display: block;
+  }
+
+  .float-left {
+    float: none;
+    display: block;
+    margin: 0 auto 20px auto;
+    text-align: center;
+  }
+
+  .polaroid {
+    margin: 0 auto;
+    width: 70%; /* ali 100% če želiš, da slika zavzame celo širino */
+  }
+
+  .polaroid-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .caption {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .athlete-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .accom {
+    font-size: 1rem;
+    padding: 0;
+  }
+
+  h2 {
+    width: 100%;
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .go-back a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 4vh;
+    padding: 12px 0;
+  }
+}

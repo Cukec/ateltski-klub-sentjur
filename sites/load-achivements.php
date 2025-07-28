@@ -1,26 +1,41 @@
 <?php
-require_once 'config.php'; // ali tvoja datoteka za povezavo na bazo
+require_once 'config.php';
 
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$perPage = 8;
-$offset = ($page - 1) * $perPage;
+$year = isset($_GET['year']) && $_GET['year'] !== 'all' ? (int)$_GET['year'] : null;
 
-$query = "SELECT id, description, date, location FROM accomplishments WHERE is_club_acc = 1 ORDER BY date DESC LIMIT ?, ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("ii", $offset, $perPage);
+if ($year) {
+    // Get results for a specific year
+    $query = "SELECT id, description, date, location 
+              FROM accomplishments 
+              WHERE is_club_acc = 1 AND YEAR(date) = ? 
+              ORDER BY date DESC";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $year);
+} else {
+    // Get all results
+    $query = "SELECT id, description, date, location 
+              FROM accomplishments 
+              WHERE is_club_acc = 1 
+              ORDER BY date DESC";
+    $stmt = $conn->prepare($query);
+}
+
 $stmt->execute();
 $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
-    $id = $row['id']; // dodano
+    $id = $row['id'];
     $description = htmlspecialchars($row['description']);
-    $location = htmlspecialchars($row['location']);
-    $date = date("j. n. Y", strtotime($row['date'])); // slovenski format
+    $location = empty($row['location'])
+    ? '<i style="color: #888;">Lokacije ni navedene</i>'
+    : htmlspecialchars($row['location']);
 
-    // Odrežemo description na 150 znakov brez rezanja besede
+    $date = date("Y", strtotime($row['date']));
+
+    // Truncate description without cutting mid-word
     if (strlen($description) > 150) {
         $truncated = substr($description, 0, 150);
-        $truncated = preg_replace('/\s+\S*$/', '', $truncated); // odreži do zadnje cele besede
+        $truncated = preg_replace('/\s+\S*$/', '', $truncated);
         $truncated .= '...';
     } else {
         $truncated = $description;

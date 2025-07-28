@@ -50,7 +50,7 @@
     ?>
 
     <div class="go-back">
-        <a href="dosezki-atleti.php">nazaj ↶</a>
+        <a href="dosezki.php">nazaj ↶</a>
     </div>
     </main>
     <?php include "footer.php"; ?>

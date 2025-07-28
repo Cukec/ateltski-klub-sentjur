@@ -281,3 +281,83 @@ main {
 .pagination button.active {
   background-color: #333;
 }
+
+@media (max-width: 768px) {
+
+  main {
+    margin: 5vh 5vw;
+  }
+
+  .main-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .news-item.wide {
+    grid-column: span 1;
+  }
+
+  .filler-grid {
+    grid-template-columns: 1fr;
+    padding: 5vh 0;
+  }
+
+  .past-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .gallery-wrapper {
+    top: 0;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    padding: 0 2vw;
+    text-align: center;
+  }
+
+  .link-item h3 {
+    font-size: 1rem;
+  }
+
+  .read-more-btn, .more-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .filler-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filler-item {
+    position: relative;
+    padding-bottom: 4rem; /* prostor za gumb */
+  }
+
+  .more-btn {
+    position: static; /* odstrani absolute za telefon */
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gallery-wrapper {
+    aspect-ratio: auto;
+    height: 250px; /* višina slike za telefon */
+  }
+
+  .gallery-image {
+    height: 100%;
+  }
+}

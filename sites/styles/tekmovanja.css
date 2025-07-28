@@ -9,7 +9,6 @@ main {
     flex-direction: column;
     color: black;
     width: 100%;
-    margin-top: -20vh;
 }
 
 @keyframes slideInDogodki {
@@ -42,6 +41,17 @@ main {
 .nav-dogodki li{
     float: left;
     margin: 0 5vw 0 5vw;
+}
+
+.nav-dogodki a{
+    color: black;
+    text-decoration: none;
+
+}
+
+.nav-dogodki a:hover{
+    text-decoration: underline;
+
 }
 
 .subtitle {
@@ -103,7 +113,7 @@ main {
     gap: 10vw;
     align-items: center; 
     margin-bottom: 10vh;
-    margin-top: -10vh;
+    margin-top: -20vh;
 }
 
 .dogodki-info h1 {
@@ -384,3 +394,106 @@ select:focus {
     border-radius: 50%;
     box-shadow: inset 0 0 0 2px #00000033;
 }
+
+@media screen and (max-width: 768px) {
+    /* Make flex rows stack vertically */
+    .nav-dogodki,
+    .subtitle,
+    .subtitle-middle,
+    .dogodki-info,
+    .past-events-content,
+    .filter-section,
+    .past-events .events-grid {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .dogodki-info {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5vh;
+        height: auto;
+        margin-left: 0;
+        width: 100%;
+        padding: 0 5vw;
+        text-align: center;
+        margin-top: 20vh;
+    }
+
+    .dogodki-info h1 {
+        font-size: 2rem; /* Lahko manjša velikost pisave za telefon */
+    }
+
+    /* Full-width navigation bar */
+    .nav-dogodki {
+        width: 100vw;
+        height: auto;
+        padding: 10px 0;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .nav-dogodki li {
+        margin: 10px 15px;
+        float: none;
+    }
+
+    /* Fix subtitle background image full width */
+    .subtitle,
+    .content,
+    .past-events-content {
+        width: 100vw;
+        background-size: cover;
+        background-position: center;
+    }
+
+    /* Scroll for wide tables/containers */
+    .content-section,
+    .dogodki-info,
+    .past-events .events-grid {
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .novica-past,
+    .past-events .dogodek-past {
+        flex: 0 1 90% !important;
+    }
+
+    /* Filter section */
+    .filter-section {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 2vh;
+    }
+
+    .filter-section div {
+        margin-right: 0;
+        width: 90%;
+        justify-content: center;
+    }
+
+    /* Reduce padding/margins for small screens */
+    .subtitle-middle,
+    .description,
+    .past-description {
+        margin: 5vh 0;
+        width: 90%;
+        padding: 5vw;
+    }
+
+    .description {
+        width: 100%;
+    }
+
+    .past-description {
+        margin-right: 0;
+    }
+
+    .novica-past {
+        flex: 1 1 100%;
+    }
+}
+

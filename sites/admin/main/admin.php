@@ -1,11 +1,14 @@
 <?php
 require_once '../../config.php';
+session_start();
 
 // Check if user is logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: login.php");
     exit;
 }
+
+$admin = $_SESSION['admin_username'];
 ?>
 
 <!DOCTYPE html>
@@ -269,19 +272,57 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
     <nav class="subNav">
         <select onchange="showDiv(this.value)">
-            <option value="novice">Novice</option>
-            <option value="dogodki">Dogodki</option>
-            <option value="osebe">Osebe</option>
-            <option value="stafete">Štafete</option>
-            <option value="dosezki">Dosežki</option>
-            <option value="discipline">Discipline</option>
-            <option value="selekcije">Selekcije</option>
-            <option value="galerije">Galerije</option>
-            <option value="povezave">Povezave</option>
-            <option value="vodstvo">Vodstvo</option>
-            <option value="dokumenti">Dokumenti</option>
-            <option value="staticne">Staticne strani</option>
-            <option value="treningi">Treningi</option>
+            <?php if (true): ?>
+                <option value="novice">Novice</option>
+            <?php endif; ?>
+
+            <?php if (true): ?>
+                <option value="dogodki">Dogodki</option>
+            <?php endif; ?>
+
+            <?php if ($admin === 'admin'): ?>
+                <option value="osebe">Osebe</option>
+            <?php endif; ?>
+
+            <?php if ($admin === 'superadmin'): ?>
+                <option value="stafete">Štafete</option>
+            <?php endif; ?>
+
+            <?php if (true): ?>
+                <option value="dosezki">Dosežki</option>
+            <?php endif; ?>
+
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
+                <option value="discipline">Discipline</option>
+            <?php endif; ?>
+
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
+                <option value="selekcije">Selekcije</option>
+            <?php endif; ?>
+
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
+                <option value="galerije">Galerije</option>
+            <?php endif; ?>
+
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
+                <option value="povezave">Povezave</option>
+            <?php endif; ?>
+
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
+                <option value="vodstvo">Vodstvo</option>
+            <?php endif; ?>
+
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
+                <option value="dokumenti">Dokumenti</option>
+            <?php endif; ?>
+
+            <?php if (in_array($admin, ['administrator', 'vladoa', 'rokn'])): ?>
+                <option value="staticne">Staticne strani</option>
+            <?php endif; ?>
+
+            <?php if (true): ?>
+                <option value="treningi">Treningi</option>
+            <?php endif; ?>
         </select>
     </nav>
 
