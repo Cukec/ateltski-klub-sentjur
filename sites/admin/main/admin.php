@@ -46,6 +46,8 @@ $admin = $_SESSION['admin_username'];
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/css/theme.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/elfinder/2.1.55/js/elfinder.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script> <!-- EXIF rotation -->
+
 
 </head>
 <header>
@@ -57,7 +59,7 @@ $admin = $_SESSION['admin_username'];
 <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
 <script>
   tinymce.init({
-  selector: 'textarea', // Target all textarea elements
+  selector: '', // Target all textarea elements
   plugins: 'link image imagetools', // Include the link plugin
   toolbar: 'undo redo | bold italic underline | link', // Add link button to the toolbar
   menu: {
@@ -76,123 +78,9 @@ $admin = $_SESSION['admin_username'];
 </header>
 <body>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        background-color: #fff;
-        overflow-x: hidden;
-    }
-
-    /* Main nav styling */
-    nav {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        height: 80px;
-        background-color: #FF9914;
-    }
-
-    nav a {
-        color: white;
-        padding: 0 20px;
-        text-decoration: none;
-        text-transform: uppercase;
-        height: 80px;
-        line-height: 80px;
-        white-space: nowrap;
-        position: relative;
-    }
-
-    nav #marker {
-        position: absolute;
-        height: 4px;
-        width: 0;
-        background: white;
-        bottom: 0;
-        transition: 0.5s;
-        border-radius: 4px;
-    }
-
-        </style>
-    </head>
-    <body>
-
-        <nav>
-            <div id="marker"></div>
-            <a href="../../domov.php">domov</a>
-            <a href="../../treningi.php">treningi</a>
-            <a href="../../dogodki.php">dogodki</a>
-            <a href="../../atleti.php">atleti</a>
-            <a href="../../nasa-ekipa.php">naša ekipa</a>
-            <a href="../../o-klubu.php">o klubu</a>
-            <a href="../../galerija.php">galerija</a>
-        </nav>
-
-        <img src="../../../assets/aks-glava-2.svg" alt="" width="100%">
-
-
-        <script>
-            var marker = document.querySelector('#marker');
-            var items = document.querySelectorAll('nav a');
-            var activeIndex = 0;
-
-            function indicator(e) {
-                marker.style.left = e.offsetLeft+"px";
-                marker.style.width = e.offsetWidth+"px";
-            }
-
-            function setMarkerToActive() {
-                var activeLink = items[activeIndex];
-                indicator(activeLink);
-            }
-
-            function setActiveLink() {
-                const currentPath = window.location.pathname.split('/').pop();
-                const altPath = window.location.pathname.split('-').pop();
-                items.forEach((link, index) => {
-                    if (link.getAttribute('href') === currentPath) {
-                        activeIndex = index;
-                    }
-                    else if (link.getAttribute('href') === altPath) {
-                        activeIndex = index;
-                    }
-                })
-                setMarkerToActive();
-            }
-
-            items.forEach((link, index) => {
-                link.addEventListener('mouseenter', (e)=>{
-                    indicator(e.target);
-                })
-
-                link.addEventListener('click', (e) => {
-                    activeIndex = index;
-                    setMarkerToActive();
-                })
-            })
-
-            document.querySelector('nav').addEventListener('mouseleave', setMarkerToActive);
-            window.onload = () => {
-                marker.style.transition = "none";
-                setTimeout(() => {
-                    marker.style.transition = "0.5s";
-                }, 10)
-                setActiveLink();
-            };
-        </script>
-    </body>
+    
+    <h1>Ste na administraciji AK Šentjur</h1>
+    <a href="../../domov.php">AK Šentjur</a>
     
     <?php if (isset($_GET['status_msg'])): ?>
     <script>
@@ -264,27 +152,28 @@ $admin = $_SESSION['admin_username'];
     <!-- Dashboard Widget -->
     <div id="dashboard-widget">
     <div class="content">
-        <span>Welcome, <?=htmlspecialchars($_SESSION['admin_username'] ?? 'Admin')?>!</span>
-        <a href="logout.php" class="logout-btn" title="Logout">Logout</a>
+        <span>Dobrodošli, <?=htmlspecialchars($_SESSION['admin_username'] ?? 'Admin')?>!</span>
+        <a href="logout.php" class="logout-btn" title="Logout">Izpis</a>
     </div>
     </div>
 
 
     <nav class="subNav">
-        <select onchange="showDiv(this.value)">
-            <?php if (true): ?>
+        <label for="filter-bar"><h2>Izberite kaj bi radi urejali > </h2> </label>
+        <select id="filter-bar" onchange="showDiv(this.value)">
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
                 <option value="novice">Novice</option>
             <?php endif; ?>
 
-            <?php if (true): ?>
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
                 <option value="dogodki">Dogodki</option>
             <?php endif; ?>
 
-            <?php if ($admin === 'admin'): ?>
+            <?php if (true): ?> 
                 <option value="osebe">Osebe</option>
             <?php endif; ?>
 
-            <?php if ($admin === 'superadmin'): ?>
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
                 <option value="stafete">Štafete</option>
             <?php endif; ?>
 
@@ -322,6 +211,10 @@ $admin = $_SESSION['admin_username'];
 
             <?php if (true): ?>
                 <option value="treningi">Treningi</option>
+            <?php endif; ?>
+
+            <?php if (in_array($admin, ['administrator', 'vladoa'])): ?>
+                <option value="noga">Noga</option>
             <?php endif; ?>
         </select>
     </nav>
@@ -479,15 +372,38 @@ $admin = $_SESSION['admin_username'];
         <form action="test.php" class="dropzone" id="file-dropzone"></form>
 
         <?php
-            $galleryDir = '../../../gallery/galerija/';
-            $folders = array_filter(glob($galleryDir . '*'), 'is_dir');
+        $galleryDir = '../../../gallery/galerija/';
+        $folders = array_filter(glob($galleryDir . '*'), 'is_dir');
+
+        // Extract folder names
+        $folders = array_map('basename', $folders);
+
+        // Custom sorting: first by year desc, then non-year folders at bottom
+        usort($folders, function ($a, $b) {
+            // Regex to extract a 4-digit year
+            preg_match('/\b(19|20)\d{2}\b/', $a, $matchA);
+            preg_match('/\b(19|20)\d{2}\b/', $b, $matchB);
+
+            $yearA = $matchA[0] ?? null;
+            $yearB = $matchB[0] ?? null;
+
+            // Case 1: both have years → sort by year descending
+            if ($yearA && $yearB) {
+                return $yearB <=> $yearA; // newer year first
+            }
+
+            // Case 2: only one has a year → year one goes first
+            if ($yearA && !$yearB) return -1;
+            if (!$yearA && $yearB) return 1;
+
+            // Case 3: neither has a year → sort alphabetically
+            return strcasecmp($a, $b);
+        });
         ?>
         <h1 style="margin: 1vh 0;">Pregled arhivov</h1>
 
         <div id="folders">
-            <?php foreach ($folders as $folderPath): 
-                $folderName = basename($folderPath);
-            ?>
+            <?php foreach ($folders as $folderName): ?>
                 <div class="folder" data-folder="<?= htmlspecialchars($folderName) ?>">
                     <strong class="folder-name"><?= htmlspecialchars($folderName) ?></strong>
                     <hr>
@@ -495,10 +411,14 @@ $admin = $_SESSION['admin_username'];
                         <input type="text" class="rename-input" placeholder="Novo ime">
                         <button id="actionsBtn" onclick="renameFolder(this)">✏️ Preimenuj</button>
                         <button id="actionsBtn" onclick="deleteFolder(this)">🗑️ Izbriši</button>
+                        <a href="edit-archive.php?archive=<?= urlencode($folderName) ?>">
+                            <button id="actionsBtn" type="button">🖼️ Uredi</button>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
+
 
         <script>
             function renameFolder(btn) {
@@ -608,39 +528,74 @@ $admin = $_SESSION['admin_username'];
         <h2>Izberite disciplino</h2>
         <form id="disciplineForm" action="discipline-actions.php" method="POST">
             <select name="discipline" id="discipline">
+                <?php
+                $stmt = $conn->prepare("SELECT * FROM discipline");
+                $stmt->execute();
+                $result = $stmt->get_result();
 
-            <?php
-            
-            $stmt = $conn->prepare("SELECT * FROM discipline");
-            $stmt->execute();
-
-            $result = $stmt->get_result();
-
-            if ($result->num_rows > 0) {
-
-                while ($row = $result->fetch_assoc()) {
-
-                    ?>
-                    
-                        <option value="<?php echo $row['id'] ?>"><?php echo $row['title'] ?></option>
-
-                    <?php
-
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['title']) . '</option>';
+                    }
+                } else {
+                    echo "<option>Napaka pri pridobivanju podatkov selekcij!</option>";
                 }
-
-            }else{
-
-                echo "Napaka pri pridobivanju podatkov slekcij!";
-            }
-            
-            ?>
+                ?>
             </select>
-
             <button type="submit" name="action" value="save">Dodaj</button>
             <button type="submit" name="action" value="change">Spremeni</button>
             <button type="submit" name="action" value="delete" id="deleteBtn">Izbriši</button>
-
         </form>
+
+        <hr>
+
+        <h3>Uredi vrstni red disciplin</h3>
+        <table id="disciplineTable" border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Naslov</th>
+                </tr>
+            </thead>
+            <tbody id="sortable">
+                <?php
+                $stmt = $conn->prepare("SELECT * FROM discipline ORDER BY num_out ASC");
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while ($row = $result->fetch_assoc()) {
+                    echo '<tr data-id="' . $row['id'] . '"><td>' . htmlspecialchars($row['title']) . '</td></tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+        <script>
+        $(function () {
+            $("#sortable").sortable({
+                update: function () {
+                    let order = [];
+                    $("#sortable tr").each(function (index) {
+                        order.push({
+                            id: $(this).data("id"),
+                            position: index + 1
+                        });
+                    });
+
+                    $.ajax({
+                        url: "update-discipline-order.php",
+                        method: "POST",
+                        data: {order: order},
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                }
+            });
+        });
+        </script>
+
+
     </div>
     
     <!-- POVEZAVE div-->
@@ -994,26 +949,111 @@ document.addEventListener("DOMContentLoaded", function () {
 
     </div>
     
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const deleteButtons = Array.from(document.querySelectorAll('button[type="submit"], input[type="submit"]'))
-        .filter(btn =>
-            btn.value?.toLowerCase() === "delete" ||
-            btn.value?.toLowerCase() === "izbriši" ||
-            btn.textContent?.toLowerCase() === "izbriši"
-        );
+    <!-- NOGA div-->
+    <div class="contentDiv" id="noga">
+        <?php
 
-    deleteButtons.forEach(button => {
-        button.addEventListener("click", function (e) {
-            const confirmDelete = confirm("Ste prepričani, da želite izbrisati vsebino?");
-            if (!confirmDelete) {
-                e.preventDefault(); // Cancel submission if user clicks "Cancel"
-            }
-            // If user clicks "OK", form submits normally
+        // Fetch the footer row
+        $sql = "SELECT * FROM footer LIMIT 1";
+        $result = $conn->query($sql);
+        $footer = $result->fetch_assoc();
+        ?>
+
+        <table id="footerForm">
+            <tr>
+                <td><label for="street">Street:</label></td>
+                <td><input type="text" name="street" id="street" value="<?= htmlspecialchars($footer['street']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="post">Post:</label></td>
+                <td><input type="text" name="post" id="post" value="<?= htmlspecialchars($footer['post']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="contact_person">Contact Person:</label></td>
+                <td><input type="text" name="contact_person" id="contact_person" value="<?= htmlspecialchars($footer['contact_person']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="tel">Phone:</label></td>
+                <td><input type="text" name="tel" id="tel" value="<?= htmlspecialchars($footer['tel']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="mail">Email:</label></td>
+                <td><input type="email" name="mail" id="mail" value="<?= htmlspecialchars($footer['mail']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="tax_number">Tax Number:</label></td>
+                <td><input type="text" name="tax_number" id="tax_number" value="<?= htmlspecialchars($footer['tax_number']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="tax_note">Tax Note:</label></td>
+                <td><input type="text" name="tax_note" id="tax_note" value="<?= htmlspecialchars($footer['tax_note']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="trr">TRR:</label></td>
+                <td><input type="text" name="trr" id="trr" value="<?= htmlspecialchars($footer['trr']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="bank">Bank:</label></td>
+                <td><input type="text" name="bank" id="bank" value="<?= htmlspecialchars($footer['bank']) ?>"></td>
+            </tr>
+            <tr>
+                <td><label for="other">Other:</label></td>
+                <td>
+                    <textarea 
+                    name="other" 
+                    id="other" 
+                    style="resize: none; height: 200px; width: 100%;"
+                    ><?= htmlspecialchars($footer['other']) ?></textarea>
+                </td>
+            </tr>
+        </table>
+
+        <script>
+            document.querySelectorAll('#footerForm input, #footerForm textarea').forEach(el => {
+                el.addEventListener('change', () => {
+                    const formData = new FormData();
+                    formData.append('column', el.name);
+                    formData.append('value', el.value);
+
+                    fetch('update-footer.php', {
+                    method: 'POST',
+                    body: formData
+                    })
+                    .then(res => res.text())
+                    .then(msg => {
+                    console.log('Saved:', msg);
+                    })
+                    .catch(err => {
+                    console.error('Error:', err);
+                    });
+                });
+            });
+        </script>
+
+
+    </div>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const deleteButtons = Array.from(document.querySelectorAll('button[type="submit"], input[type="submit"]'))
+                .filter(btn =>
+                    btn.value?.toLowerCase() === "delete" ||
+                    btn.value?.toLowerCase() === "izbriši" ||
+                    btn.textContent?.toLowerCase() === "izbriši"
+                );
+
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", function (e) {
+                    const confirmDelete = confirm("Ste prepričani, da želite izbrisati vsebino?");
+                    if (!confirmDelete) {
+                        e.preventDefault(); // Cancel submission if user clicks "Cancel"
+                    }
+                    // If user clicks "OK", form submits normally
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
 
 
 
@@ -1045,134 +1085,132 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     <script>
-    document.getElementById('disciplineForm').addEventListener('submit', function(e) {
-        const clickedButton = document.activeElement;
+        document.getElementById('disciplineForm').addEventListener('submit', function(e) {
+            const clickedButton = document.activeElement;
 
-        if (clickedButton.name === 'action' && clickedButton.value === 'delete') {
-            const confirmed = confirm("Ali ste prepričani, da želite izbrisati to disciplino? Na njo so lahko vezani podatki!");
-            if (!confirmed) {
-                e.preventDefault(); // Prekliči pošiljanje obrazca
+            if (clickedButton.name === 'action' && clickedButton.value === 'delete') {
+                const confirmed = confirm("Ali ste prepričani, da želite izbrisati to disciplino? Na njo so lahko vezani podatki!");
+                if (!confirmed) {
+                    e.preventDefault(); // Prekliči pošiljanje obrazca
+                }
             }
-        }
-    });
+        });
     </script>
 
 
 
     <script>
-        Dropzone.autoDiscover = false;
+Dropzone.autoDiscover = false;
 
-        var myDropzone = new Dropzone("#file-dropzone", {
-        url: "test.php",
-        paramName: "file",
-        maxFilesize: 5, // MB
-        acceptedFiles: "image/*",
-        autoProcessQueue: false, // Prevents automatic upload
-        parallelUploads: 9999, // Allows up to 10 files at once
-        init: function () {
-            let dropzoneInstance = this;
+var myDropzone = new Dropzone("#file-dropzone", {
+    url: "test.php",
+    paramName: "file",
+    maxFilesize: 5, // MB
+    acceptedFiles: "image/*",
+    autoProcessQueue: false, // Prevents automatic upload
+    parallelUploads: 9999, // Allows up to many files at once
+    init: function () {
+        let dropzoneInstance = this;
 
-            this.on("sending", function (file, xhr, formData) {
-                let archiveName = document.getElementById("archive-name").value.trim();
-                if (!archiveName) {
-                    alert("Please enter an archive name before uploading.");
-                    dropzoneInstance.removeFile(file);
-                    return;
+        this.on("sending", function (file, xhr, formData) {
+            let archiveName = document.getElementById("archive-name").value.trim();
+            if (!archiveName) {
+                alert("Please enter an archive name before uploading.");
+                dropzoneInstance.removeFile(file);
+                return;
+            }
+            formData.append("archive_name", archiveName);
+        });
+
+        document.getElementById("upload-btn").addEventListener("click", function () {
+            if (dropzoneInstance.files.length === 0) {
+                alert("Please add files before uploading.");
+                return;
+            }
+            dropzoneInstance.processQueue(); // Manually process the queue
+        });
+    },
+    
+    transformFile: function(file, done) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(event) {
+            var img = new Image();
+            img.src = event.target.result;
+            img.onload = function() {
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext("2d");
+
+                // Determine new dimensions
+                var width, height;
+                if (img.width > img.height) {
+                    width = 800;
+                    height = 535;
+                } else {
+                    width = 535;
+                            height = 800;
                 }
-                formData.append("archive_name", archiveName);
-            });
 
-            document.getElementById("upload-btn").addEventListener("click", function () {
-                if (dropzoneInstance.files.length === 0) {
-                    alert("Please add files before uploading.");
-                    return;
-                }
-                dropzoneInstance.processQueue(); // Manually process the queue
-            });
-        },
-        
-        transformFile: function(file, done) {
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function(event) {
-                var img = new Image();
-                img.src = event.target.result;
-                img.onload = function() {
-                    var canvas = document.createElement("canvas");
-                    var ctx = canvas.getContext("2d");
+                 // Resize canvas
+                canvas.width = width;
+                canvas.height = height;
+                ctx.drawImage(img, 0, 0, width, height);
 
-                    // Determine new dimensions
-                    var width, height;
-                    if (img.width > img.height) {
-                        width = 800;
-                        height = 535;
-                    } else {
-                        width = 535;
-                        height = 800;
-                    }
-
-                    // Resize canvas
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    // Convert to blob and send to Dropzone
-                    canvas.toBlob(function(blob) {
-                        let resizedFile = new File([blob], file.name, { type: file.type });
-                        done(resizedFile);
-                    }, file.type);
-                };
+                // Convert to blob and send to Dropzone
+                canvas.toBlob(function(blob) {
+                    let resizedFile = new File([blob], file.name, { type: file.type });
+                    done(resizedFile);
+                }, file.type);
             };
-        }
-    });
-
-
-    </script>
+        };
+    }
+});
+</script>
 </main>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    fetchAccomplishments();
-});
+    document.addEventListener("DOMContentLoaded", function () {
+        fetchAccomplishments();
+    });
 
-function fetchAccomplishments() {
-    fetch("fetch-admin-accomplishments.php")
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById("accomTableBody");
-            tableBody.innerHTML = ""; // Clear existing content
+    function fetchAccomplishments() {
+        fetch("fetch-admin-accomplishments.php")
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById("accomTableBody");
+                tableBody.innerHTML = ""; // Clear existing content
 
-            if (data.length === 0) {
-                tableBody.innerHTML = "<tr><td colspan='10'>Na voljo ni nobene novice</td></tr>";
-                return;
-            }
+                if (data.length === 0) {
+                    tableBody.innerHTML = "<tr><td colspan='10'>Na voljo ni nobene novice</td></tr>";
+                    return;
+                }
 
-            data.forEach(row => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>
-                        <a href="save-accom.php?id=${row.id}">
-                            ✏️ 
-                        </a> | 
-                        <a href="delete-accom.php?id=${row.id}" onclick="return confirmDeleteAccom(${row.id});">
-                            🗑️
-                        </a>
-                    </td>
-                    <td>${row.date}</td>
-                    <td>${row.fullname || ""}</td>
-                    <td>${row.selection || ""}</td>
-                    <td>${row.discipline || ""}</td>
-                    <td>${row.result_technical || ""}</td>
-                    <td>${row.result_time || ""}</td>
-                    <td>${row.description || ""}</td>
-                    <td>${row.location || ""}</td>
-                    <td>${row.gender || ""}</td>
-                `;
-                tableBody.appendChild(tr);
-            });
-        })
-        .catch(error => console.error("Error fetching accomplishments:", error));
-}
+                data.forEach(row => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>
+                            <a href="save-accom.php?id=${row.id}">
+                                ✏️ 
+                            </a> | 
+                            <a href="delete-accom.php?id=${row.id}" onclick="return confirmDeleteAccom(${row.id});">
+                                🗑️
+                            </a>
+                        </td>
+                        <td>${row.date}</td>
+                        <td>${row.fullname || ""}</td>
+                        <td>${row.selection || ""}</td>
+                        <td>${row.discipline || ""}</td>
+                        <td>${row.result_technical || ""}</td>
+                        <td>${row.result_time || ""}</td>
+                        <td>${row.description || ""}</td>
+                        <td>${row.location || ""}</td>
+                        <td>${row.gender || ""}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error("Error fetching accomplishments:", error));
+    }
 </script>
 
 <script>
@@ -1206,16 +1244,16 @@ function fetchAccomplishments() {
     showDiv('novice');
 </script>
 <script>
-function confirmDeleteAccom(id) {
-    // Show confirmation alert
-    if (confirm('Ste prepričani, da želite izbrisati dosežek?')) {
-        // If confirmed, proceed with the link action
-        return true;
-    } else {
-        // If canceled, prevent the link action
-        return false;
+    function confirmDeleteAccom(id) {
+        // Show confirmation alert
+        if (confirm('Ste prepričani, da želite izbrisati dosežek?')) {
+            // If confirmed, proceed with the link action
+            return true;
+        } else {
+            // If canceled, prevent the link action
+            return false;
+        }
     }
-}
 </script>
 <?php //include"../../footer.php" ?>
 

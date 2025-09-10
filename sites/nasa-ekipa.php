@@ -32,7 +32,7 @@
         <div class="description-main">
             <h1>Vodstvo, trenerji in sodniki</h1>
             <hr>
-            <p>Atletski klub je zavezan spodbujanju športnega duha, timskega dela in osebne rasti vseh svojih članov. Vodstvo kluba sestavljajo trenerji in strokovnjaki navdušeni nad atletiko.</p>
+            <?php echo $content_row['section_1'];?>
         </div>
         <div class="atletska-sola">
             <a href="treningi.php"><img src="../assets/logo-atletska-sola.png" alt="logo-atletska-sola"></a>

@@ -1,7 +1,7 @@
 <?php
 // --- CONFIG ---
 $uploadDir = realpath(__DIR__ . '/../../../gallery/tinymce') . '/'; // save path on disk
-$uploadUrl = '../gallery/tinymce/'; // path used in <img src="..."> in TinyMCE content
+$uploadUrl = $uploadUrl = '/atletski-klub-sentjur/gallery/tinymce/'; // path used in <img src="..."> in TinyMCE content
 
 $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
 

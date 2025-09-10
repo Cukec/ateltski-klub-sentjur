@@ -53,15 +53,28 @@
         }
     </style>
 </head>
+    <?php
+
+    $sql = "SELECT * FROM footer";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    $row = $result->fetch_assoc();
+    
+    ?>
+    
     <footer>
         <div class="kontakt">
             <h3>Atletski klub Šentjur</h3>
-            <p>Cesta Miloša Zidanška 28</p>
-            <p>3230 Šentjur</p>
+            <p><?php echo $row['street'] ?></p>
+            <p><?php echo $row['post'] ?></p>
             <h3>Kontakti</h3>
-            <p>Vladimir Artnak</p>
-            <p>&#9742; +386 (0)31 826 969</p>
-            <p>info@aksentjur.si</p>
+            <p><?php echo $row['contact_person'] ?></p>
+            <p>&#9742; <?php echo $row['tel'] ?></p>
+            <p><?php echo $row['mail'] ?></p>
         </div>
         <div class="sponsor">
             <img src="../assets/obcina-sentjur.jpg" alt="obcina-sentjur-logo">
@@ -69,12 +82,12 @@
         </div>
         <div class="finance">
             <h3 id="fin">Finance</h3>
-            <p>Davčna Številka: 85867730</p>
-            <p>(nismo davčni zavezanci)</p>
-            <p>TRR: SI56 0400 1004 7338 026</p>
-            <p>Banka: NKBM</p>
+            <p>Davčna Številka: <?php echo $row['tax_number'] ?></p>
+            <p><?php echo $row['tax_note'] ?></p>
+            <p>TRR: <?php echo $row['trr'] ?></p>
+            <p>Banka: <?php echo $row['bank'] ?></p>
             <h3>Ostalo</h3>
-            <p>Vpisani v register društev pri UE Šentjur.<br>AKŠ ima z odločbo 6717-166/2019/2<br>(081-06) status nevladne organizacije<br>v javnem interesu na področju športa</p>
+            <p><?php echo $row['other'] ?></p>
         </div>
     </footer>
 </html>

@@ -15,7 +15,9 @@
         <select id="year-select">
             <option value="all">Vsa leta</option>
         </select>
+        <button id="exportBtn">📥 Izvozi Excel dokument</button>
     </div>
+
 
     <main>  
         <div class="grid" id="accomplishment-grid"></div>
@@ -73,5 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
+<script>
+    //script za export v EXCEL
+    document.getElementById('exportBtn').addEventListener('click', () => {
+        const year = document.getElementById('year-select').value;
+        let url = `export-achievements.php?year=${year}`;
+        window.location.href = url; // sproži prenos Excel datoteke
+    });
+
+</script>
 
 </html>

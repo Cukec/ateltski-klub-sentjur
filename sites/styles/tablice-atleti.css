@@ -66,6 +66,30 @@ h2 {
   outline: none;
 }
 
+.filter-container button {
+  background-color: #aed97e;
+  box-shadow: 0 0 4px rgba(163, 206, 115, 0.5);
+  outline: none;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #2f3e1d;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.filter-container button:hover {
+  background-color: #a3ce73;
+  transform: scale(1.03);
+}
+
+.filter-container button:active {
+  transform: scale(0.98);
+}
+
+
 
 #scrollTopBtn {
   position: fixed;

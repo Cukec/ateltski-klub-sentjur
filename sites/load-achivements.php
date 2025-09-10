@@ -4,51 +4,63 @@ require_once 'config.php';
 $year = isset($_GET['year']) && $_GET['year'] !== 'all' ? (int)$_GET['year'] : null;
 
 if ($year) {
-    // Get results for a specific year
-    $query = "SELECT id, description, date, location 
-              FROM accomplishments 
-              WHERE is_club_acc = 1 AND YEAR(date) = ? 
-              ORDER BY date DESC";
+    // Filter by a specific year
+    $query = "SELECT YEAR(a.date) AS year, a.description, p.name, p.surname
+              FROM accomplishments a
+              JOIN people p ON a.id_people = p.id
+              WHERE a.is_club_acc = 1 AND YEAR(a.date) = ?
+              ORDER BY a.date DESC";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $year);
 } else {
-    // Get all results
-    $query = "SELECT id, description, date, location 
-              FROM accomplishments 
-              WHERE is_club_acc = 1 
-              ORDER BY date DESC";
+    // Get all years
+    $query = "SELECT YEAR(a.date) AS year, a.description, p.name, p.surname
+              FROM accomplishments a
+              JOIN people p ON a.id_people = p.id
+              WHERE a.is_club_acc = 1
+              ORDER BY year DESC, a.date DESC";
     $stmt = $conn->prepare($query);
 }
 
 $stmt->execute();
 $result = $stmt->get_result();
 
-while ($row = $result->fetch_assoc()) {
-    $id = $row['id'];
-    $description = htmlspecialchars($row['description']);
-    $location = empty($row['location'])
-    ? '<i style="color: #888;">Lokacije ni navedene</i>'
-    : htmlspecialchars($row['location']);
+$currentYear = null;
+?>
+<link rel="stylesheet" href="accomplishments.css">
 
-    $date = date("Y", strtotime($row['date']));
-
-    // Truncate description without cutting mid-word
-    if (strlen($description) > 150) {
-        $truncated = substr($description, 0, 150);
-        $truncated = preg_replace('/\s+\S*$/', '', $truncated);
-        $truncated .= '...';
-    } else {
-        $truncated = $description;
-    }
-    ?>
-    <div class="acc">
-        <p><strong><?= $location ?></strong> | <em><?= $date ?></em></p>
-        <hr>
-        <p><?= $truncated ?></p>
-        <a href="info-dosezek.php?id=<?= $id ?>">
-            <button class="read-more-btn">Preberi več</button>
-        </a>
-    </div>
-    <?php
+<div class="achievements">
+<?php
+// If filtering by year, show heading immediately
+if ($year) {
+    echo "<h3>{$year}:</h3><ul>";
 }
+
+while ($row = $result->fetch_assoc()) {
+    $rowYear     = isset($row['year']) ? (int)$row['year'] : '';
+    $name        = isset($row['name']) ? htmlspecialchars($row['name']) : '';
+    $surname     = isset($row['surname']) ? htmlspecialchars($row['surname']) : '';
+    $description = isset($row['description']) ? htmlspecialchars($row['description']) : '';
+
+    if ($rowYear === '' || ($name === '' && $surname === '') || $description === '') {
+        continue;
+    }
+
+    if (!$year && $rowYear !== $currentYear) {
+        if ($currentYear !== null) {
+            echo "</ul>";
+        }
+        echo "<h3>{$rowYear}:</h3><ul>";
+        $currentYear = $rowYear;
+    }
+
+    echo "<li><strong>{$name} {$surname}</strong> – {$description}</li>";
+}
+
+echo "</ul>";
+?>
+</div>
+<?php
+$stmt->close();
+$conn->close();
 ?>

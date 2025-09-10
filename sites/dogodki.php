@@ -220,12 +220,16 @@
                     }
                 },
                 onChange: function(selectedDates, dateStr, instance) {
-                    console.log("Selected date:", dateStr);
+                    if (dateStr) {
+                        // Redirect to day-schedule.php with the clicked date
+                        window.location.href = "day-schedule.php?date=" + encodeURIComponent(dateStr);
+                    }
                 },
                 onReady: function(selectedDates, dateStr, instance) {
                     console.log("Calendar is ready");
                 }
             });
+
 
             // Initial page load for current year past events
             const currentYear = new Date().getFullYear();

@@ -21,10 +21,13 @@
             <option value="">Vse discipline</option>
         </select><br>
 
-        <label for="selection">Selekcija:</label>
+        <label for="selection">Starostna kategorija:</label>
         <select id="selection">
-            <option value="">Vse selekcije</option>
+            <option value="">Vse starostne kategorije</option>
         </select>
+
+        <button id="exportBtn">📥 Izvozi Excel dokument</button>
+
         </div>
         
         <div class="loader-wrapper">
@@ -146,6 +149,18 @@ function loadResults(selection = '', discipline = '') {
       console.error("Napaka:", err);
     });
 }
+
+</script>
+
+
+<!-- skripta za export EXCEL -->
+<script>
+  document.getElementById('exportBtn').addEventListener('click', () => {
+      const discipline = document.getElementById('discipline').value;
+      const selection = document.getElementById('selection').value;
+      let url = `export-tabular-results.php?discipline=${discipline}&selection=${selection}`;
+      window.location.href = url; // triggers download
+  });
 
 </script>
 

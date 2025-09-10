@@ -45,6 +45,11 @@ nav a {
   display: block;
 }
 
+nav img{
+  margin: 2px;
+
+}
+
 nav #marker {
   position: absolute;
   height: 4px;
@@ -211,6 +216,11 @@ nav .submenu a:hover {
   <!-- ovo wrapam v container, da lahko na mobilu upravljam cel meni -->
   <div class="nav-items">
     <div id="marker"></div>
+
+    <div class="logo">
+      <a href="domov.php"><img src="../assets/path200.svg" alt="logo-aks" width="80px" height="80px"></a>
+    </div>
+
     <div class="nav-item">
       <a href="domov.php">domov</a>
     </div>
